@@ -1,5 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -10,18 +13,39 @@ public class OptionsPane extends JPanel {
 	
 	private Box box;
 	
-	private JButton triangleButton = new JButton();
-	private JButton circleButton = new JButton();
-	private JButton squareButton = new JButton();
+	private List<JButton> shapes = new ArrayList<>();
+	
+	private JButton triangleButton;
+	private JButton circleButton;
+	private JButton squareButton;
 	private final int OFFSET = 50;	
+	
 	public OptionsPane() {
-		circleButton.setText("Circle");
-		//circleButton.addActionListener();
-		this.add(circleButton);
-		squareButton.setText("Square");
-	    this.add(squareButton);
-	    triangleButton.setText("Triangle");
-	    this.add(triangleButton);
+		box = new Box();
+		initializeButtons();
+		addActionListenersToButtons();
 	}
-
+	private void initializeButtons() {
+		triangleButton = new JButton("TRIANGLE");
+		shapes.add(triangleButton);
+		
+		squareButton = new JButton("SQUARE");
+		shapes.add(squareButton);
+		
+		circleButton = new JButton("CIRCLE");
+		shapes.add(circleButton);
+	}
+	private void addActionListenersToButtons() {
+		ListIterator<JButton> listIterator = shapes.listIterator();
+		while (listIterator.hasNext()) {
+			JButton button = listIterator.next();
+			this.add(button);
+			button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					box.setSelectedOption(button.getText());
+				}
+			});
+		}
+	}
 }

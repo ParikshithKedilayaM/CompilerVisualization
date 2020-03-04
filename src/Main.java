@@ -20,7 +20,6 @@ public class Main extends JFrame {
 		setTitle(TITLE);
 		setBackground(Color.BLACK);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
 	}
 	
 	private void createOptionsPanel() {
