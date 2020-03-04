@@ -10,31 +10,25 @@ import javax.swing.JPanel;
 public class OptionsPane extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Box box;
-	
+
 	private List<JButton> shapes = new ArrayList<>();
-	
-	private JButton triangleButton;
-	private JButton circleButton;
-	private JButton squareButton;
-	private final int OFFSET = 50;	
-	
+
 	public OptionsPane() {
-		box = new Box();
 		initializeButtons();
 		addActionListenersToButtons();
 	}
+
 	private void initializeButtons() {
-		triangleButton = new JButton("TRIANGLE");
+		JButton triangleButton = new JButton("TRIANGLE");
 		shapes.add(triangleButton);
-		
-		squareButton = new JButton("SQUARE");
+
+		JButton squareButton = new JButton("SQUARE");
 		shapes.add(squareButton);
-		
-		circleButton = new JButton("CIRCLE");
+
+		JButton circleButton = new JButton("CIRCLE");
 		shapes.add(circleButton);
 	}
+
 	private void addActionListenersToButtons() {
 		ListIterator<JButton> listIterator = shapes.listIterator();
 		while (listIterator.hasNext()) {
@@ -43,7 +37,7 @@ public class OptionsPane extends JPanel {
 			button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					box.setSelectedOption(button.getText());
+					Box.getBoxInstance().setSelectedOption(button.getText());
 				}
 			});
 		}
