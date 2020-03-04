@@ -19,13 +19,13 @@ public class OptionsPane extends JPanel {
 	}
 
 	private void initializeButtons() {
-		JButton triangleButton = new JButton("TRIANGLE");
+		JButton triangleButton = new JButton(OptionNames.TRIANGLE);
 		shapes.add(triangleButton);
 
-		JButton squareButton = new JButton("SQUARE");
+		JButton squareButton = new JButton(OptionNames.SQUARE);
 		shapes.add(squareButton);
 
-		JButton circleButton = new JButton("CIRCLE");
+		JButton circleButton = new JButton(OptionNames.CIRCLE);
 		shapes.add(circleButton);
 	}
 

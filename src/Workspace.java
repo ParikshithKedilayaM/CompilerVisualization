@@ -27,7 +27,9 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
+		int x = e.getX();
+		int y = e.getY();
+		
 	}
 
 	@Override
