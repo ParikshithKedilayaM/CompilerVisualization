@@ -5,7 +5,7 @@ import java.awt.Point;
  *  @author Raghavan
  *  @version 1.0
  */
-public abstract class Shapes {
+public abstract class Icons {
 	
 	public abstract void drawShape(Graphics graphic);
 	

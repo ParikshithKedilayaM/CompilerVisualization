@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
-public class Dot extends Shapes {
+public class Dot extends Icons {
 
 	private Point point;
 	private Shape circle = null;
