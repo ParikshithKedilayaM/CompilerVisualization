@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -23,7 +25,6 @@ public class Main extends JFrame {
 	private List<Workspace> workspaceList = new ArrayList<Workspace>();
 	private final String TITLE = "Team 1";
 	private Dimension screenSize;
-	private JMenuBar menuBar;
 
 	public Main() {
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -65,18 +66,46 @@ public class Main extends JFrame {
 	}
 
 	private void createMenu() {
-		menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Menu");
-		JMenuItem newWorkspace = new JMenuItem("Add WorkSpace");
-		newWorkspace.addActionListener(new ActionListener() {
-
+		JMenuItem saveButton = new JMenuItem("Save");
+		FileManager fileManager = new FileManager();
+		saveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fileManager.saveFile();
+			}
+		});
+		JMenuItem loadButton = new JMenuItem("Load");
+		loadButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fileManager.loadFile();
+			}
+		});
+		menu.add(saveButton);
+		menu.add(loadButton);
+		JButton addWorkspaceButton = new JButton("Add WorkSpace");
+		addWorkspaceButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				createWorkspace();
 			}
 		});
-		menu.add(newWorkspace);
+		addWorkspaceButton.setContentAreaFilled(false);
+		JButton compileButton = new JButton("Compile");
+		compileButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Work in progress!");
+			}
+		});
+		compileButton.setContentAreaFilled(false);
 		menuBar.add(menu);
+		menuBar.add(javax.swing.Box.createHorizontalStrut(10));
+		menuBar.add(addWorkspaceButton);
+		menuBar.add(javax.swing.Box.createHorizontalStrut(10));
+		menuBar.add(compileButton);
 		this.setJMenuBar(menuBar);
 	}
 
