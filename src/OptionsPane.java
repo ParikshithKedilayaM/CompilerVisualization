@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -19,14 +20,36 @@ public class OptionsPane extends JPanel {
 	}
 
 	private void initializeButtons() {
-		JButton triangleButton = new JButton(OptionNames.TRIANGLE);
-		shapes.add(triangleButton);
+		JButton openBracket = new JButton(new ImageIcon("Resources\\openBracket.png"));
+		openBracket.setName(OptionNames.OPENBRACKET);
+		shapes.add(openBracket);
 
-		JButton squareButton = new JButton(OptionNames.SQUARE);
-		shapes.add(squareButton);
+		JButton closeBracket = new JButton(new ImageIcon("Resources\\closeBracket.png"));
+		closeBracket.setName(OptionNames.CLOSEBRACKET);
+		shapes.add(closeBracket);
+		
+		JButton lessThan = new JButton(new ImageIcon("Resources\\lessThan.png"));
+		lessThan.setName(OptionNames.LESSTHAN);
+		shapes.add(lessThan);
 
-		JButton circleButton = new JButton(OptionNames.CIRCLE);
-		shapes.add(circleButton);
+		JButton greaterThan = new JButton(new ImageIcon("Resources\\greaterThan.png"));
+		greaterThan.setName(OptionNames.GREATERTHAN);
+		shapes.add(greaterThan);
+
+		JButton atTheRate = new JButton(new ImageIcon("Resources\\atTheRate.png"));
+		atTheRate.setName(OptionNames.ATTHERATE);
+		shapes.add(atTheRate);
+		
+		JButton hyphen = new JButton(new ImageIcon("Resources\\hyphen.png"));
+		hyphen.setName(OptionNames.HYPHEN);
+		shapes.add(hyphen);
+		
+		JButton bars = new JButton(new ImageIcon("Resources\\bars.png")) ;
+		bars.setName(OptionNames.BARS);
+		shapes.add(bars);
+		
+		
+		
 	}
 
 	private void addActionListenersToButtons() {
@@ -37,7 +60,7 @@ public class OptionsPane extends JPanel {
 			button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Box.getBoxInstance().setSelectedOption(button.getText());
+					Box.getBoxInstance().setSelectedOption(button.getName());
 				}
 			});
 		}
