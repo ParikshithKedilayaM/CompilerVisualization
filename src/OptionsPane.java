@@ -60,7 +60,7 @@ public class OptionsPane extends JPanel {
 			button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Box.getBoxInstance().setSelectedOption(button.getName());
+					BoxList.getInstance().getBox().setSelectedOption(button.getName());
 				}
 			});
 		}
