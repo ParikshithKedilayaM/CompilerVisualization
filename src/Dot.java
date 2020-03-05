@@ -4,25 +4,33 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
-public class Dot extends Icons {
+public class Dot {
 
 	private Point point;
-	private Shape circle = null;
+	private Shape dot;
+	private boolean isInput;
 	
-	public Dot(Point point) {
+	public Dot(Point point, boolean isInput) {
 		this.point = point;
+		this.isInput = isInput;
+	}
+	
+	public boolean isInput() {
+		return isInput;
 	}
 
-	@Override
-	public void drawShape(Graphics graphic) {
-		circle = new Ellipse2D.Double(point.getX(), point.getY(), 10, 10);
-		Graphics2D graphics2 = (Graphics2D) graphic;
-		graphics2.fill(circle);
+	public void setInput(boolean isInput) {
+		this.isInput = isInput;
+	}
 
+	public void drawShape(Graphics graphic) {
+		dot = new Ellipse2D.Double(point.getX(), point.getY(), 10, 10);
+		Graphics2D graphics2 = (Graphics2D) graphic;
+		graphics2.fill(dot);
 	}
 
 	public boolean containsPoint(Point point) {
-		return circle.contains(point);
+		return dot.contains(point);
 	}
 
 	public Point getLocation() {
