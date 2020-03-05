@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -9,12 +10,12 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 
 	private static final long serialVersionUID = 1L;
 
-	private Box box;
-	
 	public Workspace() {
 		this.setBackground(Color.WHITE);
+		addMouseListener(this);
+		addMouseMotionListener(this);
 	}
-	
+
 	@Override
 	public void mouseDragged(MouseEvent e) {
 
@@ -29,7 +30,12 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-		
+		Point point = new Point(x, y);
+		if (BoxList.getInstance().getBox().getSelectedOption().equals(OptionNames.OPENBRACKET)) {
+			OpenBracket ob = new OpenBracket(point);
+			ob.drawShape(this.getGraphics());
+		}
+
 	}
 
 	@Override
@@ -51,5 +57,4 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	public void mouseExited(MouseEvent e) {
 
 	}
-
 }

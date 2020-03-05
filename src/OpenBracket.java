@@ -1,7 +1,7 @@
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
 public class OpenBracket extends Icons {
@@ -15,47 +15,24 @@ public class OpenBracket extends Icons {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
 		Point inputPoint = new Point();
-		inputPoint.setLocation(point.getX() + 80, point.getY() + 10);
+		inputPoint.setLocation(point.getX() + 80, point.getY() + 20);
 		this.input = new Dot(inputPoint, true);
 		this.input.drawShape(graphic);
 		Point outputPoint = new Point();
-		outputPoint.setLocation(point.getX() + 10, point.getY() + 10);
+		outputPoint.setLocation(point.getX() + 10, point.getY() + 20);
 		this.output = new Dot(outputPoint, false);
 		this.output.drawShape(graphic);
-		graphics2.draw(new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 100));
+		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
+		graphics2.drawString("(", (int)point.getX() + 35, (int)point.getY() + 35);
+		graphics2.draw(new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50));
 	}
 
 	@Override
 	public boolean containsPoint(Point point) {
-		// TODO Auto-generated method stub
-		return false;
+		return containsPoint(point);
 	}
 
 	@Override
