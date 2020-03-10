@@ -1,4 +1,5 @@
 package Controller;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -17,7 +18,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import Model.BoxList;
+import Model.TabList;
 import View.Workspace;
 
 public class Main extends JFrame {
@@ -55,19 +56,20 @@ public class Main extends JFrame {
 		tabbedPane.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				BoxList.getInstance().setCurrentTabIndex(tabbedPane.getSelectedIndex());
-				workspaceList.get(BoxList.getInstance().getCurrentTabIndex()).repaint();
+				TabList.getInstance().setCurrentTabIndex(tabbedPane.getSelectedIndex());
+				workspaceList.get(TabList.getInstance().getCurrentTabIndex()).repaint();
 			}
 		});
 
 	}
 
 	private void createWorkspace() {
-		BoxList boxList = BoxList.getInstance();
+		TabList tabList = TabList.getInstance();
 		Workspace workspace = new Workspace();
 		workspaceList.add(workspace);
-		boxList.addBox();
-		tabbedPane.add("Tab " + boxList.getSize(), workspace);
+		tabList.addTab(workspace);
+		tabList.getTab().addObserver(new WorkspaceController());
+		tabbedPane.add("Tab " + tabList.getSize(), workspace);
 	}
 
 	private void createMenu() {

@@ -32,8 +32,8 @@ public class CloseBracket extends Icons {
 	}
 
 	@Override
-	public boolean containsPoint(Point point) {
-		return containsPoint(point);
+	public boolean containsIcon(Point point) {
+		return containsIcon(point);
 	}
 
 	@Override

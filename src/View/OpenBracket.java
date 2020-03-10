@@ -3,13 +3,14 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
 public class OpenBracket extends Icons {
 	private Point point;
 	private Dot input;
 	private Dot output;
-	
+	private Shape icon;
 	public OpenBracket(Point point) {
 		this.point = point;
 		
@@ -28,24 +29,25 @@ public class OpenBracket extends Icons {
 		this.output.drawShape(graphic);
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
 		graphics2.drawString("(", (int)point.getX() + 35, (int)point.getY() + 35);
-		graphics2.draw(new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50));
+		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);
+		graphics2.draw(icon);
 	}
 
 	@Override
-	public boolean containsPoint(Point point) {
-		return containsPoint(point);
+	public boolean containsIcon(Point point) {
+		return icon.contains(point);
 	}
 
 	@Override
 	public Point getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		return point;
 	}
 
 	@Override
 	public void setLocation(Point point) {
 		// TODO Auto-generated method stub
-		
+		this.point = point;
 	}
 
 }

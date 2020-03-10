@@ -16,7 +16,7 @@ public abstract class Icons extends MouseAdapter {
 	
 	public abstract void drawShape(Graphics graphic);
 	
-	public abstract boolean containsPoint(Point point);
+	public abstract boolean containsIcon(Point point);
 	
 	public abstract Point getLocation();
 	
@@ -30,4 +30,5 @@ public abstract class Icons extends MouseAdapter {
 	public void openDialogue() {
 		String s = (String)JOptionPane.showInputDialog("Enter description");
 	}
+	
 }

@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Model.BoxList;
+import Model.TabList;
 import Model.OptionNames;
 
 public class OptionsPane extends JPanel {
@@ -64,7 +64,7 @@ public class OptionsPane extends JPanel {
 			button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					BoxList.getInstance().getBox().setSelectedOption(button.getName());
+					TabList.getInstance().getTab().setSelectedOption(button.getName());
 				}
 			});
 		}

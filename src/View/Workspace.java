@@ -12,7 +12,7 @@ import java.util.ListIterator;
 import javax.swing.JPanel;
 
 import Controller.IconFactory;
-import Model.BoxList;
+import Model.TabList;
 
 public class Workspace extends JPanel implements MouseListener, MouseMotionListener {
 
@@ -27,7 +27,8 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY());
-		
+		TabList.getInstance().getTab().setPoint(point);
+		TabList.getInstance().getTab().notifyMethod("Dragged");
 	}
 
 	@Override
@@ -39,21 +40,24 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	public void mouseClicked(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY());
 		IconFactory iconFactory = new IconFactory();
-		Icons drawnIcon = iconFactory.drawIcon(point, BoxList.getInstance().getBox().getSelectedOption(),
+		Icons drawnIcon = iconFactory.drawIcon(point, TabList.getInstance().getTab().getSelectedOption(),
 				this.getGraphics());
-		if (drawnIcon != null) {	
-			BoxList.getInstance().getBox().addIcon(drawnIcon);
+		if (drawnIcon != null) {
+			TabList.getInstance().getTab().addIcon(drawnIcon);
 		}
+		TabList.getInstance().getTab().notifyMethod("Clicked");
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY());
+		TabList.getInstance().getTab().setPoint(point);
+		TabList.getInstance().getTab().notifyMethod("Clicked");
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-
+		TabList.getInstance().getTab().setSelectedIcon(null);
 	}
 
 	@Override
@@ -65,12 +69,13 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	public void mouseExited(MouseEvent e) {
 
 	}
+
 	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
-		ArrayList<Icons> iconList = BoxList.getInstance().getBox().getIconList();
+		ArrayList<Icons> iconList = TabList.getInstance().getTab().getIconList();
 		ListIterator<Icons> i = iconList.listIterator();
-		while(i.hasNext()) {
+		while (i.hasNext()) {
 			Icons nextIcon = i.next();
 			nextIcon.drawShape(graphics);
 		}
