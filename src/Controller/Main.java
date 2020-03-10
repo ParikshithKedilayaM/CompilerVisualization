@@ -18,6 +18,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Model.BoxList;
+import View.Workspace;
 
 public class Main extends JFrame {
 
@@ -55,6 +56,7 @@ public class Main extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				BoxList.getInstance().setCurrentTabIndex(tabbedPane.getSelectedIndex());
+				workspaceList.get(BoxList.getInstance().getCurrentTabIndex()).repaint();
 			}
 		});
 
