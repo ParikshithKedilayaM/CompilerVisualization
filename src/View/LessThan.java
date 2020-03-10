@@ -1,3 +1,4 @@
+package View;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,7 +11,7 @@ public class LessThan extends Icons {
 	private Dot output1;
 	private Dot output2;
 	
-	LessThan(Point point) {
+	public LessThan(Point point) {
 		this.point = point;
 	}
 

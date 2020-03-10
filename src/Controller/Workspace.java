@@ -1,3 +1,4 @@
+package Controller;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -5,6 +6,15 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
+
+import Model.BoxList;
+import Model.OptionNames;
+import View.AtTheRate;
+import View.CloseBracket;
+import View.GreaterThan;
+import View.Hyphen;
+import View.LessThan;
+import View.OpenBracket;
 
 public class Workspace extends JPanel implements MouseListener, MouseMotionListener {
 

@@ -1,3 +1,4 @@
+package Model;
 
 public class OptionNames {
 	public final static String OPENBRACKET = "OPEN_BRACKET";

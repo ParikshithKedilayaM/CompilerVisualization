@@ -1,15 +1,16 @@
+package View;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 
-public class OpenBracket extends Icons {
+public class CloseBracket extends Icons {
 	private Point point;
 	private Dot input;
 	private Dot output;
 	
-	OpenBracket(Point point) {
+	public CloseBracket(Point point) {
 		this.point = point;
 		
 	}
@@ -26,7 +27,7 @@ public class OpenBracket extends Icons {
 		this.output = new Dot(outputPoint, false);
 		this.output.drawShape(graphic);
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
-		graphics2.drawString("(", (int)point.getX() + 35, (int)point.getY() + 35);
+		graphics2.drawString(")", (int)point.getX() + 45, (int)point.getY() + 35);
 		graphics2.draw(new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50));
 	}
 
@@ -46,5 +47,4 @@ public class OpenBracket extends Icons {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

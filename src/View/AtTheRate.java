@@ -1,3 +1,4 @@
+package View;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -11,7 +12,7 @@ public class AtTheRate extends Icons {
 	private Dot output1;
 	private Dot output2;
 	
-	AtTheRate(Point point) {
+	public AtTheRate(Point point) {
 		this.point = point;
 	}
 

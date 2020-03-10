@@ -1,3 +1,4 @@
+package View;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
