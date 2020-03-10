@@ -24,31 +24,31 @@ public class OptionsPane extends JPanel {
 	}
 
 	private void initializeButtons() {
-		JButton openBracket = new JButton(new ImageIcon("Resources\\openBracket.png"));
+		JButton openBracket = new JButton(new ImageIcon("Resources//openBracket.png"));
 		openBracket.setName(OptionNames.OPENBRACKET);
 		shapes.add(openBracket);
 
-		JButton closeBracket = new JButton(new ImageIcon("Resources\\closeBracket.png"));
+		JButton closeBracket = new JButton(new ImageIcon("Resources//closeBracket.png"));
 		closeBracket.setName(OptionNames.CLOSEBRACKET);
 		shapes.add(closeBracket);
 		
-		JButton lessThan = new JButton(new ImageIcon("Resources\\lessThan.png"));
+		JButton lessThan = new JButton(new ImageIcon("Resources//lessThan.png"));
 		lessThan.setName(OptionNames.LESSTHAN);
 		shapes.add(lessThan);
 
-		JButton greaterThan = new JButton(new ImageIcon("Resources\\greaterThan.png"));
+		JButton greaterThan = new JButton(new ImageIcon("Resources//greaterThan.png"));
 		greaterThan.setName(OptionNames.GREATERTHAN);
 		shapes.add(greaterThan);
 
-		JButton atTheRate = new JButton(new ImageIcon("Resources\\atTheRate.png"));
+		JButton atTheRate = new JButton(new ImageIcon("Resources//atTheRate.png"));
 		atTheRate.setName(OptionNames.ATTHERATE);
 		shapes.add(atTheRate);
 		
-		JButton hyphen = new JButton(new ImageIcon("Resources\\hyphen.png"));
+		JButton hyphen = new JButton(new ImageIcon("Resources//hyphen.png"));
 		hyphen.setName(OptionNames.HYPHEN);
 		shapes.add(hyphen);
 		
-		JButton bars = new JButton(new ImageIcon("Resources\\bars.png")) ;
+		JButton bars = new JButton(new ImageIcon("Resources//bars.png")) ;
 		bars.setName(OptionNames.BARS);
 		shapes.add(bars);
 		
