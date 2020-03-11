@@ -12,23 +12,23 @@ public class Hyphen extends Icons {
 	private Dot input;
 	private Dot output;
 	private Shape icon;
-
+	private Point inputPoint, outputPoint;
+	
 	public Hyphen(Point point) {
 		this.point = point;
-
+		inputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
+		outputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
+		this.input = new Dot(inputPoint, true);
+		this.output = new Dot(outputPoint, false);
 	}
 
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
-		Point inputPoint = new Point();
 		inputPoint.setLocation(point.getX() + 80, point.getY() + 20);
-		this.input = new Dot(inputPoint, true);
-		this.input.drawShape(graphic);
-		Point outputPoint = new Point();
 		outputPoint.setLocation(point.getX() + 10, point.getY() + 20);
-		this.output = new Dot(outputPoint, false);
-		this.output.drawShape(graphic);
+		input.drawShape();
+		output.drawShape();
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
 		graphics2.drawString("-", (int) point.getX() + 40, (int) point.getY() + 35);
 		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);

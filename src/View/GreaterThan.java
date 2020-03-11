@@ -13,26 +13,27 @@ public class GreaterThan extends Icons {
 	private Dot input2;
 	private Dot output;
 	private Shape icon;
+	private Point inputPoint1, inputPoint2, outputPoint;
 
 	public GreaterThan(Point point) {
 		this.point = point;
+		inputPoint1 = new Point((int)point.getX() + 10, (int)point.getY()+ 10);
+		inputPoint2 = new Point((int)point.getX() + 10, (int)point.getY()+ 30);
+		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
+		this.input1 = new Dot(inputPoint1, true);
+		this.input2 = new Dot(inputPoint2, true);
+		this.output = new Dot(outputPoint, false);
 	}
 
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
-		Point inputPoint1 = new Point();
 		inputPoint1.setLocation(point.getX() + 10, point.getY() + 10);
-		this.input1 = new Dot(inputPoint1, true);
-		this.input1.drawShape(graphic);
-		Point inputPoint2 = new Point();
 		inputPoint2.setLocation(point.getX() + 10, point.getY() + 30);
-		this.input2 = new Dot(inputPoint2, false);
-		this.input2.drawShape(graphic);
-		Point outputPoint = new Point();
 		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
-		this.output = new Dot(outputPoint, false);
-		this.output.drawShape(graphic);
+		input1.drawShape();
+		input2.drawShape();
+		output.drawShape();
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
 		graphics2.drawString(">", (int) point.getX() + 40, (int) point.getY() + 35);
 		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);
