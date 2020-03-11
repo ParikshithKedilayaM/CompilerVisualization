@@ -62,6 +62,7 @@ public class Tab extends Observable {
 	public void setWorkspace(Workspace workspace) {
 		this.workspace = workspace;
 	}
+
 	public void notifyMethod(String operation) {
 		setChanged();
 		notifyObservers(operation);

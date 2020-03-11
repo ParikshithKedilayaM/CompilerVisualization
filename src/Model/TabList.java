@@ -25,6 +25,10 @@ public class TabList {
 	public Tab getTab() {
 		return tabList.get(currentTabIndex);
 	}
+	
+	public Tab getRecentTab() {
+		return tabList.get(getSize() - 1);
+	}
 
 	public void addTab(Workspace workspace) {
 		tabList.add(new Tab(workspace));
