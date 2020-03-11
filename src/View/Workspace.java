@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 import javax.swing.JPanel;
-
-import Controller.IconFactory;
+import Model.Tab;
 import Model.TabList;
 
 public class Workspace extends JPanel implements MouseListener, MouseMotionListener {
@@ -39,20 +38,16 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY());
-		IconFactory iconFactory = new IconFactory();
-		Icons drawnIcon = iconFactory.drawIcon(point, TabList.getInstance().getTab().getSelectedOption(),
-				this.getGraphics());
-		if (drawnIcon != null) {
-			TabList.getInstance().getTab().addIcon(drawnIcon);
-		}
-		TabList.getInstance().getTab().notifyMethod("Clicked");
+		Tab tab = TabList.getInstance().getTab();
+		tab.setPoint(point);
+		tab.notifyMethod("Clicked");
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY());
 		TabList.getInstance().getTab().setPoint(point);
-		TabList.getInstance().getTab().notifyMethod("Clicked");
+		TabList.getInstance().getTab().notifyMethod("Pressed");
 	}
 
 	@Override

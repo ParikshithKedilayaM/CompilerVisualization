@@ -13,9 +13,12 @@ public class WorkspaceController implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg == "Clicked") {
+			newShape();
+		} else if (arg == "Pressed") {
 			setSelectedIcon();
-		} else {
+		} else if (arg == "Dragged") {
 			iconDragged();
+		} else {
 		}
 
 		repaint();
@@ -37,8 +40,20 @@ public class WorkspaceController implements Observer {
 	}
 
 	private void iconDragged() {
-		Icons selected = TabList.getInstance().getTab().getSelectedIcon();
-		selected.setLocation(TabList.getInstance().getTab().getPoint());
+		Tab tab = TabList.getInstance().getTab();
+		Icons selected = tab.getSelectedIcon();
+		if (selected != null) {
+			selected.setLocation(tab.getPoint());
+		}
 	}
 
+	private void newShape() {
+		IconFactory iconFactory = new IconFactory();
+		Tab tab = TabList.getInstance().getTab();
+		Icons drawnIcon = iconFactory.drawIcon(tab.getPoint(), tab.getSelectedOption(),
+				tab.getWorkspace().getGraphics());
+		if (drawnIcon != null) {
+			tab.addIcon(drawnIcon);
+		}
+	}
 }

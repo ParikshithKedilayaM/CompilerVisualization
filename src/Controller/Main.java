@@ -68,7 +68,7 @@ public class Main extends JFrame {
 		Workspace workspace = new Workspace();
 		workspaceList.add(workspace);
 		tabList.addTab(workspace);
-		tabList.getTab().addObserver(new WorkspaceController());
+		tabList.getRecentTab().addObserver(new WorkspaceController());
 		tabbedPane.add("Tab " + tabList.getSize(), workspace);
 	}
 
