@@ -7,36 +7,38 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
 public class AtTheRate extends Icons {
-	private Point point;
+	private Point point, inputPoint1, inputPoint2, outputPoint1, outputPoint2;
 	private Dot input1;
 	private Dot input2;
 	private Dot output1;
 	private Dot output2;
 	private Shape icon;
 	
+	
 	public AtTheRate(Point point) {
 		this.point = point;
+		inputPoint1 = new Point((int)point.getX() + 10, (int)point.getY()+ 10);
+		inputPoint2 = new Point((int)point.getX() + 10, (int)point.getY()+ 30);
+		outputPoint1 = new Point((int)point.getX() + 80, (int)point.getY()+ 10);
+		outputPoint2 = new Point((int)point.getX() + 80, (int)point.getY()+ 30);
+		this.input1 = new Dot(inputPoint1, true);
+		this.input2 = new Dot(inputPoint2, true);
+		this.output1 = new Dot(outputPoint1, false);
+		this.output2 = new Dot(outputPoint2, false);
+		
 	}
 
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
-		Point inputPoint1 = new Point();
 		inputPoint1.setLocation(point.getX() + 10, point.getY() + 10);
-		this.input1 = new Dot(inputPoint1, true);
-		this.input1.drawShape(graphic);
-		Point inputPoint2 = new Point();
+		input1.drawShape();
 		inputPoint2.setLocation(point.getX() + 10, point.getY() + 30);
-		this.input2 = new Dot(inputPoint2, false);
-		this.input2.drawShape(graphic);
-		Point outputPoint1 = new Point();
+		input2.drawShape();
 		outputPoint1.setLocation(point.getX() + 80, point.getY() + 10);
-		this.output1 = new Dot(outputPoint1, false);
-		this.output1.drawShape(graphic);
-		Point outputPoint2 = new Point();
+		output1.drawShape();
 		outputPoint2.setLocation(point.getX() + 80, point.getY() + 30);
-		this.output2 = new Dot(outputPoint2, false);
-		this.output2.drawShape(graphic);
+		output2.drawShape();
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
 		graphics2.drawString("@", (int)point.getX() + 40, (int)point.getY() + 35);
 		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);
