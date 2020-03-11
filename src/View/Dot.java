@@ -1,21 +1,40 @@
 package View;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 
-public class Dot {
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.border.Border;
+
+import Model.OptionNames;
+import Model.TabList;
+
+public class Dot extends JButton {
 
 	private Point point;
-	private Shape dot;
+	private JButton dot;
 	private boolean isInput;
-	
+
 	public Dot(Point point, boolean isInput) {
 		this.point = point;
 		this.isInput = isInput;
+		dot = new JButton();
+		dot.setBounds((int) point.getX(), (int) point.getY(), 10, 10);
+		TabList.getInstance().getTab().getWorkspace().add(dot);
+		this.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 	}
-	
+
 	public boolean isInput() {
 		return isInput;
 	}
@@ -24,10 +43,8 @@ public class Dot {
 		this.isInput = isInput;
 	}
 
-	public void drawShape(Graphics graphic) {
-		dot = new Ellipse2D.Double(point.getX(), point.getY(), 10, 10);
-		Graphics2D graphics2 = (Graphics2D) graphic;
-		graphics2.fill(dot);
+	public void drawShape() {
+		dot.setBounds((int) point.getX(), (int) point.getY(), 10, 10);
 	}
 
 	public boolean containsPoint(Point point) {
