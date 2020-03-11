@@ -6,23 +6,24 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GreaterThan extends Icons {
 	private Point point;
-	private Dot input1;
-	private Dot input2;
-	private Dot output;
+	private List<Dot> dots;
 	private Shape icon;
 	private Point inputPoint1, inputPoint2, outputPoint;
 
 	public GreaterThan(Point point) {
+		dots = new ArrayList<Dot>();
 		this.point = point;
 		inputPoint1 = new Point((int)point.getX() + 10, (int)point.getY()+ 10);
 		inputPoint2 = new Point((int)point.getX() + 10, (int)point.getY()+ 30);
 		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
-		this.input1 = new Dot(inputPoint1, true, this);
-		this.input2 = new Dot(inputPoint2, true, this);
-		this.output = new Dot(outputPoint, false, this);
+		dots.add(new Dot(inputPoint1, true, this));
+		dots.add(new Dot(inputPoint2, true, this));
+		dots.add(new Dot(outputPoint, false, this));
 	}
 
 	@Override
@@ -31,9 +32,9 @@ public class GreaterThan extends Icons {
 		inputPoint1.setLocation(point.getX() + 10, point.getY() + 10);
 		inputPoint2.setLocation(point.getX() + 10, point.getY() + 30);
 		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
-		input1.drawShape();
-		input2.drawShape();
-		output.drawShape();
+		for (Dot dot:dots) {
+			dot.drawShape();
+		}
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
 		graphics2.drawString(">", (int) point.getX() + 40, (int) point.getY() + 35);
 		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);

@@ -5,20 +5,22 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CloseBracket extends Icons {
 	private Point point;
-	private Dot input;
-	private Dot output;
+	private List<Dot> dots;
 	private Shape icon;
 	private Point inputPoint, outputPoint;
 	
 	public CloseBracket(Point point) {
+		dots = new ArrayList<Dot>();
 		this.point = point;
 		inputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
 		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
-		this.input = new Dot(inputPoint, true, this);
-		this.output = new Dot(outputPoint, false, this);
+		dots.add(new Dot(inputPoint, true, this));
+		dots.add(new Dot(outputPoint, false, this));
 		
 	}
 
@@ -26,9 +28,10 @@ public class CloseBracket extends Icons {
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
 		inputPoint.setLocation(point.getX() + 10, point.getY() + 20);
-		this.input.drawShape();
 		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
-		this.output.drawShape();
+		for (Dot dot:dots) {
+			dot.drawShape();
+		}
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
 		graphics2.drawString(")", (int)point.getX() + 45, (int)point.getY() + 35);
 		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);
