@@ -1,22 +1,16 @@
 package View;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Ellipse2D;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.border.Border;
 
-import Model.OptionNames;
 import Model.TabList;
 
 public class Dot extends JButton {
 
+	private static final long serialVersionUID = 1L;
 	private Point point;
 	private JButton dot;
 	private boolean isInput;
@@ -25,12 +19,12 @@ public class Dot extends JButton {
 		this.point = point;
 		this.isInput = isInput;
 		dot = new JButton();
-		dot.setBounds((int) point.getX(), (int) point.getY(), 10, 10);
+		drawShape();
 		TabList.getInstance().getTab().getWorkspace().add(dot);
-		this.addActionListener(new ActionListener() {
+		dot.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				System.out.println("Dot clicked: "+isInput);
 			}
 		});
 	}
@@ -45,10 +39,6 @@ public class Dot extends JButton {
 
 	public void drawShape() {
 		dot.setBounds((int) point.getX(), (int) point.getY(), 10, 10);
-	}
-
-	public boolean containsPoint(Point point) {
-		return dot.contains(point);
 	}
 
 	public Point getLocation() {
