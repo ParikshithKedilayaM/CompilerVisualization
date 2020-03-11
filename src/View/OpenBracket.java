@@ -16,8 +16,8 @@ public class OpenBracket extends Icons {
 
 	public OpenBracket(Point point) {
 		this.point = point;
-		inputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
-		outputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
+		inputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
+		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
 		this.input = new Dot(inputPoint, true);
 		this.output = new Dot(outputPoint, false);
 	}
@@ -25,8 +25,8 @@ public class OpenBracket extends Icons {
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
-		inputPoint.setLocation(point.getX() + 80, point.getY() + 20);
-		outputPoint.setLocation(point.getX() + 10, point.getY() + 20);
+		inputPoint.setLocation(point.getX() + 10, point.getY() + 20);
+		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
 		input.drawShape();
 		output.drawShape();
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
