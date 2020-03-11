@@ -33,9 +33,9 @@ public class LessThan extends Icons {
 		inputPoint.setLocation(point.getX() + 10, point.getY() + 20);
 		outputPoint1.setLocation(point.getX() + 80, point.getY() + 10);
 		outputPoint2.setLocation(point.getX() + 80, point.getY() + 30);
-		dots.get(0).drawShape();
-		dots.get(1).drawShape();
-		dots.get(2).drawShape();
+		for(Dot dot: dots) {
+			dot.drawShape();
+		}
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
 		graphics2.drawString("<", (int)point.getX() + 40, (int)point.getY() + 35);
 		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);
