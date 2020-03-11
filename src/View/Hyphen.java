@@ -1,18 +1,21 @@
 package View;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
 public class Hyphen extends Icons {
 	private Point point;
 	private Dot input;
 	private Dot output;
-	
+	private Shape icon;
+
 	public Hyphen(Point point) {
 		this.point = point;
-		
+
 	}
 
 	@Override
@@ -27,25 +30,26 @@ public class Hyphen extends Icons {
 		this.output = new Dot(outputPoint, false);
 		this.output.drawShape(graphic);
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
-		graphics2.drawString("-", (int)point.getX() + 40, (int)point.getY() + 35);
-		graphics2.draw(new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50));
+		graphics2.drawString("-", (int) point.getX() + 40, (int) point.getY() + 35);
+		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);
+		graphics2.draw(icon);
 	}
 
 	@Override
 	public boolean containsIcon(Point point) {
-		return containsIcon(point);
+		return icon.contains(point);
 	}
 
 	@Override
 	public Point getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		return point;
 	}
 
 	@Override
 	public void setLocation(Point point) {
 		// TODO Auto-generated method stub
-		
+		this.point = point;
 	}
 
 }
