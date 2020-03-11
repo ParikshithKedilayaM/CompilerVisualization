@@ -21,10 +21,10 @@ public class AtTheRate extends Icons {
 		inputPoint2 = new Point((int)point.getX() + 10, (int)point.getY()+ 30);
 		outputPoint1 = new Point((int)point.getX() + 80, (int)point.getY()+ 10);
 		outputPoint2 = new Point((int)point.getX() + 80, (int)point.getY()+ 30);
-		this.input1 = new Dot(inputPoint1, true);
-		this.input2 = new Dot(inputPoint2, true);
-		this.output1 = new Dot(outputPoint1, false);
-		this.output2 = new Dot(outputPoint2, false);
+		this.input1 = new Dot(inputPoint1, true, this);
+		this.input2 = new Dot(inputPoint2, true, this);
+		this.output1 = new Dot(outputPoint1, false, this);
+		this.output2 = new Dot(outputPoint2, false, this);
 		
 	}
 

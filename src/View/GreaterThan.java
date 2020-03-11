@@ -20,9 +20,9 @@ public class GreaterThan extends Icons {
 		inputPoint1 = new Point((int)point.getX() + 10, (int)point.getY()+ 10);
 		inputPoint2 = new Point((int)point.getX() + 10, (int)point.getY()+ 30);
 		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
-		this.input1 = new Dot(inputPoint1, true);
-		this.input2 = new Dot(inputPoint2, true);
-		this.output = new Dot(outputPoint, false);
+		this.input1 = new Dot(inputPoint1, true, this);
+		this.input2 = new Dot(inputPoint2, true, this);
+		this.output = new Dot(outputPoint, false, this);
 	}
 
 	@Override

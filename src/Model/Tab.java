@@ -13,6 +13,8 @@ public class Tab extends Observable {
 	private Point point;
 	private Icons selectedIcon;
 	private Workspace workspace;
+	private boolean isFirstDotClicked = false;
+	
 
 	public Tab(Workspace workspace) {
 		iconList = new ArrayList<Icons>();

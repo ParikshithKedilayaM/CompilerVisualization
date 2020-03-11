@@ -14,10 +14,12 @@ public class Dot extends JButton {
 	private Point point;
 	private JButton dot;
 	private boolean isInput;
+	private Icons icon;
 
-	public Dot(Point point, boolean isInput) {
+	public Dot(Point point, boolean isInput, Icons icon) {
 		this.point = point;
 		this.isInput = isInput;
+		this.icon = icon;
 		dot = new JButton();
 		drawShape();
 		TabList.getInstance().getTab().getWorkspace().add(dot);
@@ -25,6 +27,7 @@ public class Dot extends JButton {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Dot clicked: "+isInput);
+				TabList.getInstance().getTab();
 			}
 		});
 	}

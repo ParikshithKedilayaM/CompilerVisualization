@@ -17,8 +17,8 @@ public class CloseBracket extends Icons {
 		this.point = point;
 		inputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
 		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
-		this.input = new Dot(inputPoint, true);
-		this.output = new Dot(outputPoint, false);
+		this.input = new Dot(inputPoint, true, this);
+		this.output = new Dot(outputPoint, false, this);
 		
 	}
 
