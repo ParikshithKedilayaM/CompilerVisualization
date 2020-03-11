@@ -20,7 +20,7 @@ public class LessThan extends Icons {
 		outputPoint1 = new Point((int)point.getX() + 80, (int)point.getY()+ 10);
 		outputPoint2 = new Point((int)point.getX() + 80, (int)point.getY()+ 30);
 		this.input = new Dot(inputPoint, true);
-		this.output1 = new Dot(outputPoint1, true);
+		this.output1 = new Dot(outputPoint1, false);
 		this.output2 = new Dot(outputPoint2, false);
 	}
 
