@@ -1,4 +1,5 @@
 package Model;
+import java.awt.Point;
 import java.io.Serializable;
 
 import View.Icons;
@@ -14,55 +15,39 @@ import View.Icons;
 public class Connections implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private int sourceX, sourceY, destX, destY;
-	private Icons originShape, destShape;
+	private Point originPoint, destPoint;
+	private Icons originIcon, destIcon;
 
-	public Icons getOriginShape() {
-		return originShape;
+	public Icons getOriginIcon() {
+		return originIcon;
 	}
 
-	public void setOriginShape(Icons originShape) {
-		this.originShape = originShape;
+	public void setOriginIcon(Icons originShape) {
+		this.originIcon = originShape;
 	}
 
-	public Icons getDestShape() {
-		return destShape;
+	public Icons getDestIcon() {
+		return destIcon;
 	}
 
-	public void setDestShape(Icons destShape) {
-		this.destShape = destShape;
+	public void setDestIcon(Icons destShape) {
+		this.destIcon = destShape;
 	}
 
-	public int getSourceX() {
-		return sourceX;
+	public Point getOriginPoint() {
+		return originPoint;
 	}
 
-	public void setSourceX(int sourceX) {
-		this.sourceX = sourceX;
+	public void setOriginPoint(Point originPoint) {
+		this.originPoint = originPoint;
 	}
 
-	public int getSourceY() {
-		return sourceY;
+	public Point getDestPoint() {
+		return destPoint;
 	}
 
-	public void setSourceY(int sourceY) {
-		this.sourceY = sourceY;
-	}
-
-	public int getDestX() {
-		return destX;
-	}
-
-	public void setDestX(int destX) {
-		this.destX = destX;
-	}
-
-	public int getDestY() {
-		return destY;
-	}
-
-	public void setDestY(int destY) {
-		this.destY = destY;
+	public void setDestPoint(Point destPoint) {
+		this.destPoint = destPoint;
 	}
 
 }

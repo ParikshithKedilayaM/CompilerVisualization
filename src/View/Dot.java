@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import Model.Tab;
 import Model.TabList;
 
 public class Dot extends JButton {
@@ -15,8 +16,10 @@ public class Dot extends JButton {
 	private JButton dot;
 	private boolean isInput;
 	private Icons icon;
+	private Dot current;
 
 	public Dot(Point point, boolean isInput, Icons icon) {
+		this.current = this;
 		this.point = point;
 		this.isInput = isInput;
 		this.icon = icon;
@@ -26,8 +29,18 @@ public class Dot extends JButton {
 		dot.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Dot clicked: "+isInput);
-				TabList.getInstance().getTab();
+				Tab tab = TabList.getInstance().getTab();
+				if(!tab.isFirstDotClicked()) {
+					tab.setFirstDotClicked(true);
+					tab.setOriginIcon(icon);
+					tab.setOriginPoint(point);
+					tab.setOriginDot((JButton)e.getSource());
+				}
+				else if(icon != tab.getOriginIcon()) {
+					tab.setDestIcon(icon);
+					tab.setDestDot((JButton)e.getSource());
+					tab.setDestPoint(point, "Drawline");
+				}
 			}
 		});
 	}

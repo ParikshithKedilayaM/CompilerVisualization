@@ -1,9 +1,12 @@
 package Controller;
 
+import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 
+import Model.Connections;
 import Model.Tab;
 import Model.TabList;
 import View.Icons;
@@ -18,7 +21,10 @@ public class WorkspaceController implements Observer {
 			setSelectedIcon();
 		} else if (arg == "Dragged") {
 			iconDragged();
-		} else {
+		} else if (arg == "Drawline"){
+			drawLine(true);
+		} else if (arg == "DrawTempLine") {
+			drawLine(false);
 		}
 
 		repaint();
@@ -55,5 +61,28 @@ public class WorkspaceController implements Observer {
 		if (drawnIcon != null) {
 			tab.addIcon(drawnIcon);
 		}
+	}
+	
+	private void drawLine(boolean isFinalLine) {
+		Tab tab = TabList.getInstance().getTab();
+		Connections connection = new Connections();
+		connection.setOriginIcon(tab.getOriginIcon());
+		connection.setDestIcon(tab.getDestIcon());
+		connection.setOriginPoint(tab.getOriginPoint());
+		connection.setDestPoint(tab.getDestPoint());
+		if (isFinalLine) {
+			setLine(tab, connection);
+		} else {
+			Line2D line = new Line2D.Double();
+			line.setLine(connection.getOriginPoint(), connection.getDestPoint());
+			Graphics2D g2 = (Graphics2D) tab.getWorkspace().getGraphics();
+			g2.draw(line);
+		}
+	}
+	private void setLine(Tab tab, Connections connection) {
+		tab.getConnectionList().add(connection);
+		tab.setFirstDotClicked(false);
+		tab.getOriginDot().setEnabled(false);
+		tab.getDestDot().setEnabled(false);
 	}
 }

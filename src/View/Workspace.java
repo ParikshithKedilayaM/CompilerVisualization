@@ -2,14 +2,18 @@ package View;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
 import javax.swing.JPanel;
+
+import Model.Connections;
 import Model.Tab;
 import Model.TabList;
 
@@ -32,7 +36,11 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-
+		if (TabList.getInstance().getTab().isFirstDotClicked()) {
+			Point point = new Point(e.getX(), e.getY());
+			TabList.getInstance().getTab().setDestPoint(point, "DrawTempLine");
+		}
+		
 	}
 
 	@Override
@@ -68,11 +76,18 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
-		ArrayList<Icons> iconList = TabList.getInstance().getTab().getIconList();
+		Tab tab = TabList.getInstance().getTab();
+		ArrayList<Icons> iconList = tab.getIconList();
 		ListIterator<Icons> i = iconList.listIterator();
 		while (i.hasNext()) {
 			Icons nextIcon = i.next();
 			nextIcon.drawShape(graphics);
+		}
+		for (Connections connection : tab.getConnectionList()) {
+			Line2D line = new Line2D.Double();
+			line.setLine(connection.getOriginPoint(), connection.getDestPoint());
+			Graphics2D g2 = (Graphics2D) graphics;
+			g2.draw(line);
 		}
 	}
 }
