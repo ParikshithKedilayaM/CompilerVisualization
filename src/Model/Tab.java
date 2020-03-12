@@ -16,7 +16,7 @@ public class Tab extends Observable {
 	private Point point, originPoint, destPoint;
 	private Icons selectedIcon;
 	private Workspace workspace;
-	private boolean isFirstDotClicked = false;
+	private boolean isFirstDotClicked = false, isMoving = false;
 	private Icons originIcon, destIcon;
 	private JButton originDot, destDot;
 	private List<Connections> connectionList;
@@ -134,6 +134,14 @@ public class Tab extends Observable {
 
 	public void setDestDot(JButton destDot) {
 		this.destDot = destDot;
+	}
+
+	public boolean isMoving() {
+		return isMoving;
+	}
+
+	public void setMoving(boolean isMoving) {
+		this.isMoving = isMoving;
 	}
 
 	public void notifyMethod(String operation) {

@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.Cursor;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import java.util.ListIterator;
@@ -26,7 +27,6 @@ public class WorkspaceController implements Observer {
 		} else if (arg == "DrawTempLine") {
 			drawLine(false);
 		}
-
 		repaint();
 	}
 
@@ -56,10 +56,12 @@ public class WorkspaceController implements Observer {
 	private void newShape() {
 		IconFactory iconFactory = new IconFactory();
 		Tab tab = TabList.getInstance().getTab();
-		Icons drawnIcon = iconFactory.drawIcon(tab.getPoint(), tab.getSelectedOption(),
-				tab.getWorkspace().getGraphics());
-		if (drawnIcon != null) {
-			tab.addIcon(drawnIcon);
+		if (!tab.isMoving()) {
+			Icons drawnIcon = iconFactory.drawIcon(tab.getPoint(), tab.getSelectedOption(),
+					tab.getWorkspace().getGraphics());
+			if (drawnIcon != null) {
+				tab.addIcon(drawnIcon);
+			} 
 		}
 	}
 	
@@ -72,11 +74,11 @@ public class WorkspaceController implements Observer {
 		connection.setDestPoint(tab.getDestPoint());
 		if (isFinalLine) {
 			setLine(tab, connection);
+			tab.setMoving(false);
+			tab.getWorkspace().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		} else {
-			Line2D line = new Line2D.Double();
-			line.setLine(connection.getOriginPoint(), connection.getDestPoint());
-			Graphics2D g2 = (Graphics2D) tab.getWorkspace().getGraphics();
-			g2.draw(line);
+			tab.setMoving(true);
+			tab.getWorkspace().setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		}
 	}
 	private void setLine(Tab tab, Connections connection) {

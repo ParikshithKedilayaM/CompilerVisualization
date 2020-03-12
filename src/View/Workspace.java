@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -86,6 +87,12 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 		for (Connections connection : tab.getConnectionList()) {
 			Line2D line = new Line2D.Double();
 			line.setLine(connection.getOriginPoint(), connection.getDestPoint());
+			Graphics2D g2 = (Graphics2D) graphics;
+			g2.draw(line);
+		}
+		if (tab.isMoving()) {
+			Line2D line = new Line2D.Double();
+			line.setLine(tab.getOriginPoint(), tab.getDestPoint());
 			Graphics2D g2 = (Graphics2D) graphics;
 			g2.draw(line);
 		}
