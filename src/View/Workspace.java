@@ -97,4 +97,15 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 			g2.draw(line);
 		}
 	}
+	
+	public void setCrossHairCursor() {
+		setCursorMethod(Cursor.CROSSHAIR_CURSOR);
+	}
+	public void setDefaultCursor() {
+		setCursorMethod(Cursor.DEFAULT_CURSOR);
+	}
+	private void setCursorMethod(int cursorType) {
+		Cursor cursor = new Cursor(cursorType);
+		this.setCursor(cursor);
+	}
 }

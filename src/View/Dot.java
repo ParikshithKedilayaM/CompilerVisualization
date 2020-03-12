@@ -16,10 +16,8 @@ public class Dot extends JButton {
 	private JButton dot;
 	private boolean isInput;
 	private Icons icon;
-	private Dot current;
 
 	public Dot(Point point, boolean isInput, Icons icon) {
-		this.current = this;
 		this.point = point;
 		this.isInput = isInput;
 		this.icon = icon;

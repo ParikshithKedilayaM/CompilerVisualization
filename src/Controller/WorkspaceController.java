@@ -1,8 +1,5 @@
 package Controller;
 
-import java.awt.Cursor;
-import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
@@ -75,10 +72,10 @@ public class WorkspaceController implements Observer {
 		if (isFinalLine) {
 			setLine(tab, connection);
 			tab.setMoving(false);
-			tab.getWorkspace().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			tab.getWorkspace().setDefaultCursor();
 		} else {
 			tab.setMoving(true);
-			tab.getWorkspace().setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+			tab.getWorkspace().setCrossHairCursor();
 		}
 	}
 	private void setLine(Tab tab, Connections connection) {
