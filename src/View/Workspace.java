@@ -87,30 +87,15 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 		}
 		for (Connections connection : tab.getConnectionList()) {
 			Line2D line = new Line2D.Double();
-			double originY = connection.getOriginPoint().getY(), destY = connection.getDestPoint().getY();
-			if (tab.getOriginIcon() instanceof DoubleBar) {
-				originY = originY + 14;
-			} else {
-				originY = originY + 5;
-			}
-			if (tab.getDestIcon() instanceof DoubleBar) {
-				destY = destY + 14;
-			} else {
-				destY = destY + 5;
-			}
-			line.setLine((connection.getOriginPoint().getX() + 5), originY, (connection.getDestPoint().getX() + 5), destY);
+			line.setLine(connection.getOriginPoint().getX() + 5, connection.getOriginPoint().getY() + 5,
+					connection.getDestPoint().getX() + 5, connection.getDestPoint().getY() + 5);
 			Graphics2D g2 = (Graphics2D) graphics;
 			g2.draw(line);
 		}
 		if (tab.isMoving()) {
 			Line2D line = new Line2D.Double();
-			double originY = tab.getOriginPoint().getY();
-			if (tab.getOriginIcon() instanceof DoubleBar) {
-				originY = originY + 14;
-			} else {
-				originY = originY + 5;
-			}
-			line.setLine(tab.getOriginPoint().getX() + 5, originY, tab.getDestPoint().getX(), tab.getDestPoint().getY());
+			line.setLine(tab.getOriginPoint().getX() + 5, tab.getOriginPoint().getY() + 5,
+					tab.getDestPoint().getX(), tab.getDestPoint().getY());
 			Graphics2D g2 = (Graphics2D) graphics;
 			g2.draw(line);
 		}
