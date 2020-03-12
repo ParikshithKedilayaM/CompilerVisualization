@@ -4,9 +4,12 @@ import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JButton;
+
 import Model.Connections;
 import Model.Tab;
 import Model.TabList;
+import View.Dot;
 import View.Icons;
 
 public class WorkspaceController implements Observer {
@@ -19,7 +22,7 @@ public class WorkspaceController implements Observer {
 			setSelectedIcon();
 		} else if (arg == "Dragged") {
 			iconDragged();
-		} else if (arg == "Drawline"){
+		} else if (arg == "Drawline") {
 			drawLine(true);
 		} else if (arg == "DrawTempLine") {
 			drawLine(false);
@@ -58,10 +61,10 @@ public class WorkspaceController implements Observer {
 					tab.getWorkspace().getGraphics());
 			if (drawnIcon != null) {
 				tab.addIcon(drawnIcon);
-			} 
+			}
 		}
 	}
-	
+
 	private void drawLine(boolean isFinalLine) {
 		Tab tab = TabList.getInstance().getTab();
 		Connections connection = new Connections();
@@ -78,10 +81,13 @@ public class WorkspaceController implements Observer {
 			tab.getWorkspace().setCrossHairCursor();
 		}
 	}
+
 	private void setLine(Tab tab, Connections connection) {
-		tab.getConnectionList().add(connection);
-		tab.setFirstDotClicked(false);
-		tab.getOriginDot().setEnabled(false);
-		tab.getDestDot().setEnabled(false);
+		if ((tab.isOriginInput() && !tab.isDestInput()) || (!tab.isOriginInput() && tab.isDestInput())) {
+			tab.getConnectionList().add(connection);
+			tab.setFirstDotClicked(false);
+			tab.getOriginDot().setEnabled(false);
+			tab.getDestDot().setEnabled(false);
+		}
 	}
 }
