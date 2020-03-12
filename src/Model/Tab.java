@@ -145,10 +145,6 @@ public class Tab extends Observable {
 		this.isMoving = isMoving;
 	}
 
-	public void notifyMethod(String operation) {
-		setChanged();
-		notifyObservers(operation);
-	}
 
 	public boolean isDestInput() {
 		return isDestInput;
@@ -166,4 +162,8 @@ public class Tab extends Observable {
 		this.isOriginInput = isOriginInput;
 	}
 
+	public void notifyMethod(String operation) {
+		setChanged();
+		notifyObservers(operation);
+	}
 }

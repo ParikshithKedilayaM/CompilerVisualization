@@ -10,6 +10,7 @@ import Model.Connections;
 import Model.Tab;
 import Model.TabList;
 import View.Dot;
+import View.DoubleBar;
 import View.Icons;
 
 public class WorkspaceController implements Observer {
@@ -86,8 +87,12 @@ public class WorkspaceController implements Observer {
 		if ((tab.isOriginInput() && !tab.isDestInput()) || (!tab.isOriginInput() && tab.isDestInput())) {
 			tab.getConnectionList().add(connection);
 			tab.setFirstDotClicked(false);
-			tab.getOriginDot().setEnabled(false);
+			if (!(tab.getOriginIcon() instanceof DoubleBar)) {
+				tab.getOriginDot().setEnabled(false);
+			}
+			if (!(tab.getDestIcon() instanceof DoubleBar)) {
 			tab.getDestDot().setEnabled(false);
+			}
 		}
 	}
 }
