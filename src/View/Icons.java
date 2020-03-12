@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
 import javax.swing.JOptionPane;
 
@@ -10,8 +11,8 @@ import javax.swing.JOptionPane;
  *  @author Raghavan
  *  @version 1.0
  */
-public abstract class Icons extends MouseAdapter {
-	
+public abstract class Icons extends MouseAdapter implements Serializable {
+	private static final long serialVersionUID = 1L;
 	public String description;
 	
 	public abstract void drawShape(Graphics graphic);

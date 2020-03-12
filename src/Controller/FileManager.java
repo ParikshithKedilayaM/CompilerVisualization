@@ -5,14 +5,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import Model.Tab;
+import Model.TabList;
 
 public class FileManager {
 	private final String FILE_EXT = ".ser";
 	
-	public void saveFile() {
+	public void saveFile(List<Tab> tabList, JTabbedPane tabbedPane) {
 		FileOutputStream fileOut = null;
 		ObjectOutputStream out = null;
 		String fileName = null;
@@ -25,14 +32,14 @@ public class FileManager {
 			if (fileName != null) {
 				fileOut = new FileOutputStream(new File(fileName));
 				out = new ObjectOutputStream(fileOut);
-				
-				// to implement
-				
+				out.writeObject(tabList);
+//				out.writeObject(tabbedPane);
 				fileOut.flush();
 				JOptionPane.showMessageDialog(null, "File Saved!");
 			}
-		} catch (IOException i) {
+		} catch (Exception i) {
 			JOptionPane.showMessageDialog(null, "Error occured! Could Not Save your file");
+			i.printStackTrace();
 		} finally {
 			if (out != null) {
 				try {
@@ -51,7 +58,7 @@ public class FileManager {
 		}
 	}
 	
-	public void loadFile() {
+	public JTabbedPane loadFile() {
 		FileInputStream fileIn = null;
 		ObjectInputStream in = null;
 		String fileName = null;
@@ -64,12 +71,18 @@ public class FileManager {
 				fileName = chosenFile.getSelectedFile().getAbsolutePath();
 				fileIn = new FileInputStream(fileName);
 				in = new ObjectInputStream(fileIn);
-				
-				// to implement
-				
+				List<Tab> tabList = (ArrayList<Tab>) in.readObject();
+				TabList.getInstance().setTabList(tabList);
+				for(Tab tab : tabList) {
+					tab.getWorkspace().repaint();
+				}
+//				TabList.getInstance().getTab().getWorkspace().repaint();
+//				return (JTabbedPane) in.readObject();
 			}
 		} catch (IOException i) {
 			JOptionPane.showMessageDialog(null, "Could not load the file. Please select only .ser files!");
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			if (in != null) {
 				try {
@@ -86,5 +99,6 @@ public class FileManager {
 				}
 			}
 		}
+		return new JTabbedPane();
 	}
 }

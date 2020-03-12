@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -18,7 +19,7 @@ import Model.Connections;
 import Model.Tab;
 import Model.TabList;
 
-public class Workspace extends JPanel implements MouseListener, MouseMotionListener {
+public class Workspace extends JPanel implements MouseListener, MouseMotionListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
 

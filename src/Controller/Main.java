@@ -80,7 +80,7 @@ public class Main extends JFrame {
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				fileManager.saveFile();
+				fileManager.saveFile(TabList.getInstance().getTabList(), tabbedPane);
 			}
 		});
 		JMenuItem loadButton = new JMenuItem("Load");

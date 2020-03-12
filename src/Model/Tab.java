@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -10,7 +11,8 @@ import javax.swing.JButton;
 import View.Icons;
 import View.Workspace;
 
-public class Tab extends Observable {
+public class Tab extends Observable implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String selectedOption = "";
 	private ArrayList<Icons> iconList;
 	private Point point, originPoint, destPoint;

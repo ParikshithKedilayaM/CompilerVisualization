@@ -1,11 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import View.Workspace;
 
-public class TabList {
+public class TabList implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int currentTabIndex;
 	private List<Tab> tabList;
 	private static TabList tabListInstance;
@@ -44,5 +46,13 @@ public class TabList {
 
 	public int getSize() {
 		return tabList.size();
+	}
+
+	public List<Tab> getTabList() {
+		return tabList;
+	}
+
+	public void setTabList(List<Tab> tabList) {
+		this.tabList = tabList;
 	}
 }
