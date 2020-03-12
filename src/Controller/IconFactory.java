@@ -6,6 +6,7 @@ import java.awt.Point;
 import Model.OptionNames;
 import View.AtTheRate;
 import View.CloseBracket;
+import View.DoubleBar;
 import View.GreaterThan;
 import View.Hyphen;
 import View.Icons;
@@ -35,6 +36,7 @@ public class IconFactory {
 			iconShape = new AtTheRate(point);
 			break;
 		case OptionNames.BARS:
+			iconShape = new DoubleBar(point);
 			break;
 
 		}
