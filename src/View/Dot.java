@@ -1,15 +1,19 @@
 package View;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Ellipse2D;
 
 import javax.swing.JButton;
 
 import Model.Tab;
 import Model.TabList;
 
-public class Dot extends JButton {
+public class Dot {
 
 	private static final long serialVersionUID = 1L;
 	private Point point;
@@ -21,7 +25,7 @@ public class Dot extends JButton {
 		this.point = point;
 		this.isInput = isInput;
 		this.icon = icon;
-		dot = new JButton();
+		dot = new RoundButton();
 		drawShape();
 		TabList.getInstance().getTab().getWorkspace().add(dot);
 		dot.addActionListener(new ActionListener() {
@@ -65,4 +69,41 @@ public class Dot extends JButton {
 		this.point = point;
 	}
 
+}
+
+class RoundButton extends JButton {
+	private static final long serialVersionUID = 1L;
+	Shape shape;
+
+	public RoundButton() {
+		setContentAreaFilled(false);
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		if (getModel().isArmed()) {
+			g.setColor(getBackground());
+		} else {
+			g.setColor(Color.BLACK);
+		}
+
+		g.fillOval(0, 0, getSize().width - 1, getSize().height - 1);
+
+		super.paintComponent(g);
+	}
+
+	@Override
+	protected void paintBorder(Graphics g) {
+		g.setColor(getForeground());
+		g.drawOval(0, 0, getSize().width - 1, getSize().height - 1);
+	}
+
+	@Override
+	public boolean contains(int x, int y) {
+		if (shape == null || !shape.getBounds().equals(getBounds())) {
+			shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());
+		}
+
+		return shape.contains(x, y);
+	}
 }

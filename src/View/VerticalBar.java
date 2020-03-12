@@ -1,15 +1,8 @@
 package View;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.Color;
 import java.awt.Point;
-import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
 
 import javax.swing.JButton;
 
@@ -20,7 +13,7 @@ import Model.TabList;
  * @author Raghavan
  * @version 1.0
  */
-public class VerticalBar extends JButton  {
+public class VerticalBar {
 
 	private Point point;
 	private JButton bar;
@@ -32,6 +25,9 @@ public class VerticalBar extends JButton  {
 		this.isInput = isInput;
 		this.icon = icon;
 		bar = new JButton();
+		bar.setBorderPainted(false);
+		bar.setOpaque(true);
+		bar.setBackground(Color.BLACK);
 		TabList.getInstance().getTab().getWorkspace().add(bar);
 		bar.addActionListener(new ActionListener() {
 			@Override
