@@ -18,19 +18,20 @@ public class OpenBracket extends Icons {
 	public OpenBracket(Point point) {
 		dots = new ArrayList<Dot>();
 		this.point = point;
-		inputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
+//		inputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
 		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
-		dots.add(new Dot(inputPoint, true, this));
+//		dots.add(new Dot(inputPoint, true, this));
 		dots.add(new Dot(outputPoint, false, this));
 	}
 
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
-		inputPoint.setLocation(point.getX() + 10, point.getY() + 20);
+//		inputPoint.setLocation(point.getX() + 10, point.getY() + 20);
 		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
-		dots.get(0).drawShape();
-		dots.get(1).drawShape();
+		for (Dot dot:dots) {
+			dot.drawShape();
+		}
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
 		graphics2.drawString("(", (int) point.getX() + 35, (int) point.getY() + 35);
 		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);

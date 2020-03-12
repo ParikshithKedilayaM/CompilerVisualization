@@ -18,9 +18,9 @@ public class CloseBracket extends Icons {
 		dots = new ArrayList<Dot>();
 		this.point = point;
 		inputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
-		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
+//		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
 		dots.add(new Dot(inputPoint, true, this));
-		dots.add(new Dot(outputPoint, false, this));
+//		dots.add(new Dot(outputPoint, false, this));
 		
 	}
 
@@ -28,7 +28,7 @@ public class CloseBracket extends Icons {
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
 		inputPoint.setLocation(point.getX() + 10, point.getY() + 20);
-		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
+//		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
 		for (Dot dot:dots) {
 			dot.drawShape();
 		}

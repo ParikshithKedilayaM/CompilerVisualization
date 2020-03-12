@@ -63,6 +63,10 @@ public class WorkspaceController implements Observer {
 			if (drawnIcon != null) {
 				tab.addIcon(drawnIcon);
 			}
+		} else {
+			tab.setFirstDotClicked(false);
+			tab.setMoving(false);
+			tab.getWorkspace().setDefaultCursor();
 		}
 	}
 
