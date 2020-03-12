@@ -1,17 +1,17 @@
-package Controller;
+package controller;
 
 import java.awt.Graphics;
 import java.awt.Point;
 
-import Model.OptionNames;
-import View.AtTheRate;
-import View.CloseBracket;
-import View.DoubleBar;
-import View.GreaterThan;
-import View.Hyphen;
-import View.Icons;
-import View.LessThan;
-import View.OpenBracket;
+import model.OptionNames;
+import view.AtTheRate;
+import view.CloseBracket;
+import view.DoubleBar;
+import view.GreaterThan;
+import view.Hyphen;
+import view.Icons;
+import view.LessThan;
+import view.OpenBracket;
 
 public class IconFactory {
 	public Icons drawIcon(Point point, String icon, Graphics graphics) {

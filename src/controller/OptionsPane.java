@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Model.TabList;
-import Model.OptionNames;
+import model.OptionNames;
+import model.TabList;
 
 public class OptionsPane extends JPanel {
 

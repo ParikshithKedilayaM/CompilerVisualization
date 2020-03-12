@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 /**
  * Model Class to store details about lines

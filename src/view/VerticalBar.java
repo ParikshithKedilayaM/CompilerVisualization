@@ -1,4 +1,4 @@
-package View;
+package view;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import Model.Tab;
-import Model.TabList;
+import model.Tab;
+import model.TabList;
 
 /**
  * @author Raghavan
@@ -29,25 +29,7 @@ public class VerticalBar {
 		bar.setOpaque(true);
 		bar.setBackground(Color.BLACK);
 		TabList.getInstance().getTab().getWorkspace().add(bar);
-		bar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Tab tab = TabList.getInstance().getTab();
-				if (!tab.isFirstDotClicked()) {
-					tab.setFirstDotClicked(true);
-					tab.setOriginIcon(icon);
-					tab.setOriginPoint(point);
-					tab.setOriginInput(isInput);
-					tab.setOriginDot((JButton) e.getSource());
-				} else if (icon != tab.getOriginIcon()) {
-					tab.setDestInput(isInput);
-					tab.setDestIcon(icon);
-					tab.setDestDot((JButton) e.getSource());
-					tab.setDestPoint(point, "Drawline");
-
-				}
-			}
-		});
+		bar.addActionListener(new DotBarActionListener(icon, point, isInput));
 	}
 
 	public boolean isInput() {

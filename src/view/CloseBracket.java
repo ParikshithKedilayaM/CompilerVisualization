@@ -1,5 +1,4 @@
-package View;
-
+package view;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,34 +8,32 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GreaterThan extends Icons {
+public class CloseBracket extends Icons {
 	private Point point;
 	private List<Dot> dots;
 	private Shape icon;
-	private Point inputPoint1, inputPoint2, outputPoint;
-
-	public GreaterThan(Point point) {
+	private Point inputPoint, outputPoint;
+	
+	public CloseBracket(Point point) {
 		dots = new ArrayList<Dot>();
 		this.point = point;
-		inputPoint1 = new Point((int)point.getX() + 10, (int)point.getY()+ 10);
-		inputPoint2 = new Point((int)point.getX() + 10, (int)point.getY()+ 30);
+		inputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
 		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
-		dots.add(new Dot(inputPoint1, true, this));
-		dots.add(new Dot(inputPoint2, true, this));
+		dots.add(new Dot(inputPoint, true, this));
 		dots.add(new Dot(outputPoint, false, this));
+		
 	}
 
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
-		inputPoint1.setLocation(point.getX() + 10, point.getY() + 10);
-		inputPoint2.setLocation(point.getX() + 10, point.getY() + 30);
+		inputPoint.setLocation(point.getX() + 10, point.getY() + 20);
 		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
 		for (Dot dot:dots) {
 			dot.drawShape();
 		}
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
-		graphics2.drawString(">", (int) point.getX() + 40, (int) point.getY() + 35);
+		graphics2.drawString(")", (int)point.getX() + 45, (int)point.getY() + 35);
 		icon = new Rectangle2D.Double(this.point.getX(), this.point.getY(), 100, 50);
 		graphics2.draw(icon);
 	}
@@ -57,5 +54,4 @@ public class GreaterThan extends Icons {
 		// TODO Auto-generated method stub
 		this.point = point;
 	}
-
 }

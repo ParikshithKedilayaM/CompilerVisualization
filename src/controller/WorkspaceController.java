@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.util.ListIterator;
 import java.util.Observable;
@@ -6,12 +6,12 @@ import java.util.Observer;
 
 import javax.swing.JButton;
 
-import Model.Connections;
-import Model.Tab;
-import Model.TabList;
-import View.Dot;
-import View.DoubleBar;
-import View.Icons;
+import model.Connections;
+import model.Tab;
+import model.TabList;
+import view.Dot;
+import view.DoubleBar;
+import view.Icons;
 
 public class WorkspaceController implements Observer {
 

@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -15,9 +15,9 @@ import java.util.ListIterator;
 
 import javax.swing.JPanel;
 
-import Model.Connections;
-import Model.Tab;
-import Model.TabList;
+import model.Connections;
+import model.Tab;
+import model.TabList;
 
 public class Workspace extends JPanel implements MouseListener, MouseMotionListener, Serializable {
 

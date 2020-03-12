@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import Model.Tab;
-import Model.TabList;
+import model.Tab;
+import model.TabList;
 
 public class FileManager {
 	private final String FILE_EXT = ".ser";
@@ -64,7 +64,7 @@ public class FileManager {
 		String fileName = null;
 		try {
 			JFileChooser chosenFile = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter(FILE_EXT, FILE_EXT);
+			FileNameExtensionFilter filter = new FileNameExtensionFilter(FILE_EXT, FILE_EXT.replace(".", ""));
 			chosenFile.setFileFilter(filter);
 			int showOpenDialog = chosenFile.showOpenDialog(null);
 			if (showOpenDialog == JFileChooser.APPROVE_OPTION) {

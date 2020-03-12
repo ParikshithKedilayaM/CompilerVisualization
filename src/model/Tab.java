@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.awt.Point;
 import java.io.Serializable;
@@ -8,8 +8,8 @@ import java.util.Observable;
 
 import javax.swing.JButton;
 
-import View.Icons;
-import View.Workspace;
+import view.Icons;
+import view.Workspace;
 
 public class Tab extends Observable implements Serializable {
 	private static final long serialVersionUID = 1L;

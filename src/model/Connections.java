@@ -1,8 +1,8 @@
-package Model;
+package model;
 import java.awt.Point;
 import java.io.Serializable;
 
-import View.Icons;
+import view.Icons;
 
 /**
  * This class has line information that requires source and destination end

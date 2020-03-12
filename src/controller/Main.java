@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,8 +18,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import Model.TabList;
-import View.Workspace;
+import model.TabList;
+import view.Workspace;
 
 public class Main extends JFrame {
 
