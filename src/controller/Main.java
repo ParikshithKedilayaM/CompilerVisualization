@@ -105,7 +105,7 @@ public class Main extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// JOptionPane.showMessageDialog(null, "Work in progress!");
-				NodeCompiler.createAdjacencyList();
+				new NodeCompiler().createAdjacencyList();
 			}
 		});
 		compileButton.setContentAreaFilled(false);

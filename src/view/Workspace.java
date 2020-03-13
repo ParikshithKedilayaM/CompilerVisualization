@@ -53,15 +53,16 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	public void mouseClicked(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY());
 		Tab tab = TabList.getInstance().getTab();
-		if (e.getClickCount() == 2) {
-			tab.setDoubleClick(true);
-			tab.setPoint(point, "DoubleClicked");
-		} else {
-			Integer timerinterval = (Integer) Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval");
-			Timer timer = new Timer(timerinterval.intValue(), new ClickTimer(point));
-			timer.setRepeats(false);
-			timer.start();
-		}
+		tab.setPoint(point, "Clicked");
+//		if (e.getClickCount() == 2) {
+//			tab.setDoubleClick(true);
+//			tab.setPoint(point, "DoubleClicked");
+//		} else {
+//			Integer timerinterval = (Integer) Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval");
+//			Timer timer = new Timer(timerinterval.intValue(), new ClickTimer(point));
+//			timer.setRepeats(false);
+//			timer.start();
+//		}
 	}
 
 	@Override

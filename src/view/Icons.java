@@ -9,10 +9,12 @@ import java.io.Serializable;
  * @version 1.0
  */
 public abstract class Icons implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private String description = "";
+
+	private boolean isFirstConnection = false;
 
 	public abstract void drawShape(Graphics graphic);
 
@@ -28,6 +30,14 @@ public abstract class Icons implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isFirstConnection() {
+		return isFirstConnection;
+	}
+
+	public void setFirstConnection(boolean isFirstConnection) {
+		this.isFirstConnection = isFirstConnection;
 	}
 
 }

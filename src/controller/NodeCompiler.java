@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
+
+import javax.swing.JOptionPane;
 
 import model.Connections;
 import model.Tab;
 import model.TabList;
 import view.CloseBracket;
+import view.GreaterThan;
 import view.Icons;
+import view.LessThan;
 import view.OpenBracket;
 
 public class NodeCompiler {
 
-	public static void createAdjacencyList() {
+	public void createAdjacencyList() {
 
 		LinkedHashMap<Icons, List<Icons>> adjList = new LinkedHashMap<Icons, List<Icons>>();
 		Tab tab = TabList.getInstance().getTab();
@@ -36,35 +41,56 @@ public class NodeCompiler {
 			}
 
 		}
-
-		System.out.println(adjList);
+		Stack<Icons> stack = new Stack<Icons>();
+		// System.out.println(adjList);
 		Icons start = getStartIcon(adjList);
-		traverse(adjList, start);
+		traverse(adjList, start, stack);
+		System.out.println(stack);
+		if (!stack.isEmpty())
+			JOptionPane.showMessageDialog(null, "Compiler Error");
+		else
+			JOptionPane.showMessageDialog(null, "Compilation Success");
 	}
 
-	public static void traverse(LinkedHashMap<Icons, List<Icons>> adjList, Icons start) {
+	public void traverse(LinkedHashMap<Icons, List<Icons>> adjList, Icons start, Stack<Icons> stack) {
 
+		if (!stack.isEmpty() && start instanceof CloseBracket && stack.peek() instanceof OpenBracket) {
+			stack.pop();
+			return;
+		}
 		if (start instanceof CloseBracket) {
-			System.out.println(start);
-			System.out.println("Close");
 			return;
 		}
 		List<Icons> list = adjList.get(start);
-		System.out.println(start + "----->>>");
+		if (list == null)
+			return;
+		if (start instanceof OpenBracket || start instanceof LessThan)
+			stack.push(start);
+		if (!stack.isEmpty() && start.isFirstConnection() && start instanceof GreaterThan
+				&& stack.peek() instanceof LessThan) {
+			stack.pop();
+		}
 		for (Icons icon : list) {
-			
-			traverse(adjList, icon);
+			if (icon instanceof GreaterThan && !icon.isFirstConnection()) {
+				icon.setFirstConnection(true);
+				return;
+			}
+			traverse(adjList, icon, stack);
 		}
 	}
 
 	public static Icons getStartIcon(LinkedHashMap<Icons, List<Icons>> adjList) {
 		Icons start = null;
+		int count = 0;
 		for (Map.Entry<Icons, List<Icons>> map : adjList.entrySet()) {
 			Icons key = map.getKey();
 			if (key instanceof OpenBracket) {
 				start = key;
+				count++;
 			}
 		}
+		if (count >= 2)
+			System.err.println("More than one open bracket");
 		return start;
 	}
 }
