@@ -104,7 +104,7 @@ public class WorkspaceController implements Observer {
 		while (listIterator.hasNext()) {
 			Icons icon = listIterator.next();
 			if (icon.containsIcon(tab.getPoint())) {
-				String description = tab.getWorkspace().GetInputString();
+				String description = tab.getWorkspace().getInputString(icon.getDescription());
 				icon.setDescription(description);
 				break;
 			}

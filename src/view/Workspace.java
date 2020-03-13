@@ -124,8 +124,8 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 		this.setCursor(cursor);
 	}
 	
-	public String GetInputString() {
-		return (String) JOptionPane.showInputDialog("Enter description");
+	public String getInputString(String setMessage) {
+		return (String) JOptionPane.showInputDialog("Enter description", setMessage);
 	}
 }
 
