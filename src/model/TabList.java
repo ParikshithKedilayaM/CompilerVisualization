@@ -10,7 +10,7 @@ public class TabList implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int currentTabIndex;
 	private List<Tab> tabList;
-	private static TabList tabListInstance;
+	public static TabList tabListInstance;
 
 	private TabList() {
 		currentTabIndex = 0;
