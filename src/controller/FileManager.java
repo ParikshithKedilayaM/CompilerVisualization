@@ -1,4 +1,5 @@
 package controller;
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,13 +14,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import model.Connections;
+import model.OptionNames;
 import model.Tab;
 import model.TabList;
+import view.CloseBracket;
+import view.DoubleBar;
+import view.GreaterThan;
+import view.Icons;
+import view.LessThan;
+import view.OpenBracket;
 
 public class FileManager {
 	private final String FILE_EXT = ".ser";
 	
-	public void saveFile(List<Tab> tabList, JTabbedPane tabbedPane) {
+	public void saveFile() {
 		FileOutputStream fileOut = null;
 		ObjectOutputStream out = null;
 		String fileName = null;
@@ -32,8 +41,12 @@ public class FileManager {
 			if (fileName != null) {
 				fileOut = new FileOutputStream(new File(fileName));
 				out = new ObjectOutputStream(fileOut);
-				out.writeObject(tabList);
-//				out.writeObject(tabbedPane);
+				List<Tab> tabList = TabList.getInstance().getTabList();
+				out.writeInt(tabList.size());
+				for (Tab tab: tabList) {
+					out.writeObject(tab.getIconList());
+					out.writeObject(tab.getConnectionList());
+				}
 				fileOut.flush();
 				JOptionPane.showMessageDialog(null, "File Saved!");
 			}
@@ -71,13 +84,32 @@ public class FileManager {
 				fileName = chosenFile.getSelectedFile().getAbsolutePath();
 				fileIn = new FileInputStream(fileName);
 				in = new ObjectInputStream(fileIn);
-				List<Tab> tabList = (ArrayList<Tab>) in.readObject();
-				TabList.getInstance().setTabList(tabList);
-				for(Tab tab : tabList) {
-					tab.getWorkspace().repaint();
+				int numberOfTabs = in.readInt();
+				// create workspaces
+				for (int i=0;i<numberOfTabs;i++) {
+					TabList tabList = TabList.getInstance();
+					tabList.setCurrentTabIndex(i);
+//					in.readObject();
+					tabList.getTab().setIconList((ArrayList<Icons>) in.readObject());
+					tabList.getTab().setConnectionList((List<Connections>) in.readObject());
+//					for (Connections conn : tabList.getTab().getConnectionList()) {
+//						IconFactory icf = new IconFactory();
+//						Graphics graphics = tabList.getTab().getWorkspace().getGraphics();
+//						Icons originIcon = conn.getOriginIcon();
+//						originIcon = icf.drawIcon(originIcon.getLocation(), getClassAsString(originIcon), graphics);
+//						tabList.getTab().addIcon(originIcon);
+//						Icons destIcon = conn.getDestIcon();
+//						destIcon = icf.drawIcon(destIcon.getLocation(), getClassAsString(destIcon), graphics);
+//						tabList.getTab().addIcon(destIcon);
+////						Connections conn1 = new Connections();
+////						conn1.setOriginIcon(originIcon);
+////						conn1.setDestIcon(destIcon);
+////						conn1.setOriginPoint(originIcon.getLocation());
+////						conn1.setDestPoint(destIcon.getLocation());
+////						tabList.getTab().getConnectionList().add(conn1);
+//					}
+					tabList.getTab().getWorkspace().repaint();
 				}
-//				TabList.getInstance().getTab().getWorkspace().repaint();
-//				return (JTabbedPane) in.readObject();
 			}
 		} catch (IOException i) {
 			JOptionPane.showMessageDialog(null, "Could not load the file. Please select only .ser files!");
@@ -100,5 +132,17 @@ public class FileManager {
 			}
 		}
 		return new JTabbedPane();
+	}
+	private String getClassAsString(Icons icon) {
+		if (icon instanceof OpenBracket) {
+			return OptionNames.OPENBRACKET;
+		} else if (icon instanceof CloseBracket) {
+			return OptionNames.CLOSEBRACKET;
+		} else if (icon instanceof GreaterThan) {
+			return OptionNames.GREATERTHAN;
+		} else if (icon instanceof LessThan) {
+			return OptionNames.LESSTHAN;
+		}
+		return "";
 	}
 }

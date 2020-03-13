@@ -1,6 +1,7 @@
 package view;
 import java.awt.Color;
 import java.awt.Point;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 
@@ -10,7 +11,7 @@ import model.TabList;
  * @author Raghavan
  * @version 1.0
  */
-public class VerticalBar {
+public class VerticalBar implements Serializable {
 
 	private Point point;
 	private JButton bar;
