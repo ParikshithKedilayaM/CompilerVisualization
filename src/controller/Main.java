@@ -104,7 +104,8 @@ public class Main extends JFrame {
 		compileButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Work in progress!");
+				// JOptionPane.showMessageDialog(null, "Work in progress!");
+				NodeCompiler.createAdjacencyList();
 			}
 		});
 		compileButton.setContentAreaFilled(false);
