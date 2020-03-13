@@ -1,5 +1,4 @@
 package controller;
-import java.awt.Graphics;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,7 +10,6 @@ import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.Connections;
@@ -19,7 +17,6 @@ import model.OptionNames;
 import model.Tab;
 import model.TabList;
 import view.CloseBracket;
-import view.DoubleBar;
 import view.GreaterThan;
 import view.Icons;
 import view.LessThan;
@@ -70,8 +67,8 @@ public class FileManager {
 			}
 		}
 	}
-	
-	public JTabbedPane loadFile() {
+
+	public void loadFile() {
 		FileInputStream fileIn = null;
 		ObjectInputStream in = null;
 		String fileName = null;
@@ -131,7 +128,6 @@ public class FileManager {
 				}
 			}
 		}
-		return new JTabbedPane();
 	}
 	private String getClassAsString(Icons icon) {
 		if (icon instanceof OpenBracket) {
