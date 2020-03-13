@@ -5,12 +5,13 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 
 import model.TabList;
 
-public class Dot {
+public class Dot implements Serializable {
 
 	private Point point;
 	private JButton dot;
