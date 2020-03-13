@@ -5,6 +5,9 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -13,7 +16,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import model.Connections;
 import model.Tab;
@@ -32,8 +37,7 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY());
-		TabList.getInstance().getTab().setPoint(point);
-		TabList.getInstance().getTab().notifyMethod("Dragged");
+		TabList.getInstance().getTab().setPoint(point, "Dragged");
 	}
 
 	@Override
@@ -42,22 +46,28 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 			Point point = new Point(e.getX(), e.getY());
 			TabList.getInstance().getTab().setDestPoint(point, "DrawTempLine");
 		}
-		
+
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY());
 		Tab tab = TabList.getInstance().getTab();
-		tab.setPoint(point);
-		tab.notifyMethod("Clicked");
+		if (e.getClickCount() == 2) {
+			tab.setDoubleClick(true);
+			tab.setPoint(point, "DoubleClicked");
+		} else {
+			Integer timerinterval = (Integer) Toolkit.getDefaultToolkit().getDesktopProperty("awt.multiClickInterval");
+			Timer timer = new Timer(timerinterval.intValue(), new ClickTimer(point));
+			timer.setRepeats(false);
+			timer.start();
+		}
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		Point point = new Point(e.getX(), e.getY());
-		TabList.getInstance().getTab().setPoint(point);
-		TabList.getInstance().getTab().notifyMethod("Pressed");
+		TabList.getInstance().getTab().setPoint(point, "Pressed");
 	}
 
 	@Override
@@ -94,21 +104,44 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 		}
 		if (tab.isMoving()) {
 			Line2D line = new Line2D.Double();
-			line.setLine(tab.getOriginPoint().getX() + 5, tab.getOriginPoint().getY() + 5,
-					tab.getDestPoint().getX(), tab.getDestPoint().getY());
+			line.setLine(tab.getOriginPoint().getX() + 5, tab.getOriginPoint().getY() + 5, tab.getDestPoint().getX(),
+					tab.getDestPoint().getY());
 			Graphics2D g2 = (Graphics2D) graphics;
 			g2.draw(line);
 		}
 	}
-	
+
 	public void setCrossHairCursor() {
 		setCursorMethod(Cursor.CROSSHAIR_CURSOR);
 	}
+
 	public void setDefaultCursor() {
 		setCursorMethod(Cursor.DEFAULT_CURSOR);
 	}
+
 	private void setCursorMethod(int cursorType) {
 		Cursor cursor = new Cursor(cursorType);
 		this.setCursor(cursor);
+	}
+	
+	public String GetInputString() {
+		return (String) JOptionPane.showInputDialog("Enter description");
+	}
+}
+
+class ClickTimer implements ActionListener {
+	private Point point;
+	public ClickTimer(Point point) {
+		this.point = point;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent evt) {
+		Tab tab = TabList.getInstance().getTab();
+		if (tab.isDoubleClick()) {
+			tab.setDoubleClick(false);
+		} else {
+			tab.setPoint(point, "Clicked");
+		}
 	}
 }

@@ -12,16 +12,13 @@ import model.TabList;
 
 public class Dot {
 
-	private static final long serialVersionUID = 1L;
 	private Point point;
 	private JButton dot;
 	private boolean isInput;
-	private Icons icon;
 
 	public Dot(Point point, boolean isInput, Icons icon) {
 		this.point = point;
 		this.isInput = isInput;
-		this.icon = icon;
 		dot = new RoundButton();
 		drawShape();
 		TabList.getInstance().getTab().getWorkspace().add(dot);

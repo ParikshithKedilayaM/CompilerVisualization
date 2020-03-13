@@ -10,24 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OpenBracket extends Icons {
+	private static final long serialVersionUID = 1L;
 	private Point point;
 	private List<Dot> dots;
 	private Shape icon;
-	private Point inputPoint, outputPoint;
+	private Point outputPoint;
 
 	public OpenBracket(Point point) {
 		dots = new ArrayList<Dot>();
 		this.point = point;
-//		inputPoint = new Point((int)point.getX() + 10, (int)point.getY()+ 20);
 		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
-//		dots.add(new Dot(inputPoint, true, this));
 		dots.add(new Dot(outputPoint, false, this));
 	}
 
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
-//		inputPoint.setLocation(point.getX() + 10, point.getY() + 20);
 		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
 		for (Dot dot:dots) {
 			dot.drawShape();
@@ -45,13 +43,11 @@ public class OpenBracket extends Icons {
 
 	@Override
 	public Point getLocation() {
-		// TODO Auto-generated method stub
 		return point;
 	}
 
 	@Override
 	public void setLocation(Point point) {
-		// TODO Auto-generated method stub
 		this.point = point;
 	}
 

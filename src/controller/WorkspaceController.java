@@ -4,12 +4,9 @@ import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JButton;
-
 import model.Connections;
 import model.Tab;
 import model.TabList;
-import view.Dot;
 import view.DoubleBar;
 import view.Icons;
 
@@ -27,6 +24,8 @@ public class WorkspaceController implements Observer {
 			drawLine(true);
 		} else if (arg == "DrawTempLine") {
 			drawLine(false);
+		} else if (arg == "DoubleClicked") {
+			doubleClick();
 		}
 		repaint();
 	}
@@ -96,6 +95,18 @@ public class WorkspaceController implements Observer {
 			}
 			if (!(tab.getDestIcon() instanceof DoubleBar)) {
 			tab.getDestDot().setEnabled(false);
+			}
+		}
+	}
+	private void doubleClick() {
+		Tab tab = TabList.getInstance().getTab();
+		ListIterator<Icons> listIterator = tab.getIconList().listIterator();
+		while (listIterator.hasNext()) {
+			Icons icon = listIterator.next();
+			if (icon.containsIcon(tab.getPoint())) {
+				String description = tab.getWorkspace().GetInputString();
+				icon.setDescription(description);
+				break;
 			}
 		}
 	}

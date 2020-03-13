@@ -15,12 +15,10 @@ public class VerticalBar {
 	private Point point;
 	private JButton bar;
 	private boolean isInput;
-	private Icons icon;
 
 	public VerticalBar(Point point, boolean isInput, Icons icon) {
 		this.point = point;
 		this.isInput = isInput;
-		this.icon = icon;
 		bar = new JButton();
 		bar.setBorderPainted(false);
 		bar.setOpaque(true);

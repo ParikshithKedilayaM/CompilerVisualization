@@ -18,7 +18,7 @@ public class Tab extends Observable implements Serializable {
 	private Point point, originPoint, destPoint;
 	private Icons selectedIcon;
 	private Workspace workspace;
-	private boolean isFirstDotClicked = false, isMoving = false;
+	private boolean isFirstDotClicked = false, isMoving = false, isDoubleClick = false;
 	private Icons originIcon, destIcon;
 	private JButton originDot, destDot;
 	private boolean isOriginInput, isDestInput;
@@ -54,8 +54,9 @@ public class Tab extends Observable implements Serializable {
 		return point;
 	}
 
-	public void setPoint(Point point) {
+	public void setPoint(Point point, String operation) {
 		this.point = point;
+		this.notifyMethod(operation);
 	}
 
 	public Icons getSelectedIcon() {
@@ -120,7 +121,7 @@ public class Tab extends Observable implements Serializable {
 
 	public void setDestPoint(Point destPoint, String operation) {
 		this.destPoint = destPoint;
-		notifyMethod(operation);
+		this.notifyMethod(operation);
 	}
 
 	public JButton getOriginDot() {
@@ -162,6 +163,14 @@ public class Tab extends Observable implements Serializable {
 
 	public void setOriginInput(boolean isOriginInput) {
 		this.isOriginInput = isOriginInput;
+	}
+
+	public boolean isDoubleClick() {
+		return isDoubleClick;
+	}
+
+	public void setDoubleClick(boolean isDoubleClick) {
+		this.isDoubleClick = isDoubleClick;
 	}
 
 	public void notifyMethod(String operation) {
