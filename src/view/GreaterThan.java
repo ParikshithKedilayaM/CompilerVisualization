@@ -7,11 +7,9 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GreaterThan extends Icons {
 	private Point point;
-	private List<Dot> dots;
 	private Shape icon;
 	private Point inputPoint1, inputPoint2, outputPoint;
 

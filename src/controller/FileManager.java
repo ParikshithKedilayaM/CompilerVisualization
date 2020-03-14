@@ -15,14 +15,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.Connections;
-import model.OptionNames;
 import model.Tab;
 import model.TabList;
-import view.CloseBracket;
-import view.GreaterThan;
+import view.Dot;
 import view.Icons;
-import view.LessThan;
-import view.OpenBracket;
+import view.VerticalBar;
 import view.Workspace;
 
 public class FileManager {
@@ -97,6 +94,7 @@ public class FileManager {
 					tabList.getTab().addObserver(new WorkspaceController());
 					tabList.getTab().setIconList((ArrayList<Icons>) in.readObject());
 					tabList.getTab().setConnectionList((List<Connections>) in.readObject());
+					addActionListeners(tabList);
 				}
 				tabList.setCurrentTabIndex(currentTabIndex);
 			}
@@ -118,6 +116,21 @@ public class FileManager {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+			}
+		}
+	}
+	
+	private void addActionListeners(TabList tabList) {
+		for (Icons icon : tabList.getTab().getIconList()) {
+			if (icon.getDots() != null) {
+				for (Dot dot : icon.getDots()) {
+					dot.addActionListener(icon);
+				} 
+			}
+			if (icon.getBars() != null) {
+				for (VerticalBar bar : icon.getBars()) {
+					bar.addActionListener(icon);
+				} 
 			}
 		}
 	}
