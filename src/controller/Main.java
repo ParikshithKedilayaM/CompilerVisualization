@@ -5,15 +5,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -27,7 +24,6 @@ public class Main extends JFrame {
 
 	private OptionsPane optionsPanel;
 	private JTabbedPane tabbedPane;
-	private List<Workspace> workspaceList = new ArrayList<Workspace>();
 	private final String TITLE = "Team 1";
 	private Dimension screenSize;
 
@@ -57,7 +53,7 @@ public class Main extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				TabList.getInstance().setCurrentTabIndex(tabbedPane.getSelectedIndex());
-				workspaceList.get(TabList.getInstance().getCurrentTabIndex()).repaint();
+				TabList.getInstance().getTab().getWorkspace().repaint();
 			}
 		});
 
@@ -66,7 +62,6 @@ public class Main extends JFrame {
 	private void createWorkspace() {
 		TabList tabList = TabList.getInstance();
 		Workspace workspace = new Workspace();
-		workspaceList.add(workspace);
 		tabList.addTab(workspace);
 		tabList.getRecentTab().addObserver(new WorkspaceController());
 		tabbedPane.add("Tab " + tabList.getSize(), workspace);
@@ -87,7 +82,7 @@ public class Main extends JFrame {
 		loadButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				fileManager.loadFile();
+				fileManager.loadFile(tabbedPane);
 			}
 		});
 		menu.add(saveButton);
