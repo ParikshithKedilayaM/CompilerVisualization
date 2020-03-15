@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoubleBar extends Icons {
-	private List<VerticalBar> bars; 
+	
 	private Shape icon;
 	private Point point, inputPoint, outputPoint;
 

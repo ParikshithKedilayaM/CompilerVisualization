@@ -3,6 +3,7 @@ package view;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Raghavan
@@ -15,6 +16,10 @@ public abstract class Icons implements Serializable {
 	private String description = "";
 
 	private boolean isFirstConnection = false;
+	
+	protected List<Dot> dots;
+	
+	protected List<VerticalBar> bars; 
 
 	public abstract void drawShape(Graphics graphic);
 
@@ -38,6 +43,22 @@ public abstract class Icons implements Serializable {
 
 	public void setFirstConnection(boolean isFirstConnection) {
 		this.isFirstConnection = isFirstConnection;
+	}
+
+	public List<Dot> getDots() {
+		return dots;
+	}
+
+	public void setDots(List<Dot> dots) {
+		this.dots = dots;
+	}
+
+	public List<VerticalBar> getBars() {
+		return bars;
+	}
+
+	public void setBars(List<VerticalBar> bars) {
+		this.bars = bars;
 	}
 
 }

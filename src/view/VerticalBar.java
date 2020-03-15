@@ -25,7 +25,7 @@ public class VerticalBar implements Serializable {
 		bar.setOpaque(true);
 		bar.setBackground(Color.BLACK);
 		TabList.getInstance().getTab().getWorkspace().add(bar);
-		bar.addActionListener(new DotBarActionListener(icon, point, isInput));
+		addActionListener(icon);
 	}
 
 	public boolean isInput() {
@@ -52,6 +52,9 @@ public class VerticalBar implements Serializable {
 
 	public void setLocation(Point point) {
 		this.point = point;
+	}
+	public void addActionListener(Icons icon) {
+		bar.addActionListener(new DotBarActionListener(icon, point, isInput));
 	}
 
 }

@@ -7,11 +7,10 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AtTheRate extends Icons {
 	private Point point, inputPoint1, inputPoint2, outputPoint1, outputPoint2;
-	private List<Dot> dots;
+	
 	private Shape icon;
 
 	public AtTheRate(Point point) {
@@ -22,9 +21,18 @@ public class AtTheRate extends Icons {
 		outputPoint1 = new Point((int) point.getX() + 80, (int) point.getY() + 10);
 		outputPoint2 = new Point((int) point.getX() + 80, (int) point.getY() + 30);
 		dots.add(new Dot(inputPoint1, true, this));
-		dots.add(new Dot(inputPoint2, true, this));
-		dots.add(new Dot(outputPoint1, false, this));
-		dots.add(new Dot(outputPoint2, false, this));
+		
+		Dot outputPoint1 = new Dot(this.outputPoint1, false, this);
+		outputPoint1.setEnabled(false);
+		dots.add(outputPoint1);
+		
+		Dot outputPoint2 = new Dot(this.outputPoint2, false, this);
+		outputPoint2.addActionListener(outputPoint1);
+		dots.add(outputPoint2);
+		
+		Dot inputPoint2 = new Dot(this.inputPoint2, true, this);
+		inputPoint2.addActionListener(outputPoint1);
+		dots.add(inputPoint2);
 
 	}
 

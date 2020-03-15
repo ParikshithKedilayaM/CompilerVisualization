@@ -7,12 +7,10 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OpenBracket extends Icons {
 	private static final long serialVersionUID = 1L;
 	private Point point;
-	private List<Dot> dots;
 	private Shape icon;
 	private Point outputPoint;
 
