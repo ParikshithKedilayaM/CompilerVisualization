@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import model.Connections;
 import model.Tab;
 import model.TabList;
+import view.AtTheRate;
 import view.CloseBracket;
 import view.GreaterThan;
 import view.Icons;
@@ -41,8 +42,22 @@ public class NodeCompiler {
 			}
 
 		}
+		for (Map.Entry<Icons, List<Icons>> map : adjList.entrySet()) {
+			Icons key = map.getKey();
+			if (key instanceof AtTheRate) {
+				List<Icons> icon = map.getValue();
+				if (icon.size() != 2) {
+					JOptionPane.showMessageDialog(null, "Compiler Error");
+					return;
+				} else {
+					Icons icon1 = icon.get(0);
+					Icons icon2 = icon.get(1);
+					
+				}
+			}
+		}
 		Stack<Icons> stack = new Stack<Icons>();
-		// System.out.println(adjList);
+		System.out.println(adjList);
 		Icons start = getStartIcon(adjList);
 		traverse(adjList, start, stack);
 		System.out.println(stack);
@@ -61,14 +76,26 @@ public class NodeCompiler {
 		if (start instanceof CloseBracket) {
 			return;
 		}
+		System.out.println(stack);
 		List<Icons> list = adjList.get(start);
 		if (list == null)
 			return;
 		if (start instanceof OpenBracket || start instanceof LessThan)
 			stack.push(start);
+
 		if (!stack.isEmpty() && start.isFirstConnection() && start instanceof GreaterThan
 				&& stack.peek() instanceof LessThan) {
 			stack.pop();
+		}
+		if (!stack.isEmpty() && start.isFirstConnection() && start instanceof AtTheRate
+				&& stack.peek() instanceof AtTheRate) {
+			stack.pop();
+			System.out.println("Heloo");
+			return;
+		}
+		if (start instanceof AtTheRate && !start.isFirstConnection()) {
+			stack.push(start);
+			start.setFirstConnection(true);
 		}
 		for (Icons icon : list) {
 			if (icon instanceof GreaterThan && !icon.isFirstConnection()) {
@@ -93,4 +120,5 @@ public class NodeCompiler {
 			System.err.println("More than one open bracket");
 		return start;
 	}
+
 }
