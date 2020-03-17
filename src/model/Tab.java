@@ -21,7 +21,6 @@ public class Tab extends Observable implements Serializable {
 	private boolean isFirstDotClicked = false, isMoving = false, isDoubleClick = false;
 	private Icons originIcon, destIcon;
 	private JButton originDot, destDot;
-	private boolean isOriginInput, isDestInput;
 	private List<Connections> connectionList;
 
 	public Tab(Workspace workspace) {
@@ -146,23 +145,6 @@ public class Tab extends Observable implements Serializable {
 
 	public void setMoving(boolean isMoving) {
 		this.isMoving = isMoving;
-	}
-
-
-	public boolean isDestInput() {
-		return isDestInput;
-	}
-
-	public void setDestInput(boolean isDestInput) {
-		this.isDestInput = isDestInput;
-	}
-
-	public boolean isOriginInput() {
-		return isOriginInput;
-	}
-
-	public void setOriginInput(boolean isOriginInput) {
-		this.isOriginInput = isOriginInput;
 	}
 
 	public boolean isDoubleClick() {
