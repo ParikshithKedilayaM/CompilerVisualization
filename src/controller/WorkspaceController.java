@@ -87,17 +87,16 @@ public class WorkspaceController implements Observer {
 	}
 
 	private void setLine(Tab tab, Connections connection) {
-		if ((tab.isOriginInput() && !tab.isDestInput()) || (!tab.isOriginInput() && tab.isDestInput())) {
-			tab.getConnectionList().add(connection);
-			tab.setFirstDotClicked(false);
-			if (!(tab.getOriginIcon() instanceof DoubleBar)) {
-				tab.getOriginDot().setEnabled(false);
-			}
-			if (!(tab.getDestIcon() instanceof DoubleBar)) {
+		tab.getConnectionList().add(connection);
+		tab.setFirstDotClicked(false);
+		if (!(tab.getOriginIcon() instanceof DoubleBar)) {
+			tab.getOriginDot().setEnabled(false);
+		}
+		if (!(tab.getDestIcon() instanceof DoubleBar)) {
 			tab.getDestDot().setEnabled(false);
-			}
 		}
 	}
+
 	private void doubleClick() {
 		Tab tab = TabList.getInstance().getTab();
 		ListIterator<Icons> listIterator = tab.getIconList().listIterator();
