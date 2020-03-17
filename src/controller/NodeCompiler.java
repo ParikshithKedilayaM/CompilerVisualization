@@ -55,9 +55,7 @@ public class NodeCompiler {
 					list.add(destIcon);
 				}
 			}
-
 		}
-		System.out.println(adjList);
 
 		for (Map.Entry<Icons, LinkedList<Icons>> map : adjList.entrySet()) {
 			Icons key = map.getKey();
@@ -66,19 +64,10 @@ public class NodeCompiler {
 				if (icon.size() != 2) {
 					JOptionPane.showMessageDialog(null, "Compiler Error");
 					return;
-				} else {
-					Icons icon1 = icon.get(0);
-					Icons icon2 = icon.get(1);
-
 				}
 			}
 		}
-
-		for (Connections connection : connectionList) {
-			System.out.print(connection.getOriginIcon() + "->" + connection.getOriginPoint());
-			System.out.println(connection.getDestIcon() + "-" + connection.getDestPoint());
-		}
-
+		
 		Stack<Icons> stack = new Stack<Icons>();
 		Icons start = getStartIcon(adjList);
 		traverse(adjList, start, stack);
@@ -137,7 +126,7 @@ public class NodeCompiler {
 			}
 		}
 		if (count >= 2)
-			System.err.println("More than one open bracket");
+			JOptionPane.showMessageDialog(null, "Compiler Error More than one open bracket");
 		return start;
 	}
 
