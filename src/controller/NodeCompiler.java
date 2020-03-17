@@ -16,6 +16,7 @@ import model.Tab;
 import model.TabList;
 import view.AtTheRate;
 import view.CloseBracket;
+import view.DoubleBar;
 import view.GreaterThan;
 import view.Icons;
 import view.LessThan;
@@ -82,7 +83,9 @@ public class NodeCompiler {
 		Stack<Icons> stack = new Stack<Icons>();
 		Icons start = getStartIcon(adjList);
 		traverse(adjList, start, stack);
-
+		for (Icons icon: tab.getIconList()) {
+			icon.setFirstConnection(false);
+		}
 		if (!stack.isEmpty())
 			JOptionPane.showMessageDialog(null, "Compiler Error");
 		else
@@ -113,10 +116,20 @@ public class NodeCompiler {
 			stack.pop();
 			return;
 		}
+		
+		if(start.isFirstConnection() && start instanceof DoubleBar) {
+			return;
+		}
+
 		if (start instanceof AtTheRate && !start.isFirstConnection()) {
 			stack.push(start);
 			start.setFirstConnection(true);
 		}
+		
+		if (start instanceof DoubleBar && !start.isFirstConnection()) {
+			start.setFirstConnection(true);
+		}
+
 		for (Icons icon : list) {
 			if (icon instanceof GreaterThan && !icon.isFirstConnection()) {
 				icon.setFirstConnection(true);

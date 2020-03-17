@@ -1,6 +1,8 @@
 package model;
 import java.awt.Point;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import view.Icons;
 
@@ -16,22 +18,28 @@ public class Connections implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Point originPoint, destPoint;
-	private Icons originIcon, destIcon;
+	private List<Icons> icons;
+	
+	public Connections() {
+		icons = new ArrayList<Icons>();
+		icons.add(null);
+		icons.add(null);
+	}
 
 	public Icons getOriginIcon() {
-		return originIcon;
+		return icons.get(0);
 	}
 
 	public void setOriginIcon(Icons originShape) {
-		this.originIcon = originShape;
+		this.icons.set(0, originShape);
 	}
 
 	public Icons getDestIcon() {
-		return destIcon;
+		return icons.get(1);
 	}
 
 	public void setDestIcon(Icons destShape) {
-		this.destIcon = destShape;
+		this.icons.set(1, destShape);
 	}
 
 	public Point getOriginPoint() {
