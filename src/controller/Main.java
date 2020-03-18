@@ -11,7 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.LayoutStyle;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -23,6 +26,7 @@ public class Main extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private OptionsPane optionsPanel;
+	private JScrollPane scrollPane;
 	private JTabbedPane tabbedPane;
 	private final String TITLE = "Team 1";
 	private Dimension screenSize;
@@ -37,10 +41,16 @@ public class Main extends JFrame {
 	}
 
 	private void createOptionsPanel() {
+		
 		optionsPanel = new OptionsPane();
+		scrollPane = new JScrollPane(optionsPanel);
 		optionsPanel.setBounds(0, 0, screenSize.width / 4, screenSize.height);
 		optionsPanel.setVisible(true);
-		this.add(optionsPanel);
+		scrollPane.setBounds(0, 0, screenSize.width / 4, screenSize.height);
+		scrollPane.setVisible(true);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setViewportView(optionsPanel);
+		this.getContentPane().add(scrollPane);
 	}
 
 	private void createTabs() {
