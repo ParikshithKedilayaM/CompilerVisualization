@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Shape;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 
@@ -48,23 +46,9 @@ public class Dot implements Serializable {
 		this.point = point;
 	}
 	
-	public void setEnabled(boolean isEnabled) {
-		dot.setEnabled(isEnabled);
-	}
-	
 	public void addActionListener(Icons icon) {
 		dot.addActionListener(new DotBarActionListener(icon, point, isInput));
 	}
-	
-	public void addActionListener(Dot outputPoint1) {
-		dot.addActionListener(new ActionListener () {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				outputPoint1.setEnabled(true);
-			}	
-		});
-	}
-
 }
 
 class RoundButton extends JButton {
