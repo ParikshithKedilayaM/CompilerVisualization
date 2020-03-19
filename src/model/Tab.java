@@ -19,7 +19,6 @@ public class Tab extends Observable implements Serializable {
 	private List<Icons> icons;
 	private Workspace workspace;
 	private boolean isFirstDotClicked = false, isMoving = false, isDoubleClick = false;
-	//private Icons originIcon, destIcon;
 	private JButton originDot, destDot;
 	private boolean isOriginInput, isDestInput;
 	private List<Connections> connectionList;

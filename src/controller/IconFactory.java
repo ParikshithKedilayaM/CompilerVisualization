@@ -14,8 +14,10 @@ import view.LessThan;
 import view.OpenBracket;
 
 public class IconFactory {
+	private Icons iconShape;
+
 	public Icons drawIcon(Point point, String icon, Graphics graphics) {
-		Icons iconShape = null;
+		iconShape = null;
 		switch (icon) {
 		case OptionNames.OPENBRACKET:
 			iconShape = new OpenBracket(point);

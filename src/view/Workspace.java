@@ -26,6 +26,7 @@ import model.TabList;
 public class Workspace extends JPanel implements MouseListener, MouseMotionListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private ClickTimer clickTimer;
 
 	public Workspace() {
 		this.setBackground(Color.WHITE);
@@ -56,7 +57,8 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 			tab.setDoubleClick(true);
 			tab.setPoint(point, "DoubleClicked");
 		} else {
-			Timer timer = new Timer(300, new ClickTimer(point));
+			clickTimer = new ClickTimer(point);
+			Timer timer = new Timer(300, clickTimer);
 			timer.setRepeats(false);
 			timer.start();
 		}
@@ -165,7 +167,7 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	}
 }
 
-class ClickTimer implements ActionListener {
+class ClickTimer implements ActionListener, Serializable {
 	private Point point;
 	public ClickTimer(Point point) {
 		this.point = point;

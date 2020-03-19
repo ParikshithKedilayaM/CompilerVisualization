@@ -16,11 +16,13 @@ public class Dot implements Serializable {
 	private Point point;
 	private JButton dot;
 	private boolean isInput;
+	private RoundButton roundButton;
 
 	public Dot(Point point, boolean isInput, Icons icon) {
 		this.point = point;
 		this.isInput = isInput;
-		dot = new RoundButton();
+		roundButton = new RoundButton();
+		dot = roundButton;
 		drawShape();
 		TabList.getInstance().getTab().getWorkspace().add(dot);
 		addActionListener(icon);

@@ -12,6 +12,8 @@ import view.Icons;
 
 public class WorkspaceController implements Observer {
 
+	private IconFactory iconFactory;
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg == "Clicked") {
@@ -54,7 +56,7 @@ public class WorkspaceController implements Observer {
 	}
 
 	private void newShape() {
-		IconFactory iconFactory = new IconFactory();
+		iconFactory = new IconFactory();
 		Tab tab = TabList.getInstance().getTab();
 		if (!tab.isMoving()) {
 			Icons drawnIcon = iconFactory.drawIcon(tab.getPoint(), tab.getSelectedOption(),
