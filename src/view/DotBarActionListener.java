@@ -32,7 +32,7 @@ public class DotBarActionListener implements ActionListener {
 				tab.setOriginInput(isInput);
 				tab.setOriginDot((JButton) e.getSource());
 			} else if (icon != tab.getOriginIcon()) {
-				tab.setDestInput(isInput);
+				tab.setDestInput(isInput); 
 				tab.setDestIcon(icon);
 				tab.setDestDot((JButton) e.getSource());
 				tab.setDestPoint(point, "Drawline");

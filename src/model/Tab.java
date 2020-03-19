@@ -16,10 +16,9 @@ public class Tab extends Observable implements Serializable {
 	private String selectedOption = "";
 	private ArrayList<Icons> iconList;
 	private Point point, originPoint, destPoint;
-	private Icons selectedIcon;
+	private List<Icons> icons;
 	private Workspace workspace;
 	private boolean isFirstDotClicked = false, isMoving = false, isDoubleClick = false;
-	private Icons originIcon, destIcon;
 	private JButton originDot, destDot;
 	private boolean isOriginInput, isDestInput;
 	private List<Connections> connectionList;
@@ -28,6 +27,10 @@ public class Tab extends Observable implements Serializable {
 		iconList = new ArrayList<Icons>();
 		connectionList = new ArrayList<Connections>();
 		this.workspace = workspace;
+		icons = new ArrayList<Icons>();
+		for (int i=0;i<3;i++) {
+			icons.add(null);
+		}
 	}
 
 	public String getSelectedOption() {
@@ -60,11 +63,11 @@ public class Tab extends Observable implements Serializable {
 	}
 
 	public Icons getSelectedIcon() {
-		return selectedIcon;
+		return icons.get(0);
 	}
 
 	public void setSelectedIcon(Icons selectedIcon) {
-		this.selectedIcon = selectedIcon;
+		this.icons.set(0, selectedIcon);
 	}
 
 	public Workspace getWorkspace() {
@@ -84,19 +87,19 @@ public class Tab extends Observable implements Serializable {
 	}
 
 	public Icons getOriginIcon() {
-		return originIcon;
+		return icons.get(1);
 	}
 
 	public void setOriginIcon(Icons originIcon) {
-		this.originIcon = originIcon;
+		this.icons.set(1, originIcon);
 	}
 
 	public Icons getDestIcon() {
-		return destIcon;
+		return icons.get(2);
 	}
 
 	public void setDestIcon(Icons destIcon) {
-		this.destIcon = destIcon;
+		this.icons.set(2, destIcon);
 	}
 
 	public List<Connections> getConnectionList() {

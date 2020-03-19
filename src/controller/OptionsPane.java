@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -51,16 +52,15 @@ public class OptionsPane extends JPanel {
 		JButton bars = new JButton(new ImageIcon("Resources//bars.png")) ;
 		bars.setName(OptionNames.BARS);
 		shapes.add(bars);
-		
-		
-		
 	}
 
 	private void addActionListenersToButtons() {
 		ListIterator<JButton> listIterator = shapes.listIterator();
+		Box box = Box.createVerticalBox();
 		while (listIterator.hasNext()) {
 			JButton button = listIterator.next();
-			this.add(button);
+			box.add(Box.createVerticalStrut(10));
+			box.add(button);
 			button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -68,5 +68,6 @@ public class OptionsPane extends JPanel {
 				}
 			});
 		}
+		this.add(box);
 	}
 }

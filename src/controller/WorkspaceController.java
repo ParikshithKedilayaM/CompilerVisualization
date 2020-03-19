@@ -12,6 +12,8 @@ import view.Icons;
 
 public class WorkspaceController implements Observer {
 
+	private IconFactory iconFactory;
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg == "Clicked") {
@@ -54,7 +56,7 @@ public class WorkspaceController implements Observer {
 	}
 
 	private void newShape() {
-		IconFactory iconFactory = new IconFactory();
+		iconFactory = new IconFactory();
 		Tab tab = TabList.getInstance().getTab();
 		if (!tab.isMoving()) {
 			Icons drawnIcon = iconFactory.drawIcon(tab.getPoint(), tab.getSelectedOption(),
@@ -87,6 +89,7 @@ public class WorkspaceController implements Observer {
 	}
 
 	private void setLine(Tab tab, Connections connection) {
+		if ((tab.isOriginInput() && !tab.isDestInput()) || (!tab.isOriginInput() && tab.isDestInput())){
 		tab.getConnectionList().add(connection);
 		tab.setFirstDotClicked(false);
 		if (!(tab.getOriginIcon() instanceof DoubleBar)) {
@@ -95,6 +98,7 @@ public class WorkspaceController implements Observer {
 		if (!(tab.getDestIcon() instanceof DoubleBar)) {
 			tab.getDestDot().setEnabled(false);
 		}
+	}
 	}
 
 	private void doubleClick() {

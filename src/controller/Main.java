@@ -11,7 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.LayoutStyle;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -23,9 +26,14 @@ public class Main extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private OptionsPane optionsPanel;
+	private JScrollPane scrollPane;
 	private JTabbedPane tabbedPane;
 	private final String TITLE = "Team 1";
 	private Dimension screenSize;
+
+	private FileManager fileManager;
+
+	private WorkspaceController workspaceController;
 
 	public Main() {
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -37,10 +45,16 @@ public class Main extends JFrame {
 	}
 
 	private void createOptionsPanel() {
+		
 		optionsPanel = new OptionsPane();
+		scrollPane = new JScrollPane(optionsPanel);
 		optionsPanel.setBounds(0, 0, screenSize.width / 4, screenSize.height);
 		optionsPanel.setVisible(true);
-		this.add(optionsPanel);
+		scrollPane.setBounds(0, 0, screenSize.width / 4, screenSize.height);
+		scrollPane.setVisible(true);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setViewportView(optionsPanel);
+		this.getContentPane().add(scrollPane);
 	}
 
 	private void createTabs() {
@@ -63,7 +77,8 @@ public class Main extends JFrame {
 		TabList tabList = TabList.getInstance();
 		Workspace workspace = new Workspace();
 		tabList.addTab(workspace);
-		tabList.getRecentTab().addObserver(new WorkspaceController());
+		workspaceController = new WorkspaceController();
+		tabList.getRecentTab().addObserver(workspaceController);
 		tabbedPane.add("Tab " + tabList.getSize(), workspace);
 	}
 
@@ -71,7 +86,7 @@ public class Main extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Menu");
 		JMenuItem saveButton = new JMenuItem("Save");
-		FileManager fileManager = new FileManager();
+		fileManager = new FileManager();
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -97,10 +112,12 @@ public class Main extends JFrame {
 		addWorkspaceButton.setContentAreaFilled(false);
 		JButton compileButton = new JButton("Compile");
 		compileButton.addActionListener(new ActionListener() {
+			private NodeCompiler nodeCompiler;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// JOptionPane.showMessageDialog(null, "Work in progress!");
-				new NodeCompiler().createAdjacencyList();
+				nodeCompiler = new NodeCompiler();
+				nodeCompiler.createAdjacencyList();
 			}
 		});
 		compileButton.setContentAreaFilled(false);
