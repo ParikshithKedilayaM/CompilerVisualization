@@ -68,11 +68,11 @@ public class NodeCompiler {
 				}
 			}
 		}
-		
+
 		Stack<Icons> stack = new Stack<Icons>();
 		Icons start = getStartIcon(adjList);
 		traverse(adjList, start, stack);
-		for (Icons icon: tab.getIconList()) {
+		for (Icons icon : tab.getIconList()) {
 			icon.setFirstConnection(false);
 		}
 		if (!stack.isEmpty())
@@ -105,8 +105,8 @@ public class NodeCompiler {
 			stack.pop();
 			return;
 		}
-		
-		if(start.isFirstConnection() && start instanceof DoubleBar) {
+
+		if (start.isFirstConnection() && start instanceof DoubleBar) {
 			return;
 		}
 
@@ -114,16 +114,16 @@ public class NodeCompiler {
 			stack.push(start);
 			start.setFirstConnection(true);
 		}
-		
+
 		if (start instanceof DoubleBar && !start.isFirstConnection()) {
 			start.setFirstConnection(true);
 		}
-
+		if (start instanceof GreaterThan && !start.isFirstConnection()) {
+			start.setFirstConnection(true);
+			return;
+		}
 		for (Icons icon : list) {
-			if (icon instanceof GreaterThan && !icon.isFirstConnection()) {
-				icon.setFirstConnection(true);
-				return;
-			}
+
 			traverse(adjList, icon, stack);
 		}
 	}
