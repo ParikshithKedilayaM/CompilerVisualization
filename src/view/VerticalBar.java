@@ -12,7 +12,7 @@ import model.TabList;
  * 
  * This class holds "Vertical Bar || " icon information and draw them
  * 
- * @author Raghavan
+ * @author Mayank Kataruka
  * @version 1.0
  */
 
