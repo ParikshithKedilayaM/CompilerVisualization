@@ -77,7 +77,6 @@ public class NodeCompiler {
 
 		Stack<Icons> stack = new Stack<Icons>();
 		Icons start = getStartIcon(adjList);
-
 		traverse(adjList, start, stack);
 		for (Icons icon : tab.getIconList()) {
 			icon.setFirstConnection(false);
