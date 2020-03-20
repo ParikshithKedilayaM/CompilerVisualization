@@ -32,6 +32,8 @@ import view.OpenBracket;
 
 public class NodeCompiler {
 
+	private String errorMessage = "";
+
 	public void createAdjacencyList() {
 
 		LinkedHashMap<Icons, LinkedList<Icons>> adjList = new LinkedHashMap<Icons, LinkedList<Icons>>();
@@ -76,12 +78,14 @@ public class NodeCompiler {
 
 		Stack<Icons> stack = new Stack<Icons>();
 		Icons start = getStartIcon(adjList);
+
 		traverse(adjList, start, stack);
 		for (Icons icon : tab.getIconList()) {
 			icon.setFirstConnection(false);
 		}
-		if (!stack.isEmpty())
-			JOptionPane.showMessageDialog(null, "Compiler Error");
+
+		if (!stack.isEmpty() || start == null)
+			JOptionPane.showMessageDialog(null, "Compiler Error. " + errorMessage);
 		else
 			JOptionPane.showMessageDialog(null, "Compilation Success");
 	}
@@ -136,18 +140,24 @@ public class NodeCompiler {
 		}
 	}
 
-	public static Icons getStartIcon(LinkedHashMap<Icons, LinkedList<Icons>> adjList) {
+	public Icons getStartIcon(LinkedHashMap<Icons, LinkedList<Icons>> adjList) {
 		Icons start = null;
-		int count = 0;
+		int countStartIcons = 0, countCloseIcons = 0;
 		for (Entry<Icons, LinkedList<Icons>> map : adjList.entrySet()) {
 			Icons key = map.getKey();
 			if (key instanceof OpenBracket) {
 				start = key;
-				count++;
+				countStartIcons++;
+			}
+
+			if (key instanceof CloseBracket) {
+				countCloseIcons++;
 			}
 		}
-		if (count >= 2)
-			JOptionPane.showMessageDialog(null, "Compiler Error More than one open bracket");
+		if (countStartIcons >= 2 || countCloseIcons >= 2) {
+			errorMessage = "More than 1 open bracket or close bracket";
+			return null;
+		}
 		return start;
 	}
 
