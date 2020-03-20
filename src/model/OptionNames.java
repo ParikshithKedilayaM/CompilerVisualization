@@ -1,5 +1,10 @@
 package model;
-
+/**
+ * This class contains constants
+ * 
+ * @author Chandan
+ * @version 1.0
+ */
 public class OptionNames {
 	public final static String OPENBRACKET = "OPEN_BRACKET";
 	

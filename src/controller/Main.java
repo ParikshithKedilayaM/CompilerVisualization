@@ -13,7 +13,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.LayoutStyle;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -21,18 +20,21 @@ import javax.swing.event.ChangeListener;
 import model.TabList;
 import view.Workspace;
 
+/**
+ * This class creates left panel, right panel and Menu button
+ * 
+ * @author Chandan
+ * @version 4.0
+ */
 public class Main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
 	private OptionsPane optionsPanel;
 	private JScrollPane scrollPane;
 	private JTabbedPane tabbedPane;
 	private final String TITLE = "Team 1";
 	private Dimension screenSize;
-
 	private FileManager fileManager;
-
 	private WorkspaceController workspaceController;
 
 	public Main() {
@@ -45,7 +47,7 @@ public class Main extends JFrame {
 	}
 
 	private void createOptionsPanel() {
-		
+
 		optionsPanel = new OptionsPane();
 		scrollPane = new JScrollPane(optionsPanel);
 		optionsPanel.setBounds(0, 0, screenSize.width / 4, screenSize.height);
@@ -57,6 +59,9 @@ public class Main extends JFrame {
 		this.getContentPane().add(scrollPane);
 	}
 
+	/**
+	 * Function to create multiple tabs in right panel.
+	 */
 	private void createTabs() {
 		tabbedPane = new JTabbedPane();
 		createWorkspace();
@@ -73,6 +78,9 @@ public class Main extends JFrame {
 
 	}
 
+	/**
+	 * Function to create workspace in each tab.
+	 */
 	private void createWorkspace() {
 		TabList tabList = TabList.getInstance();
 		Workspace workspace = new Workspace();
@@ -82,6 +90,10 @@ public class Main extends JFrame {
 		tabbedPane.add("Tab " + tabList.getSize(), workspace);
 	}
 
+	/**
+	 * Function to create menu bar with load,save, add workspace and compile
+	 * buttons.
+	 */
 	private void createMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Menu");

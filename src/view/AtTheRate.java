@@ -8,9 +8,15 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+/**
+ * This class has AtTheRate icon which contains two input dots and two output
+ * dots.
+ * 
+ * @author Chandan
+ * @version 1.0
+ */
 public class AtTheRate extends Icons {
 	private Point point, inputPoint1, inputPoint2, outputPoint1, outputPoint2;
-	
 	private Shape icon;
 
 	public AtTheRate(Point point) {
@@ -26,6 +32,11 @@ public class AtTheRate extends Icons {
 		dots.add(new Dot(outputPoint2, false, this));
 	}
 
+	/**
+	 * Draws the icon with two input dots and two output dots.
+	 * 
+	 * @param graphic
+	 */
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
@@ -49,13 +60,11 @@ public class AtTheRate extends Icons {
 
 	@Override
 	public Point getLocation() {
-		// TODO Auto-generated method stub
 		return point;
 	}
 
 	@Override
 	public void setLocation(Point point) {
-		// TODO Auto-generated method stub
 		this.point = point;
 	}
 
