@@ -6,7 +6,14 @@ import java.util.List;
 
 import view.Workspace;
 
-public class TabList implements Serializable{
+/**
+ * This is a singleton class that contains a list of all the tabs in the
+ * workspace.
+ * 
+ * @author Raghavan
+ * @version 1.0
+ */
+public class TabList implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int currentTabIndex;
 	private List<Tab> tabList;
@@ -17,6 +24,9 @@ public class TabList implements Serializable{
 		tabList = new ArrayList<Tab>();
 	}
 
+	/**
+	 * Returns the singleton instance of the TabList class.
+	 */
 	public static TabList getInstance() {
 		if (tabListInstance == null) {
 			tabListInstance = new TabList();
@@ -27,7 +37,7 @@ public class TabList implements Serializable{
 	public Tab getTab() {
 		return tabList.get(currentTabIndex);
 	}
-	
+
 	public Tab getRecentTab() {
 		return tabList.get(getSize() - 1);
 	}

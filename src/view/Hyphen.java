@@ -8,7 +8,14 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+/**
+ * This class has hyphen icon which contains one input dot and one output dot.
+ * 
+ * @author Raghavan
+ * @version 1.0
+ */
 public class Hyphen extends Icons {
+	private static final long serialVersionUID = 1L;
 	private Point point;
 	private Shape icon;
 	private Point inputPoint, outputPoint;
@@ -22,12 +29,17 @@ public class Hyphen extends Icons {
 		dots.add(new Dot(outputPoint, false, this));
 	}
 
+	/**
+	 * Draws the icon with one input dot and one output dot.
+	 * 
+	 * @param graphic
+	 */
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
 		inputPoint.setLocation(point.getX() + 10, point.getY() + 20);
 		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
-		for(Dot dot: dots)
+		for (Dot dot : dots)
 			dot.drawShape();
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
 		graphics2.drawString("-", (int) point.getX() + 40, (int) point.getY() + 35);
@@ -42,13 +54,11 @@ public class Hyphen extends Icons {
 
 	@Override
 	public Point getLocation() {
-		// TODO Auto-generated method stub
 		return point;
 	}
 
 	@Override
 	public void setLocation(Point point) {
-		// TODO Auto-generated method stub
 		this.point = point;
 	}
 

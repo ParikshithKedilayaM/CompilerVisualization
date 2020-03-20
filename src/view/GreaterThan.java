@@ -8,7 +8,15 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+/**
+ * This class has greater than icon which contains two input dots and one output
+ * dot.
+ * 
+ * @author Raghavan
+ * @version 1.0
+ */
 public class GreaterThan extends Icons {
+	private static final long serialVersionUID = 1L;
 	private Point point;
 	private Shape icon;
 	private Point inputPoint1, inputPoint2, outputPoint;
@@ -16,21 +24,26 @@ public class GreaterThan extends Icons {
 	public GreaterThan(Point point) {
 		dots = new ArrayList<Dot>();
 		this.point = point;
-		inputPoint1 = new Point((int)point.getX() + 10, (int)point.getY()+ 10);
-		inputPoint2 = new Point((int)point.getX() + 10, (int)point.getY()+ 30);
-		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
+		inputPoint1 = new Point((int) point.getX() + 10, (int) point.getY() + 10);
+		inputPoint2 = new Point((int) point.getX() + 10, (int) point.getY() + 30);
+		outputPoint = new Point((int) point.getX() + 80, (int) point.getY() + 20);
 		dots.add(new Dot(inputPoint1, true, this));
 		dots.add(new Dot(inputPoint2, true, this));
 		dots.add(new Dot(outputPoint, false, this));
 	}
 
+	/**
+	 * Draws the icon with two input dots and one output dot.
+	 * 
+	 * @param graphic
+	 */
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
 		inputPoint1.setLocation(point.getX() + 10, point.getY() + 10);
 		inputPoint2.setLocation(point.getX() + 10, point.getY() + 30);
 		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
-		for (Dot dot:dots) {
+		for (Dot dot : dots) {
 			dot.drawShape();
 		}
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
@@ -46,13 +59,11 @@ public class GreaterThan extends Icons {
 
 	@Override
 	public Point getLocation() {
-		// TODO Auto-generated method stub
 		return point;
 	}
 
 	@Override
 	public void setLocation(Point point) {
-		// TODO Auto-generated method stub
 		this.point = point;
 	}
 

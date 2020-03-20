@@ -7,10 +7,15 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * This class has double bar icon which contains two vertical bars.
+ * 
+ * @author Raghavan
+ * @version 1.0
+ */
 public class DoubleBar extends Icons {
-	
+	private static final long serialVersionUID = 1L;
 	private Shape icon;
 	private Point point, inputPoint, outputPoint;
 
@@ -24,6 +29,11 @@ public class DoubleBar extends Icons {
 
 	}
 
+	/**
+	 * Draws the icon with two vertical bars inside it.
+	 * 
+	 * @param graphic
+	 */
 	@Override
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
@@ -45,13 +55,11 @@ public class DoubleBar extends Icons {
 
 	@Override
 	public Point getLocation() {
-		// TODO Auto-generated method stub
 		return point;
 	}
 
 	@Override
 	public void setLocation(Point point) {
-		// TODO Auto-generated method stub
 		this.point = point;
 	}
 

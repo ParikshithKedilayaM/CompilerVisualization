@@ -22,9 +22,21 @@ import view.Icons;
 import view.VerticalBar;
 import view.Workspace;
 
+/**
+ * This class provides functionality to save and load workspace.
+ * 
+ * @author Raghavan
+ * @version 2.0
+ */
 public class FileManager {
 	private final String FILE_EXT = ".ser";
+	private final String SUCCESS_MESSAGE = "File Saved!";
+	private final String ERROR_MESSAGE_SAVE = "Error occured! Could Not Save your file";
+	private final String ERROR_MESSAGE_LOAD = "Could not load the file. Please select only .ser files!";
 
+	/**
+	 * Function to save the workspace to a file.
+	 */
 	public void saveFile() {
 		FileOutputStream fileOut = null;
 		ObjectOutputStream out = null;
@@ -46,10 +58,10 @@ public class FileManager {
 					out.writeObject(tab.getConnectionList());
 				}
 				fileOut.flush();
-				JOptionPane.showMessageDialog(null, "File Saved!");
+				JOptionPane.showMessageDialog(null, SUCCESS_MESSAGE);
 			}
 		} catch (Exception i) {
-			JOptionPane.showMessageDialog(null, "Error occured! Could Not Save your file");
+			JOptionPane.showMessageDialog(null, ERROR_MESSAGE_SAVE);
 			i.printStackTrace();
 		} finally {
 			if (out != null) {
@@ -69,6 +81,9 @@ public class FileManager {
 		}
 	}
 
+	/**
+	 * Function to load workspace from a file.
+	 */
 	public void loadFile(JTabbedPane jTabbedPane) {
 		FileInputStream fileIn = null;
 		ObjectInputStream in = null;
@@ -99,7 +114,7 @@ public class FileManager {
 				tabList.setCurrentTabIndex(currentTabIndex);
 			}
 		} catch (IOException i) {
-			JOptionPane.showMessageDialog(null, "Could not load the file. Please select only .ser files!");
+			JOptionPane.showMessageDialog(null, ERROR_MESSAGE_LOAD);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -119,18 +134,23 @@ public class FileManager {
 			}
 		}
 	}
-	
+
+	/**
+	 * Adding action listeners to the dots while loading them back from the file.
+	 * 
+	 * @param tabList
+	 */
 	private void addActionListeners(TabList tabList) {
 		for (Icons icon : tabList.getTab().getIconList()) {
 			if (icon.getDots() != null) {
 				for (Dot dot : icon.getDots()) {
 					dot.addActionListener(icon);
-				} 
+				}
 			}
 			if (icon.getBars() != null) {
 				for (VerticalBar bar : icon.getBars()) {
 					bar.addActionListener(icon);
-				} 
+				}
 			}
 		}
 	}
