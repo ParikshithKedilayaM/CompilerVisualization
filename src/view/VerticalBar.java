@@ -1,4 +1,5 @@
 package view;
+
 import java.awt.Color;
 import java.awt.Point;
 import java.io.Serializable;
@@ -8,9 +9,13 @@ import javax.swing.JButton;
 import model.TabList;
 
 /**
+ * 
+ * This class holds "Vertical Bar || " icon information and draw them
+ * 
  * @author Raghavan
  * @version 1.0
  */
+
 public class VerticalBar implements Serializable {
 
 	private Point point;
@@ -36,12 +41,10 @@ public class VerticalBar implements Serializable {
 		this.isInput = isInput;
 	}
 
-	
 	public void drawShape() {
 		bar.setBounds((int) point.getX(), (int) point.getY(), 10, 28);
 	}
-	
-	
+
 	public boolean containsPoint(Point point) {
 		return bar.contains(point);
 	}
@@ -53,6 +56,7 @@ public class VerticalBar implements Serializable {
 	public void setLocation(Point point) {
 		this.point = point;
 	}
+
 	public void addActionListener(Icons icon) {
 		bar.addActionListener(new DotBarActionListener(icon, point, isInput));
 	}

@@ -8,6 +8,13 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+/**
+ * This class holds "Less Than '<' " icon information and draw them
+ * 
+ * @author Mayank Kataruka
+ * @version 1.0
+ */
+
 public class LessThan extends Icons {
 	private Point point;
 	private Shape icon;

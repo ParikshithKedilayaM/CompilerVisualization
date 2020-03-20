@@ -22,6 +22,14 @@ import view.Icons;
 import view.LessThan;
 import view.OpenBracket;
 
+/**
+ * This class does the compilation of the visual diagram, here DFS traversal is
+ * performed and Stack is used to verify the connected diagrams.
+ * 
+ * @author Mayank Kataruka
+ * @version 1.0
+ */
+
 public class NodeCompiler {
 
 	public void createAdjacencyList() {
@@ -30,9 +38,6 @@ public class NodeCompiler {
 		Tab tab = TabList.getInstance().getTab();
 		ArrayList<Icons> iconList = tab.getIconList();
 		List<Connections> connectionList = tab.getConnectionList();
-		for (Icons icon : iconList) {
-
-		}
 		HashMap<Icons, Double> atTheRateLoc = new HashMap<Icons, Double>();
 		for (Connections connection : connectionList) {
 			Icons originIcon = connection.getOriginIcon();
@@ -90,9 +95,12 @@ public class NodeCompiler {
 		if (start instanceof CloseBracket) {
 			return;
 		}
+
 		List<Icons> list = adjList.get(start);
+
 		if (list == null)
 			return;
+
 		if (start instanceof OpenBracket || start instanceof LessThan)
 			stack.push(start);
 

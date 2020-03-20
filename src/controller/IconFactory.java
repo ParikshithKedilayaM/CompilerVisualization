@@ -13,6 +13,13 @@ import view.Icons;
 import view.LessThan;
 import view.OpenBracket;
 
+/**
+ * This is the factory class used to create and draw different icons on runtime.
+ * 
+ * @author Mayank Kataruka
+ * @version 1.0
+ */
+
 public class IconFactory {
 	private Icons iconShape;
 

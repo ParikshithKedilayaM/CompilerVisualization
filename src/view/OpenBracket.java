@@ -8,6 +8,13 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+/**
+ * This class holds "Open Bracket '(' " icon information and draw them
+ * 
+ * @author Mayank Kataruka
+ * @version 1.0
+ */
+
 public class OpenBracket extends Icons {
 	private static final long serialVersionUID = 1L;
 	private Point point;
