@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -38,7 +38,6 @@ public class NodeCompiler {
 
 		LinkedHashMap<Icons, LinkedList<Icons>> adjList = new LinkedHashMap<Icons, LinkedList<Icons>>();
 		Tab tab = TabList.getInstance().getTab();
-		ArrayList<Icons> iconList = tab.getIconList();
 		List<Connections> connectionList = tab.getConnectionList();
 		HashMap<Icons, Double> atTheRateLoc = new HashMap<Icons, Double>();
 		for (Connections connection : connectionList) {

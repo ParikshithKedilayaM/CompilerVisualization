@@ -16,6 +16,10 @@ import java.util.ArrayList;
  */
 
 public class LessThan extends Icons {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Point point;
 	private Shape icon;
 	private Point inputPoint, outputPoint1, outputPoint2;

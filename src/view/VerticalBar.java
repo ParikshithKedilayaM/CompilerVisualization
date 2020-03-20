@@ -18,6 +18,10 @@ import model.TabList;
 
 public class VerticalBar implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Point point;
 	private JButton bar;
 	private boolean isInput;
