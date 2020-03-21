@@ -9,6 +9,13 @@ import javax.swing.JButton;
 import model.Tab;
 import model.TabList;
 
+/**
+ * This is the class where ActionListener is added to dots and bars of icons.
+ * 
+ * @author Rishika Bera
+ * @version 1.0
+ */
+
 public class DotBarActionListener implements ActionListener {
 
 	private Icons icon;
