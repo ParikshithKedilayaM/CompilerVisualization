@@ -13,6 +13,13 @@ import javax.swing.JPanel;
 import model.OptionNames;
 import model.TabList;
 
+/**
+ * This is the class where all the JButtons with images of icons on it is created on the left Panel.
+ * 
+ * @author Rishika Bera
+ * @version 1.0
+ */
+
 public class OptionsPane extends JPanel {
 
 	private static final long serialVersionUID = 1L;
