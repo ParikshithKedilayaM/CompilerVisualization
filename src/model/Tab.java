@@ -1,15 +1,20 @@
 package model;
-
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
 import javax.swing.JButton;
-
 import view.Icons;
 import view.Workspace;
+
+/**
+ * This is a model class having all the shareable items of the tab
+ * 
+ * @author Rishika Bera
+ * @version 1.0
+ */
+
 
 public class Tab extends Observable implements Serializable {
 	private static final long serialVersionUID = 1L;
