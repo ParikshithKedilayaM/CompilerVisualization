@@ -1,4 +1,5 @@
 package model;
+
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ import view.Icons;
  * This class has line information that requires source and destination end
  * point
  * 
- * @author Mayank Kataruka
- * @version 1.0
+ * @author Parikshith Kedilaya Mallar
+ * @version 2.0
  */
 
 public class Connections implements Serializable {
@@ -19,7 +20,7 @@ public class Connections implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Point originPoint, destPoint;
 	private List<Icons> icons;
-	
+
 	public Connections() {
 		icons = new ArrayList<Icons>();
 		icons.add(null);
