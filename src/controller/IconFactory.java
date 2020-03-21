@@ -23,6 +23,14 @@ import view.OpenBracket;
 public class IconFactory {
 	private Icons iconShape;
 
+	/**
+	 * This method creates an instance of the selected icon and draws it.
+	 * 
+	 * @param point
+	 * @param icon
+	 * @param graphics
+	 * @return
+	 */
 	public Icons drawIcon(Point point, String icon, Graphics graphics) {
 		iconShape = null;
 		switch (icon) {

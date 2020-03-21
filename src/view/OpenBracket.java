@@ -24,7 +24,7 @@ public class OpenBracket extends Icons {
 	public OpenBracket(Point point) {
 		dots = new ArrayList<Dot>();
 		this.point = point;
-		outputPoint = new Point((int)point.getX() + 80, (int)point.getY()+ 20);
+		outputPoint = new Point((int) point.getX() + 80, (int) point.getY() + 20);
 		dots.add(new Dot(outputPoint, false, this));
 	}
 
@@ -32,7 +32,7 @@ public class OpenBracket extends Icons {
 	public void drawShape(Graphics graphic) {
 		Graphics2D graphics2 = (Graphics2D) graphic;
 		outputPoint.setLocation(point.getX() + 80, point.getY() + 20);
-		for (Dot dot:dots) {
+		for (Dot dot : dots) {
 			dot.drawShape();
 		}
 		graphics2.setFont(new Font("Monospaced", Font.BOLD, 32));
