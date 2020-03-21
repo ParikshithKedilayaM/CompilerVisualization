@@ -6,7 +6,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author Raghavan
+ * This is an abstract class where icons, dots and bars are declared.
+ *@author Rishika Bera
  * @version 1.0
  */
 public abstract class Icons implements Serializable {
