@@ -4,12 +4,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import model.OptionNames;
 import model.TabList;
 
@@ -19,7 +17,6 @@ import model.TabList;
  * @author Rishika Bera
  * @version 1.0
  */
-
 public class OptionsPane extends JPanel {
 
 	private static final long serialVersionUID = 1L;
