@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -15,7 +13,6 @@ import java.util.ListIterator;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import model.Connections;
 import model.Tab;
@@ -31,7 +28,6 @@ import model.TabList;
 public class Workspace extends JPanel implements MouseListener, MouseMotionListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private ClickTimer clickTimer;
 
 	public Workspace() {
 		this.setBackground(Color.WHITE);
@@ -59,13 +55,9 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 		Point point = new Point(e.getX(), e.getY());
 		Tab tab = TabList.getInstance().getTab();
 		if (e.getClickCount() == 2) {
-			tab.setDoubleClick(true);
 			tab.setPoint(point, "DoubleClicked");
 		} else {
-			clickTimer = new ClickTimer(point);
-			Timer timer = new Timer(300, clickTimer);
-			timer.setRepeats(false);
-			timer.start();
+			tab.setPoint(point, "Clicked");
 		}
 	}
 
@@ -167,30 +159,5 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	
 	public void displayMessage(String message) {
 		JOptionPane.showMessageDialog(this, message);
-	}
-}
-
-/**
- * This class checks for double click or single click on the workspace
- * 
- * @author Parikshith Kedilaya Mallar
- *
- */
-class ClickTimer implements ActionListener, Serializable {
-	private static final long serialVersionUID = 1L;
-	private Point point;
-
-	public ClickTimer(Point point) {
-		this.point = point;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent evt) {
-		Tab tab = TabList.getInstance().getTab();
-		if (tab.isDoubleClick()) {
-			tab.setDoubleClick(false);
-		} else {
-			tab.setPoint(point, "Clicked");
-		}
 	}
 }
