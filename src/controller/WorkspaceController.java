@@ -47,12 +47,9 @@ public class WorkspaceController implements Observer {
 	 */
 	private void setSelectedIcon() {
 		Tab tab = TabList.getInstance().getTab();
-		ListIterator<Icons> listIterator = tab.getIconList().listIterator();
-		while (listIterator.hasNext()) {
-			Icons icon = listIterator.next();
-			if (icon.containsIcon(tab.getPoint())) {
-				tab.setSelectedIcon(icon);
-			}
+		Icons icon = searchIcons(tab);
+		if (icon != null) {
+			tab.setSelectedIcon(icon);
 		}
 	}
 
@@ -81,8 +78,11 @@ public class WorkspaceController implements Observer {
 	 * called on mouse click in the workspace
 	 */
 	private void newShape() {
-		iconFactory = new IconFactory();
 		Tab tab = TabList.getInstance().getTab();
+		if (searchIcons(tab) != null) {
+			return;
+		}
+		iconFactory = new IconFactory();
 		if (!tab.isMoving()) {
 			Icons drawnIcon = iconFactory.drawIcon(tab.getPoint(), tab.getSelectedOption(),
 					tab.getWorkspace().getGraphics());
@@ -94,6 +94,7 @@ public class WorkspaceController implements Observer {
 			tab.setMoving(false);
 			tab.getWorkspace().setDefaultCursor();
 		}
+
 	}
 
 	/**
@@ -146,14 +147,26 @@ public class WorkspaceController implements Observer {
 	 */
 	private void doubleClick() {
 		Tab tab = TabList.getInstance().getTab();
+		Icons icon = searchIcons(tab);
+		if (icon != null) {
+			String description = tab.getWorkspace().getInputString(icon.getDescription());
+			icon.setDescription(description);
+		}
+	}
+	
+	/**
+	 * Searches the icons list and returns the object of the clicked icon, else return null
+	 * @param tab - Tab instance
+	 * @return
+	 */
+	private Icons searchIcons(Tab tab) {
 		ListIterator<Icons> listIterator = tab.getIconList().listIterator();
 		while (listIterator.hasNext()) {
 			Icons icon = listIterator.next();
 			if (icon.containsIcon(tab.getPoint())) {
-				String description = tab.getWorkspace().getInputString(icon.getDescription());
-				icon.setDescription(description);
-				break;
+				return icon;
 			}
 		}
+		return null;
 	}
 }
