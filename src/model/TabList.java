@@ -65,4 +65,46 @@ public class TabList implements Serializable {
 	public void setTabList(List<Tab> tabList) {
 		this.tabList = tabList;
 	}
+
+	private final String OPENBRACKET = "OPEN_BRACKET";
+
+	private final String CLOSEBRACKET = "CLOSE_BRACKET";
+	
+	private final String LESSTHAN = "LESS_THAN";
+	
+	private final String GREATERTHAN = "GREATER_THAN";
+
+	private final String ATTHERATE = "AT_THE_RATE";
+	
+	private final String HYPHEN = "HYPHEN";
+	
+	private final String BARS = "BARS";
+
+	public String getOpenBracket() {
+		return OPENBRACKET;
+	}
+
+	public String getCloseBracket() {
+		return CLOSEBRACKET;
+	}
+
+	public String getLessThan() {
+		return LESSTHAN;
+	}
+
+	public String getGreaterThan() {
+		return GREATERTHAN;
+	}
+
+	public String getAtTheRate() {
+		return ATTHERATE;
+	}
+
+	public String getHyphen() {
+		return HYPHEN;
+	}
+
+	public String getBars() {
+		return BARS;
+	}
 }
