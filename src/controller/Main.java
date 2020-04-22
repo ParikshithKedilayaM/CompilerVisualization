@@ -36,8 +36,10 @@ public class Main extends JFrame {
 	private Dimension screenSize;
 	private FileManager fileManager;
 	private WorkspaceController workspaceController;
+	private NodeCompiler nodeCompiler;
 
 	public Main() {
+		nodeCompiler = new NodeCompiler();
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setLayout(null);
@@ -96,7 +98,7 @@ public class Main extends JFrame {
 	 */
 	private void createMenu() {
 		JMenuBar menuBar = new JMenuBar();
-		JMenu menu = new JMenu("Menu");
+		JMenu menu = new JMenu("File");
 		JMenuItem saveButton = new JMenuItem("Save");
 		fileManager = new FileManager();
 		saveButton.addActionListener(new ActionListener() {
@@ -122,22 +124,28 @@ public class Main extends JFrame {
 			}
 		});
 		addWorkspaceButton.setContentAreaFilled(false);
-		JButton compileButton = new JButton("Compile");
+		JMenu projectMenu = new JMenu("Project");
+		JMenuItem compileButton = new JMenuItem("Compile");
 		compileButton.addActionListener(new ActionListener() {
-			private NodeCompiler nodeCompiler;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nodeCompiler = new NodeCompiler();
 				nodeCompiler.createAdjacencyList();
 			}
 		});
-		compileButton.setContentAreaFilled(false);
+		JMenuItem translateButton = new JMenuItem("Translate");
+		translateButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		projectMenu.add(compileButton);
+		projectMenu.add(translateButton);
 		menuBar.add(menu);
 		menuBar.add(javax.swing.Box.createHorizontalStrut(10));
-		menuBar.add(addWorkspaceButton);
+		menuBar.add(projectMenu);
 		menuBar.add(javax.swing.Box.createHorizontalStrut(10));
-		menuBar.add(compileButton);
+		menuBar.add(addWorkspaceButton);
 		this.setJMenuBar(menuBar);
 	}
 
