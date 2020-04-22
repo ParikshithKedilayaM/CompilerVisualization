@@ -1,9 +1,8 @@
 package controller;
 
-import java.awt.Graphics;
 import java.awt.Point;
 
-import model.OptionNames;
+import model.TabList;
 import view.AtTheRate;
 import view.CloseBracket;
 import view.DoubleBar;
@@ -21,7 +20,11 @@ import view.OpenBracket;
  */
 
 public class IconFactory {
-	private Icons iconShape;
+	
+	private TabList tabList;
+	public IconFactory() {
+		tabList = TabList.getInstance();
+	}
 
 	/**
 	 * This method creates an instance of the selected icon and draws it.
@@ -31,35 +34,22 @@ public class IconFactory {
 	 * @param graphics
 	 * @return
 	 */
-	public Icons drawIcon(Point point, String icon, Graphics graphics) {
-		iconShape = null;
-		switch (icon) {
-		case OptionNames.OPENBRACKET:
-			iconShape = new OpenBracket(point);
-			break;
-		case OptionNames.CLOSEBRACKET:
-			iconShape = new CloseBracket(point);
-			break;
-		case OptionNames.HYPHEN:
-			iconShape = new Hyphen(point);
-			break;
-		case OptionNames.LESSTHAN:
-			iconShape = new LessThan(point);
-			break;
-		case OptionNames.GREATERTHAN:
-			iconShape = new GreaterThan(point);
-			break;
-		case OptionNames.ATTHERATE:
-			iconShape = new AtTheRate(point);
-			break;
-		case OptionNames.BARS:
-			iconShape = new DoubleBar(point);
-			break;
-
+	public Icons getIconObject(Point point, String icon) {
+		if (tabList.getOpenBracket().equals(icon)) {
+			return new OpenBracket(point);
+		} else if (tabList.getCloseBracket().equals(icon)) {
+			return new CloseBracket(point);
+		} else if (tabList.getLessThan().equals(icon)) {
+			return new LessThan(point);
+		} else if (tabList.getGreaterThan().equals(icon)) {
+			return new GreaterThan(point);
+		} else if (tabList.getAtTheRate().equals(icon)) {
+			return new AtTheRate(point);
+		} else if (tabList.getHyphen().equals(icon)) {
+			return new Hyphen(point);
+		} else if (tabList.getBars().equals(icon)) {
+			return new DoubleBar(point);
 		}
-		if (iconShape != null) {
-			iconShape.drawShape(graphics);
-		}
-		return iconShape;
+		return null;
 	}
 }

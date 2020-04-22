@@ -117,7 +117,7 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	 * @param d  the width of the arrow.
 	 * @param h  the height of the arrow.
 	 * 
-	 * https://stackoverflow.com/questions/2027613/how-to-draw-a-directed-arrow-line-in-java/27461352#27461352
+	 *           https://stackoverflow.com/questions/2027613/how-to-draw-a-directed-arrow-line-in-java/27461352#27461352
 	 */
 	private void drawArrowLine(Graphics g, int x1, int y1, int x2, int y2, int d, int h) {
 		int dx = x2 - x1, dy = y2 - y1;
@@ -156,7 +156,7 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	public String getInputString(String setMessage) {
 		return (String) JOptionPane.showInputDialog("Enter description", setMessage);
 	}
-	
+
 	public void displayMessage(String message) {
 		JOptionPane.showMessageDialog(this, message);
 	}

@@ -22,6 +22,10 @@ public class WorkspaceController implements Observer {
 
 	private IconFactory iconFactory;
 
+	public WorkspaceController() {
+		iconFactory = new IconFactory();
+	}
+
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg == "Clicked") {
@@ -82,11 +86,10 @@ public class WorkspaceController implements Observer {
 		if (searchIcons(tab) != null) {
 			return;
 		}
-		iconFactory = new IconFactory();
 		if (!tab.isMoving()) {
-			Icons drawnIcon = iconFactory.drawIcon(tab.getPoint(), tab.getSelectedOption(),
-					tab.getWorkspace().getGraphics());
+			Icons drawnIcon = iconFactory.getIconObject(tab.getPoint(), tab.getSelectedOption());
 			if (drawnIcon != null) {
+				drawnIcon.drawShape(tab.getWorkspace().getGraphics());
 				tab.addIcon(drawnIcon);
 			}
 		} else {
@@ -153,9 +156,11 @@ public class WorkspaceController implements Observer {
 			icon.setDescription(description);
 		}
 	}
-	
+
 	/**
-	 * Searches the icons list and returns the object of the clicked icon, else return null
+	 * Searches the icons list and returns the object of the clicked icon, else
+	 * return null
+	 * 
 	 * @param tab - Tab instance
 	 * @return
 	 */
@@ -169,4 +174,5 @@ public class WorkspaceController implements Observer {
 		}
 		return null;
 	}
+
 }
