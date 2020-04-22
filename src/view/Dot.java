@@ -17,19 +17,18 @@ import model.TabList;
  * @author Chandan
  * @version 4.0
  */
-public class Dot implements Serializable {
+public class Dot extends JButton implements Serializable {
 
 	private Point point;
 	private JButton dot;
 	private boolean isInput;
-	private RoundButton roundButton;
 
 	public Dot(Point point, boolean isInput, Icons icon) {
 		this.point = point;
 		this.isInput = isInput;
-		roundButton = new RoundButton();
-		dot = roundButton;
+		dot = this;
 		drawShape();
+		setContentAreaFilled(false);
 		TabList.getInstance().getTab().getWorkspace().add(dot);
 		addActionListener(icon);
 	}
@@ -57,21 +56,9 @@ public class Dot implements Serializable {
 	public void addActionListener(Icons icon) {
 		dot.addActionListener(new DotBarActionListener(icon, point, isInput));
 	}
-}
-
-/**
- * This class sets properties for the Dot JButton.
- * 
- * @author Chandan
- * @version 1.0
- */
-class RoundButton extends JButton {
+	
 	private static final long serialVersionUID = 1L;
 	Shape shape;
-
-	public RoundButton() {
-		setContentAreaFilled(false);
-	}
 
 	/**
 	 * Draws the dot JButton .
