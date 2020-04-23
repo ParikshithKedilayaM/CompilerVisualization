@@ -1,10 +1,12 @@
 package controller;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,19 +35,30 @@ public class Main extends JFrame {
 	private JScrollPane scrollPane;
 	private JTabbedPane tabbedPane;
 	private final String TITLE = "Team 1";
-	private Dimension screenSize;
+	private Rectangle screenSize;
 	private FileManager fileManager;
 	private WorkspaceController workspaceController;
 	private NodeCompiler nodeCompiler;
+	private JMenuBar menuBar;
 
 	public Main() {
+		menuBar = new JMenuBar();
 		nodeCompiler = new NodeCompiler();
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		setLayout(null);
 		setTitle(TITLE);
 		setBackground(Color.BLACK);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				System.out.println(menuBar.getHeight()+"   ---->   "+ e.getComponent().getHeight());
+				scrollPane.setBounds(0, 0, e.getComponent().getWidth() / 4, e.getComponent().getHeight() - (4 * menuBar.getHeight()));
+				tabbedPane.setBounds(e.getComponent().getWidth() / 4, 0, 3 * e.getComponent().getWidth() / 4,
+						e.getComponent().getHeight() - (4 * menuBar.getHeight()));
+			}
+		});
 	}
 
 	private void createOptionsPanel() {
@@ -57,6 +70,7 @@ public class Main extends JFrame {
 		scrollPane.setBounds(0, 0, screenSize.width / 4, screenSize.height);
 		scrollPane.setVisible(true);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setViewportView(optionsPanel);
 		this.getContentPane().add(scrollPane);
 	}
@@ -97,7 +111,6 @@ public class Main extends JFrame {
 	 * buttons.
 	 */
 	private void createMenu() {
-		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("File");
 		JMenuItem saveButton = new JMenuItem("Save");
 		fileManager = new FileManager();
@@ -151,9 +164,9 @@ public class Main extends JFrame {
 
 	public static void main(String[] args) {
 		Main frame = new Main();
+		frame.createMenu();
 		frame.createOptionsPanel();
 		frame.createTabs();
-		frame.createMenu();
 		frame.setVisible(true);
 	}
 
