@@ -1,11 +1,16 @@
 package controller;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.Stack;
 
 import model.Connections;
@@ -15,6 +20,7 @@ import view.AtTheRate;
 import view.CloseBracket;
 import view.DoubleBar;
 import view.GreaterThan;
+import view.Hyphen;
 import view.Icons;
 import view.LessThan;
 import view.OpenBracket;
@@ -205,4 +211,108 @@ public class NodeCompiler {
 		return true;
 	}
 
+	public void translate() {
+		Tab tab = TabList.getInstance().getTab();
+		List<Icons> allNodes = tab.getIconList();
+		Set<Icons> presentInAdj = new HashSet<Icons>();
+		HashMap<Icons, String> map = new HashMap<Icons, String>();
+		Set<String> graphNodeConnections = new HashSet<String>();
+		LinkedHashMap<Icons, LinkedList<Icons>> adjList = new LinkedHashMap<Icons, LinkedList<Icons>>();
+		List<Connections> connectionList = tab.getConnectionList();
+		HashMap<Icons, Double> atTheRateLoc = new HashMap<Icons, Double>();
+		for (Connections connection : connectionList) {
+			Icons originIcon = connection.getOriginIcon();
+			Icons destIcon = connection.getDestIcon();
+			if (!adjList.containsKey(originIcon)) {
+				LinkedList<Icons> list = new LinkedList<Icons>();
+				list.add(destIcon);
+				adjList.put(originIcon, list);
+				if (originIcon instanceof AtTheRate)
+					atTheRateLoc.put(originIcon, connection.getOriginPoint().getY());
+			} else {
+				LinkedList<Icons> list = adjList.get(originIcon);
+				if (originIcon instanceof AtTheRate) {
+					double getprevY = atTheRateLoc.get(originIcon);
+					double getnewY = connection.getOriginPoint().getY();
+					if (getnewY > getprevY)
+						list.addFirst(destIcon);
+					else
+						list.add(destIcon);
+				} else {
+					list.add(destIcon);
+				}
+			}
+		}
+
+		int openBracketCount = 1, atTheRateCount = 1, closeBracketCount = 1, doubleBarCount = 1, greaterThanCount = 1,
+				hyphenCount = 1, lessThanCount = 1;
+
+		for (Icons icons : allNodes) {
+			if (map.containsKey(icons)) {
+				continue;
+			} else {
+				if (icons instanceof LessThan) {
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ lessThanCount++);
+				} else if (icons instanceof GreaterThan) {
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ greaterThanCount++);
+				} else if (icons instanceof CloseBracket) {
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ closeBracketCount++);
+				} else if (icons instanceof OpenBracket) {
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ openBracketCount++);
+				} else if (icons instanceof AtTheRate) {
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ atTheRateCount++);
+				} else if (icons instanceof Hyphen) {
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ hyphenCount++);
+				} else if (icons instanceof DoubleBar) {
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ doubleBarCount++);
+				}
+
+			}
+
+		}
+
+		for (Icons icon : adjList.keySet()) {
+			presentInAdj.add(icon);
+			for (Icons icons : adjList.get(icon)) {
+				graphNodeConnections.add(map.get(icon) + "->" + map.get(icons) + ";");
+				presentInAdj.add(icons);
+			}
+
+		}
+
+		for (Icons icon : allNodes) {
+			if (!presentInAdj.contains(icon)) {
+				graphNodeConnections
+						.add(icon.toString().substring(icon.toString().indexOf('.') + 1, icon.toString().indexOf('@'))
+								+ ";");
+			}
+		}
+		for (String s : graphNodeConnections) {
+			System.out.println(s);
+		}
+
+		File file = new File("Resources//Translate.txt");
+		try {
+			file.createNewFile();
+			FileWriter writer = new FileWriter(file); 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
