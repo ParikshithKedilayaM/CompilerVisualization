@@ -109,9 +109,9 @@ public class WorkspaceController implements Observer {
 			if (drawnIcon != null) {
 				drawnIcon.drawShape(tab.getWorkspace().getGraphics());
 				tab.addIcon(drawnIcon);
-			}
-			if(drawnIcon.getClass().getName().equals("view.Pound")) {
-				createWorkspace();
+				if(drawnIcon.getClass().getName().equals("view.Pound")) {
+					createWorkspace();
+				}
 			}
 		} else {
 			tab.setFirstDotClicked(false);
