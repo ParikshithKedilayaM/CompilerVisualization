@@ -33,14 +33,17 @@ public class Main extends JFrame {
 	private OptionsPane optionsPanel;
 	private JScrollPane scrollPane;
 	private JTabbedPane tabbedPane;
-	private final String TITLE = "Team Lala";
+	private final String TITLE = "Team 1";
+
 	private Rectangle screenSize;
 	private FileManager fileManager;
 	private WorkspaceController workspaceController;
 	private NodeCompiler nodeCompiler;
+	private JMenuBar menuBar;
 	private JScrollPane scrollPane2;
 
 	public Main() {
+		menuBar = new JMenuBar();
 		nodeCompiler = new NodeCompiler();
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
@@ -51,6 +54,7 @@ public class Main extends JFrame {
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
+
 				super.componentResized(e);
 				scrollPane.setBounds(0, 0, e.getComponent().getWidth() / 4, 9*e.getComponent().getHeight()/10);
 				scrollPane2.setBounds(e.getComponent().getWidth() / 4, 0, 3 * e.getComponent().getWidth() / 4, 2*screenSize.height/19);
@@ -125,7 +129,6 @@ public class Main extends JFrame {
 	 * buttons.
 	 */
 	private void createMenu() {
-		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("File");
 		JMenuItem saveButton = new JMenuItem("Save");
 		fileManager = new FileManager();
@@ -156,7 +159,7 @@ public class Main extends JFrame {
 		translateButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				nodeCompiler.translate();
 			}
 		});
 		projectMenu.add(compileButton);
@@ -171,9 +174,9 @@ public class Main extends JFrame {
 
 	public static void main(String[] args) {
 		Main frame = new Main();
+		frame.createMenu();
 		frame.createOptionsPanel();
 		frame.createTabs();
-		frame.createMenu();
 	    frame.createToolBar();
         frame.setVisible(true);
 	}
