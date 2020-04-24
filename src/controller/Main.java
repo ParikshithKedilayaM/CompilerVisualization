@@ -1,18 +1,22 @@
 package controller;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JToolBar;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -32,7 +36,7 @@ public class Main extends JFrame {
 	private OptionsPane optionsPanel;
 	private JScrollPane scrollPane;
 	private JTabbedPane tabbedPane;
-	private final String TITLE = "Team 1";
+	private final String TITLE = "Team Lala";
 	private Dimension screenSize;
 	private FileManager fileManager;
 	private WorkspaceController workspaceController;
@@ -68,7 +72,7 @@ public class Main extends JFrame {
 		tabbedPane = new JTabbedPane();
 		createWorkspace();
 		tabbedPane.setVisible(true);
-		tabbedPane.setBounds(screenSize.width / 4, 0, 3 * screenSize.width / 4, screenSize.height);
+		tabbedPane.setBounds(screenSize.width / 4, screenSize.height/12 , 11 * screenSize.width / 15, screenSize.height);
 		this.add(tabbedPane);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			@Override
@@ -92,6 +96,43 @@ public class Main extends JFrame {
 		tabbedPane.add("Tab " + tabList.getSize(), workspace);
 	}
 
+	/** create toolbar with icons**/
+	private void createToolBar()
+	{
+		setLayout(new BorderLayout());
+
+
+		  
+	     // add toolbar to frame 
+      //  add(toolBar, BorderLayout.CENTER); 
+       // f.add(p1, BorderLayout.CENTER); 
+       // setSize(getPreferredSize());
+        // set the size of the frame 
+     //   setSize(1000, 700); 
+        //setVisible(true); 
+        
+        /* to add listeners to icons in toolbar */
+    	//OptionsPane op=new OptionsPane();
+  		ToolBar toolBarPanel = new ToolBar();
+    	JScrollPane scrollPane2 = new JScrollPane(toolBarPanel);
+		//toolBar.setBounds(600, 200,2000, 2000);
+
+    	toolBarPanel.setBounds(9000, 9000, 2000, 2000);
+    	toolBarPanel.setVisible(true);
+		//scrollPane2.setBounds(0, 0, screenSize.width / 4, screenSize.height);
+		//scrollPane2.setVisible(true);
+		scrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane2.setViewportView(toolBarPanel);
+		this.getContentPane().add(toolBarPanel);
+        
+        
+        
+        
+        
+       // return toolBar;
+	}
+	
+	
 	/**
 	 * Function to create menu bar with load,save, add workspace and compile
 	 * buttons.
@@ -124,6 +165,8 @@ public class Main extends JFrame {
 			}
 		});
 		addWorkspaceButton.setContentAreaFilled(false);
+		
+		
 		JMenu projectMenu = new JMenu("Project");
 		JMenuItem compileButton = new JMenuItem("Compile");
 		compileButton.addActionListener(new ActionListener() {
@@ -147,6 +190,13 @@ public class Main extends JFrame {
 		menuBar.add(javax.swing.Box.createHorizontalStrut(10));
 		menuBar.add(addWorkspaceButton);
 		this.setJMenuBar(menuBar);
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	public static void main(String[] args) {
@@ -154,7 +204,8 @@ public class Main extends JFrame {
 		frame.createOptionsPanel();
 		frame.createTabs();
 		frame.createMenu();
-		frame.setVisible(true);
+	    frame.createToolBar();
+        frame.setVisible(true);
 	}
 
 }

@@ -59,6 +59,10 @@ public class OptionsPane extends JPanel {
 		JButton bars = new JButton(new ImageIcon("Resources//bars.png"));
 		bars.setName(TabList.getInstance().getBars());
 		shapes.add(bars);
+		
+		JButton pound = new JButton(new ImageIcon("Resources//pound.png"));
+		pound.setName(TabList.getInstance().getPound());
+		shapes.add(pound);
 	}
 
 	private void addActionListenersToButtons() {
@@ -67,6 +71,7 @@ public class OptionsPane extends JPanel {
 		while (listIterator.hasNext()) {
 			JButton button = listIterator.next();
 			box.add(Box.createVerticalStrut(10));
+			
 			box.add(button);
 			button.addActionListener(new ActionListener() {
 				@Override

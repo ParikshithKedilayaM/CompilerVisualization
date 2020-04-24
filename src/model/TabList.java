@@ -79,6 +79,8 @@ public class TabList implements Serializable {
 	private final String HYPHEN = "HYPHEN";
 	
 	private final String BARS = "BARS";
+	
+	private final String POUND= "POUND";
 
 	public String getOpenBracket() {
 		return OPENBRACKET;
@@ -106,5 +108,8 @@ public class TabList implements Serializable {
 
 	public String getBars() {
 		return BARS;
+	}
+	public String getPound() {
+		return POUND;
 	}
 }

@@ -11,6 +11,7 @@ import view.Hyphen;
 import view.Icons;
 import view.LessThan;
 import view.OpenBracket;
+import view.Pound;
 
 /**
  * This is the factory class used to create and draw different icons on runtime.
@@ -49,7 +50,10 @@ public class IconFactory {
 			return new Hyphen(point);
 		} else if (tabList.getBars().equals(icon)) {
 			return new DoubleBar(point);
+		} else if (tabList.getPound().equals(icon)) {
+			return new Pound(point);
 		}
+		
 		return null;
 	}
 }
