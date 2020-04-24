@@ -301,16 +301,28 @@ public class NodeCompiler {
 								+ ";");
 			}
 		}
+		String translatedText = "";
+		
 		for (String s : graphNodeConnections) {
 			System.out.println(s);
+			translatedText += s + '\n';
 		}
 
-		File file = new File("Resources//Translate.txt");
+		File file = new File("Translate.txt");
 		try {
+			String prepend = "digraph nodes{\n";
+			String append = "}";
+			translatedText = prepend + translatedText + append;
 			file.createNewFile();
 			FileWriter writer = new FileWriter(file); 
+			 writer.write(translatedText); 
+			 writer.flush();
+			 writer.close();
+			 tab.getWorkspace().displayMessage("Translated Successfully. Saved in file Translate.txt");
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			 tab.getWorkspace().displayMessage("Could not translate the graph");
 			e.printStackTrace();
 		}
 		
