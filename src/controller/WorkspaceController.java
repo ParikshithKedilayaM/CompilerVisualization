@@ -4,11 +4,14 @@ import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JTabbedPane;
+
 import model.Connections;
 import model.Tab;
 import model.TabList;
 import view.DoubleBar;
 import view.Icons;
+import view.Workspace;
 
 /**
  * This is the Controller class for workspace. This class observes changes in
@@ -21,11 +24,26 @@ import view.Icons;
 public class WorkspaceController implements Observer {
 
 	private IconFactory iconFactory;
+	private JTabbedPane tabbedPane;
+
+	public void setTabbedPane(JTabbedPane tabbedPane) {
+		this.tabbedPane = tabbedPane;
+	}
 
 	public WorkspaceController() {
 		iconFactory = new IconFactory();
 	}
 
+	private void createWorkspace() {
+		TabList tabList = TabList.getInstance();
+		Workspace workspace = new Workspace();
+		tabList.addTab(workspace);
+		WorkspaceController workspaceController = new WorkspaceController();
+		workspaceController.setTabbedPane(tabbedPane);
+		tabList.getRecentTab().addObserver(workspaceController);
+		tabbedPane.add("Tab " + tabList.getSize(), workspace);
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg == "Clicked") {
@@ -91,6 +109,9 @@ public class WorkspaceController implements Observer {
 			if (drawnIcon != null) {
 				drawnIcon.drawShape(tab.getWorkspace().getGraphics());
 				tab.addIcon(drawnIcon);
+			}
+			if(drawnIcon.getClass().getName().equals("view.Pound")) {
+				createWorkspace();
 			}
 		} else {
 			tab.setFirstDotClicked(false);
