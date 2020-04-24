@@ -92,17 +92,15 @@ public class Main extends JFrame {
 		Workspace workspace = new Workspace();
 		tabList.addTab(workspace);
 		workspaceController = new WorkspaceController();
+		workspaceController.setTabbedPane(tabbedPane);
 		tabList.getRecentTab().addObserver(workspaceController);
-		tabbedPane.add("Tab " + tabList.getSize(), workspace);
+		tabbedPane.add("Tab 1", workspace);
 	}
 
 	/** create toolbar with icons**/
 	private void createToolBar()
 	{
 		setLayout(new BorderLayout());
-
-
-		  
 	     // add toolbar to frame 
       //  add(toolBar, BorderLayout.CENTER); 
        // f.add(p1, BorderLayout.CENTER); 
@@ -110,7 +108,6 @@ public class Main extends JFrame {
         // set the size of the frame 
      //   setSize(1000, 700); 
         //setVisible(true); 
-        
         /* to add listeners to icons in toolbar */
     	//OptionsPane op=new OptionsPane();
   		ToolBar toolBarPanel = new ToolBar();
@@ -124,11 +121,6 @@ public class Main extends JFrame {
 		scrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPane2.setViewportView(toolBarPanel);
 		this.getContentPane().add(toolBarPanel);
-        
-        
-        
-        
-        
        // return toolBar;
 	}
 	
@@ -157,16 +149,6 @@ public class Main extends JFrame {
 		});
 		menu.add(saveButton);
 		menu.add(loadButton);
-		JButton addWorkspaceButton = new JButton("Add WorkSpace");
-		addWorkspaceButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				createWorkspace();
-			}
-		});
-		addWorkspaceButton.setContentAreaFilled(false);
-		
-		
 		JMenu projectMenu = new JMenu("Project");
 		JMenuItem compileButton = new JMenuItem("Compile");
 		compileButton.addActionListener(new ActionListener() {
@@ -188,15 +170,7 @@ public class Main extends JFrame {
 		menuBar.add(javax.swing.Box.createHorizontalStrut(10));
 		menuBar.add(projectMenu);
 		menuBar.add(javax.swing.Box.createHorizontalStrut(10));
-		menuBar.add(addWorkspaceButton);
 		this.setJMenuBar(menuBar);
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	public static void main(String[] args) {

@@ -36,9 +36,11 @@ public class IconFactory {
 	 * @return
 	 */
 	public Icons getIconObject(Point point, String icon) {
-		if (tabList.getOpenBracket().equals(icon)) {
+		if (tabList.getOpenBracket().equals(icon) && !tabList.getTab().isOpenBracketAdded()) {
+			tabList.getTab().setOpenBracketAdded(true);
 			return new OpenBracket(point);
-		} else if (tabList.getCloseBracket().equals(icon)) {
+		} else if (tabList.getCloseBracket().equals(icon) && !tabList.getTab().isCloseBracketAdded()) {
+			tabList.getTab().setCloseBracketAdded(true);
 			return new CloseBracket(point);
 		} else if (tabList.getLessThan().equals(icon)) {
 			return new LessThan(point);

@@ -27,6 +27,7 @@ public class Tab extends Observable implements Serializable {
 	private JButton originDot, destDot;
 	private boolean isOriginInput, isDestInput;
 	private List<Connections> connectionList;
+	private boolean openBracketAdded = false, closeBracketAdded = false;
 
 	public Tab(Workspace workspace) {
 		iconList = new ArrayList<Icons>();
@@ -171,6 +172,22 @@ public class Tab extends Observable implements Serializable {
 
 	public void setOriginInput(boolean isOriginInput) {
 		this.isOriginInput = isOriginInput;
+	}
+	
+	public boolean isOpenBracketAdded() {
+		return openBracketAdded;
+	}
+
+	public void setOpenBracketAdded(boolean openBracketAdded) {
+		this.openBracketAdded = openBracketAdded;
+	}
+
+	public boolean isCloseBracketAdded() {
+		return closeBracketAdded;
+	}
+
+	public void setCloseBracketAdded(boolean closeBracketAdded) {
+		this.closeBracketAdded = closeBracketAdded;
 	}
 
 	public void notifyMethod(String operation) {
