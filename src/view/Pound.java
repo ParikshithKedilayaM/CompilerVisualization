@@ -20,6 +20,7 @@ public class Pound extends Icons {
 	private Point point;
 	private Shape icon;
 	private Point inputPoint, outputPoint;
+	private int tabIndex;
 
 	public Pound(Point point) {
 		dots = new ArrayList<Dot>();
@@ -63,5 +64,20 @@ public class Pound extends Icons {
 	@Override
 	public void setLocation(Point point) {
 		this.point = point;
+	}
+	
+	public int getTabIndex() {
+		return tabIndex;
+	}
+
+	public void setTabIndex(int tabIndex) {
+		this.tabIndex = tabIndex;
+	}
+	
+	@Override
+	public void setDescription(String description) {
+		this.description = description;
+		setChanged();
+		notifyObservers(new String[] {String.valueOf(this.tabIndex), this.description});
 	}
 }

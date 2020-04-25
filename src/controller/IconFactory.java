@@ -53,7 +53,9 @@ public class IconFactory {
 		} else if (tabList.getBars().equals(icon)) {
 			return new DoubleBar(point);
 		} else if (tabList.getPound().equals(icon)) {
-			return new Pound(point);
+			Icons pound = (Pound) new Pound(point);
+			((Pound) pound).setTabIndex(tabList.getSize());
+			return pound;
 		}
 		
 		return null;
