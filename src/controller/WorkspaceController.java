@@ -40,24 +40,32 @@ public class WorkspaceController implements Observer {
 		tabList.addTab(workspace);
 		WorkspaceController workspaceController = new WorkspaceController();
 		workspaceController.setTabbedPane(tabbedPane);
+		tabList.getRecentTab().setWorkspaceController(workspaceController);
 		tabList.getRecentTab().addObserver(workspaceController);
 		tabbedPane.add("Tab " + tabList.getSize(), workspace);
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if (arg == "Clicked") {
-			newShape();
-		} else if (arg == "Pressed") {
-			setSelectedIcon();
-		} else if (arg == "Dragged") {
-			iconDragged();
-		} else if (arg == "Drawline") {
-			drawLine(true);
-		} else if (arg == "DrawTempLine") {
-			drawLine(false);
-		} else if (arg == "DoubleClicked") {
-			doubleClick();
+		System.out.println(o.getClass().getName());
+		if(o.getClass().getName().equals("view.Pound")) {
+			String[] args = (String[]) arg;
+			tabbedPane.setTitleAt(Integer.parseInt(args[0]), args[1]);
+		}
+		else {
+			if (arg == "Clicked") {
+				newShape();
+			} else if (arg == "Pressed") {
+				setSelectedIcon();
+			} else if (arg == "Dragged") {
+				iconDragged();
+			} else if (arg == "Drawline") {
+				drawLine(true);
+			} else if (arg == "DrawTempLine") {
+				drawLine(false);
+			} else if (arg == "DoubleClicked") {
+				doubleClick();
+			}
 		}
 		repaint();
 	}
@@ -111,6 +119,7 @@ public class WorkspaceController implements Observer {
 				tab.addIcon(drawnIcon);
 				if(drawnIcon.getClass().getName().equals("view.Pound")) {
 					createWorkspace();
+					drawnIcon.addObserver(TabList.getInstance().getRecentTab().getWorkspaceController());
 				}
 			}
 		} else {

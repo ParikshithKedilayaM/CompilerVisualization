@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JButton;
+
+import controller.WorkspaceController;
 import view.Icons;
 import view.Workspace;
 
@@ -23,6 +25,7 @@ public class Tab extends Observable implements Serializable {
 	private Point point, originPoint, destPoint;
 	private List<Icons> icons;
 	private Workspace workspace;
+	private WorkspaceController workspaceController;
 	private boolean isFirstDotClicked = false, isMoving = false;
 	private JButton originDot, destDot;
 	private boolean isOriginInput, isDestInput;
@@ -188,6 +191,14 @@ public class Tab extends Observable implements Serializable {
 
 	public void setCloseBracketAdded(boolean closeBracketAdded) {
 		this.closeBracketAdded = closeBracketAdded;
+	}
+	
+	public WorkspaceController getWorkspaceController() {
+		return workspaceController;
+	}
+
+	public void setWorkspaceController(WorkspaceController workspaceController) {
+		this.workspaceController = workspaceController;
 	}
 
 	public void notifyMethod(String operation) {
