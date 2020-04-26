@@ -1,9 +1,14 @@
 package controller;
 
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Toolkit;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.Icon;
 
 import model.Connections;
 import model.Tab;
@@ -24,7 +29,7 @@ public class WorkspaceController implements Observer {
 	private IconFactory iconFactory;
 	private final String OPENBRACKET = "OPEN_BRACKET";
 	private final String CLOSEBRACKET = "CLOSE_BRACKET";
-	private final String LESSTHAN = "LESS_THAN";	
+	private final String LESSTHAN = "LESS_THAN";
 	private final String GREATERTHAN = "GREATER_THAN";
 	private final String ATTHERATE = "AT_THE_RATE";
 	private final String HYPHEN = "HYPHEN";
@@ -32,9 +37,11 @@ public class WorkspaceController implements Observer {
 	private final int fixedFinalX = 10;
 	private final int fixedFinalY = 10;
 	private final int fixedFinaldiffY = 70;
+	private Dimension screenSize;
 
 	public WorkspaceController() {
 		iconFactory = new IconFactory();
+		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	}
 
 	@Override
@@ -51,22 +58,62 @@ public class WorkspaceController implements Observer {
 			drawLine(false);
 		} else if (arg == "DoubleClicked") {
 			doubleClick();
-		}else if (arg == "CreateFixedIcons") {
+		} else if (arg == "CreateFixedIcons") {
 			createFixedIcons();
+		} else if (arg == "Released") {
+			mouseReleased();
 		}
-		
+
 		repaint();
+	}
+
+	private void mouseReleased() {
+		Tab tab = TabList.getInstance().getTab();
+		Point point = tab.getPoint();
+		if (point.getX() > screenSize.width / 10) {
+			Icons icon = tab.getSelectedIcon();
+			if (isFixed(tab, icon)) {
+				addToIconList(icon);
+			}
+		}
+
+	}
+
+	private void addToIconList(Icons newIcon) {
+		Tab tab = TabList.getInstance().getTab();
+		if (searchIcons(tab) != null) {
+			return;
+		}
+		if (!tab.isMoving()) {
+			Icons drawnIcon = newIcon;
+			if (drawnIcon != null) {
+				// drawnIcon.drawShape(tab.getWorkspace().getGraphics());
+				tab.addIcon(drawnIcon);
+			}
+		} else {
+			tab.setFirstDotClicked(false);
+			tab.setMoving(false);
+			tab.getWorkspace().setDefaultCursor();
+		}
 	}
 
 	private void createFixedIcons() {
 		Tab tab = TabList.getInstance().getRecentTab();
-		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY), OPENBRACKET));
-		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 1*fixedFinaldiffY), CLOSEBRACKET));
-		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 2*fixedFinaldiffY), LESSTHAN));
-		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 3*fixedFinaldiffY), GREATERTHAN));
-		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 4*fixedFinaldiffY), ATTHERATE));
-		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 5*fixedFinaldiffY), HYPHEN));
-		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 6*fixedFinaldiffY), BARS));
+		for (int i = 1; i <= 20; i++) {
+			tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX, fixedFinalY), OPENBRACKET));
+			tab.addFixedIcon(
+					iconFactory.getIconObject(new Point(fixedFinalX, fixedFinalY + 1 * fixedFinaldiffY), CLOSEBRACKET));
+			tab.addFixedIcon(
+					iconFactory.getIconObject(new Point(fixedFinalX, fixedFinalY + 2 * fixedFinaldiffY), LESSTHAN));
+			tab.addFixedIcon(
+					iconFactory.getIconObject(new Point(fixedFinalX, fixedFinalY + 3 * fixedFinaldiffY), GREATERTHAN));
+			tab.addFixedIcon(
+					iconFactory.getIconObject(new Point(fixedFinalX, fixedFinalY + 4 * fixedFinaldiffY), ATTHERATE));
+			tab.addFixedIcon(
+					iconFactory.getIconObject(new Point(fixedFinalX, fixedFinalY + 5 * fixedFinaldiffY), HYPHEN));
+			tab.addFixedIcon(
+					iconFactory.getIconObject(new Point(fixedFinalX, fixedFinalY + 6 * fixedFinaldiffY), BARS));
+		}
 	}
 
 	/**
@@ -79,10 +126,13 @@ public class WorkspaceController implements Observer {
 		Icons icon = searchIcons(tab);
 		if (icon != null) {
 			tab.setSelectedIcon(icon);
-		}
-		icon = searchFixedIcons(tab);
-		if (icon != null) {
-			tab.setSelectedIcon(icon);
+			tab.setSelectedOption(icon.getClass().getSimpleName());
+		} else {
+			icon = searchFixedIcons(tab);
+			if (icon != null) {
+				tab.setSelectedIcon(icon);
+				tab.setSelectedOption(icon.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -112,9 +162,10 @@ public class WorkspaceController implements Observer {
 	 */
 	private void newShape() {
 		Tab tab = TabList.getInstance().getTab();
-		if (searchIcons(tab) != null) {
+		if (searchIcons(tab) != null || tab.getPoint().getX() < screenSize.width / 10) {
 			return;
 		}
+
 		if (!tab.isMoving()) {
 			Icons drawnIcon = iconFactory.getIconObject(tab.getPoint(), tab.getSelectedOption());
 			if (drawnIcon != null) {
@@ -193,6 +244,19 @@ public class WorkspaceController implements Observer {
 	 * @param tab - Tab instance
 	 * @return
 	 */
+
+	private boolean isFixed(Tab tab, Icons iconToSearch) {
+		ListIterator<Icons> listIterator = tab.getFixedIconList().listIterator();
+		while (listIterator.hasNext()) {
+			Icons icon = listIterator.next();
+			if (icon == iconToSearch) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
 	private Icons searchIcons(Tab tab) {
 		ListIterator<Icons> listIterator = tab.getIconList().listIterator();
 		while (listIterator.hasNext()) {

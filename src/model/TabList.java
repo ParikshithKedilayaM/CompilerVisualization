@@ -71,18 +71,20 @@ public class TabList implements Serializable {
 	}
 
 	private final String OPENBRACKET = "OPEN_BRACKET";
-
 	private final String CLOSEBRACKET = "CLOSE_BRACKET";
-	
-	private final String LESSTHAN = "LESS_THAN";
-	
+	private final String LESSTHAN = "LESS_THAN";	
 	private final String GREATERTHAN = "GREATER_THAN";
-
 	private final String ATTHERATE = "AT_THE_RATE";
-	
 	private final String HYPHEN = "HYPHEN";
-	
 	private final String BARS = "BARS";
+
+	private final String OPENBRACKET_CLASSNAME = "OpenBracket";
+	private final String CLOSEBRACKET_CLASSNAME = "CloseBracket";
+	private final String LESSTHAN_CLASSNAME = "LessThan";	
+	private final String GREATERTHAN_CLASSNAME = "GreaterThan";
+	private final String ATTHERATE_CLASSNAME = "AtTheRate";
+	private final String HYPHEN_CLASSNAME = "Hyphen";
+	private final String BARS_CLASSNAME = "DoubleBars";
 
 	public String getOpenBracket() {
 		return OPENBRACKET;
@@ -110,5 +112,33 @@ public class TabList implements Serializable {
 
 	public String getBars() {
 		return BARS;
+	}
+
+	public String getOpenBracketClassName() {
+		return OPENBRACKET_CLASSNAME;
+	}
+
+	public String getCloseBracketClassName() {
+		return CLOSEBRACKET_CLASSNAME;
+	}
+
+	public String getLessThanClassName() {
+		return LESSTHAN_CLASSNAME;
+	}
+
+	public String getGreaterThanClassName() {
+		return GREATERTHAN_CLASSNAME;
+	}
+
+	public String getAtTheRateClassName() {
+		return ATTHERATE_CLASSNAME;
+	}
+
+	public String getHyphenClassName() {
+		return HYPHEN_CLASSNAME;
+	}
+
+	public String getBarsClassName() {
+		return BARS_CLASSNAME;
 	}
 }

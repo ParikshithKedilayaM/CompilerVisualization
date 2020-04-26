@@ -74,7 +74,10 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		Point point = new Point(e.getX(), e.getY());
+		TabList.getInstance().getTab().setPoint(point, "Released");
 		TabList.getInstance().getTab().setSelectedIcon(null);
+
 	}
 
 	@Override
@@ -94,7 +97,9 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 		ArrayList<Icons> iconList = tab.getIconList();
 		ListIterator<Icons> i = iconList.listIterator();
 		List<Icons> fixedIcons = tab.getFixedIconList();
+
 		graphics.fillRect(screenSize.width/10, 0, 5, screenSize.height);
+
 		for(Icons icons: fixedIcons){
 			icons.drawShape(graphics);
 		}

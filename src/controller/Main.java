@@ -92,7 +92,6 @@ public class Main extends JFrame {
 		workspaceController = new WorkspaceController();
 		tabList.getRecentTab().addObserver(workspaceController);
 		tabbedPane.add("Tab " + tabList.getSize(), workspace);
-		System.out.println("-----"+tabbedPane.getTabCount());
 		tabList.addFixedIcons();
 	}
 

@@ -6,7 +6,14 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  * This class holds "Open Bracket '(' " icon information and draw them

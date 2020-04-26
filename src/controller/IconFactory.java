@@ -20,8 +20,9 @@ import view.OpenBracket;
  */
 
 public class IconFactory {
-	
+
 	private TabList tabList;
+
 	public IconFactory() {
 		tabList = TabList.getInstance();
 	}
@@ -35,19 +36,19 @@ public class IconFactory {
 	 * @return
 	 */
 	public Icons getIconObject(Point point, String icon) {
-		if (tabList.getOpenBracket().equals(icon)) {
+		if (tabList.getOpenBracket().equals(icon) || tabList.getOpenBracketClassName().equals(icon)) {
 			return new OpenBracket(point);
-		} else if (tabList.getCloseBracket().equals(icon)) {
+		} else if (tabList.getCloseBracket().equals(icon) || tabList.getCloseBracketClassName().equals(icon)) {
 			return new CloseBracket(point);
-		} else if (tabList.getLessThan().equals(icon)) {
+		} else if (tabList.getLessThan().equals(icon)|| tabList.getLessThanClassName().equals(icon)) {
 			return new LessThan(point);
-		} else if (tabList.getGreaterThan().equals(icon)) {
+		} else if (tabList.getGreaterThan().equals(icon)|| tabList.getGreaterThanClassName().equals(icon)) {
 			return new GreaterThan(point);
-		} else if (tabList.getAtTheRate().equals(icon)) {
+		} else if (tabList.getAtTheRate().equals(icon)|| tabList.getAtTheRateClassName().equals(icon)) {
 			return new AtTheRate(point);
-		} else if (tabList.getHyphen().equals(icon)) {
+		} else if (tabList.getHyphen().equals(icon)|| tabList.getHyphenClassName().equals(icon)) {
 			return new Hyphen(point);
-		} else if (tabList.getBars().equals(icon)) {
+		} else if (tabList.getBars().equals(icon) || tabList.getBarsClassName().equals(icon)) {
 			return new DoubleBar(point);
 		}
 		return null;
