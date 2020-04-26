@@ -142,6 +142,7 @@ public class TabList implements Serializable {
 
 	public String getBarsClassName() {
 		return BARS_CLASSNAME;
+	}
 
 	public String getPound() {
 		return POUND;

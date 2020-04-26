@@ -85,7 +85,7 @@ public class Main extends JFrame {
 		tabbedPane = new JTabbedPane();
 		createWorkspace();
 		tabbedPane.setVisible(true);
-		tabbedPane.setBounds(10, screenSize.height/10, 11 * screenSize.width / 15 +10 , 4*screenSize.height/5);
+		tabbedPane.setBounds(10, screenSize.height/10,screenSize.width , 4*screenSize.height/5);
 		this.add(tabbedPane);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			@Override
@@ -117,8 +117,8 @@ public class Main extends JFrame {
   		ToolBar toolBarPanel = new ToolBar();
     	scrollPane2 = new JScrollPane(toolBarPanel);
     	toolBarPanel.setVisible(true);
-		scrollPane2.setBounds(screenSize.width / 4, 0, 3 * screenSize.width / 4, 2*screenSize.height/19);
-		toolBarPanel.setBounds(screenSize.width / 4, 0, 3 * screenSize.width / 4, 2*screenSize.height/19);
+		scrollPane2.setBounds(0, 0, screenSize.width, 2*screenSize.height/19);
+		toolBarPanel.setBounds(0, 0, screenSize.width , 2*screenSize.height/19);
 		scrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane2.setViewportView(toolBarPanel);
