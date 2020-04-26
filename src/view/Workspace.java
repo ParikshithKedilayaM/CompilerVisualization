@@ -7,10 +7,14 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -28,11 +32,12 @@ import model.TabList;
 public class Workspace extends JPanel implements MouseListener, MouseMotionListener, Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	private Dimension screenSize;
 	public Workspace() {
 		this.setBackground(Color.WHITE);
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	}
 
 	@Override
@@ -88,6 +93,12 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 		Tab tab = TabList.getInstance().getTab();
 		ArrayList<Icons> iconList = tab.getIconList();
 		ListIterator<Icons> i = iconList.listIterator();
+		List<Icons> fixedIcons = tab.getFixedIconList();
+		graphics.fillRect(screenSize.width/10, 0, 5, screenSize.height);
+		for(Icons icons: fixedIcons){
+			icons.drawShape(graphics);
+		}
+
 		// Draws all the icons from the list
 		while (i.hasNext()) {
 			Icons nextIcon = i.next();

@@ -29,7 +29,7 @@ public class Dot extends JButton implements Serializable {
 		dot = this;
 		drawShape();
 		setContentAreaFilled(false);
-		TabList.getInstance().getTab().getWorkspace().add(dot);
+		TabList.getInstance().getRecentTab().getWorkspace().add(dot);
 		addActionListener(icon);
 	}
 

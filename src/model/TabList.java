@@ -46,6 +46,10 @@ public class TabList implements Serializable {
 		tabList.add(new Tab(workspace));
 	}
 
+	public void addFixedIcons(){
+		TabList.getInstance().getRecentTab().notifyFixedIcons("CreateFixedIcons");
+	}
+
 	public int getCurrentTabIndex() {
 		return currentTabIndex;
 	}

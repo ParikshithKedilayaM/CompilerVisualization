@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -68,7 +69,8 @@ public class Main extends JFrame {
 		tabbedPane = new JTabbedPane();
 		createWorkspace();
 		tabbedPane.setVisible(true);
-		tabbedPane.setBounds(screenSize.width / 4, 0, 3 * screenSize.width / 4, screenSize.height);
+		//tabbedPane.setBounds(screenSize.width / 4, 0, 3 * screenSize.width / 4, screenSize.height);
+		tabbedPane.setBounds(0, 0, screenSize.width , screenSize.height);
 		this.add(tabbedPane);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			@Override
@@ -90,6 +92,8 @@ public class Main extends JFrame {
 		workspaceController = new WorkspaceController();
 		tabList.getRecentTab().addObserver(workspaceController);
 		tabbedPane.add("Tab " + tabList.getSize(), workspace);
+		System.out.println("-----"+tabbedPane.getTabCount());
+		tabList.addFixedIcons();
 	}
 
 	/**
@@ -151,7 +155,7 @@ public class Main extends JFrame {
 
 	public static void main(String[] args) {
 		Main frame = new Main();
-		frame.createOptionsPanel();
+		// frame.createOptionsPanel();
 		frame.createTabs();
 		frame.createMenu();
 		frame.setVisible(true);

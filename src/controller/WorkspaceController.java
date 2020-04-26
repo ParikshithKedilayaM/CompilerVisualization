@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Point;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
@@ -21,6 +22,16 @@ import view.Icons;
 public class WorkspaceController implements Observer {
 
 	private IconFactory iconFactory;
+	private final String OPENBRACKET = "OPEN_BRACKET";
+	private final String CLOSEBRACKET = "CLOSE_BRACKET";
+	private final String LESSTHAN = "LESS_THAN";	
+	private final String GREATERTHAN = "GREATER_THAN";
+	private final String ATTHERATE = "AT_THE_RATE";
+	private final String HYPHEN = "HYPHEN";
+	private final String BARS = "BARS";
+	private final int fixedFinalX = 10;
+	private final int fixedFinalY = 10;
+	private final int fixedFinaldiffY = 70;
 
 	public WorkspaceController() {
 		iconFactory = new IconFactory();
@@ -40,8 +51,22 @@ public class WorkspaceController implements Observer {
 			drawLine(false);
 		} else if (arg == "DoubleClicked") {
 			doubleClick();
+		}else if (arg == "CreateFixedIcons") {
+			createFixedIcons();
 		}
+		
 		repaint();
+	}
+
+	private void createFixedIcons() {
+		Tab tab = TabList.getInstance().getRecentTab();
+		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY), OPENBRACKET));
+		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 1*fixedFinaldiffY), CLOSEBRACKET));
+		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 2*fixedFinaldiffY), LESSTHAN));
+		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 3*fixedFinaldiffY), GREATERTHAN));
+		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 4*fixedFinaldiffY), ATTHERATE));
+		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 5*fixedFinaldiffY), HYPHEN));
+		tab.addFixedIcon(iconFactory.getIconObject(new Point(fixedFinalX,fixedFinalY + 6*fixedFinaldiffY), BARS));
 	}
 
 	/**
@@ -52,6 +77,10 @@ public class WorkspaceController implements Observer {
 	private void setSelectedIcon() {
 		Tab tab = TabList.getInstance().getTab();
 		Icons icon = searchIcons(tab);
+		if (icon != null) {
+			tab.setSelectedIcon(icon);
+		}
+		icon = searchFixedIcons(tab);
 		if (icon != null) {
 			tab.setSelectedIcon(icon);
 		}
@@ -166,6 +195,17 @@ public class WorkspaceController implements Observer {
 	 */
 	private Icons searchIcons(Tab tab) {
 		ListIterator<Icons> listIterator = tab.getIconList().listIterator();
+		while (listIterator.hasNext()) {
+			Icons icon = listIterator.next();
+			if (icon.containsIcon(tab.getPoint())) {
+				return icon;
+			}
+		}
+		return null;
+	}
+
+	private Icons searchFixedIcons(Tab tab) {
+		ListIterator<Icons> listIterator = tab.getFixedIconList().listIterator();
 		while (listIterator.hasNext()) {
 			Icons icon = listIterator.next();
 			if (icon.containsIcon(tab.getPoint())) {

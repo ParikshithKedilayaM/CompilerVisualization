@@ -1,11 +1,18 @@
 package model;
+
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Observable;
+
+import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 import view.Icons;
+import view.OpenBracket;
 import view.Workspace;
 
 /**
@@ -14,7 +21,6 @@ import view.Workspace;
  * @author Rishika Bera
  * @version 1.0
  */
-
 
 public class Tab extends Observable implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,14 +34,17 @@ public class Tab extends Observable implements Serializable {
 	private boolean isOriginInput, isDestInput;
 	private List<Connections> connectionList;
 
+	private List<Icons> fixedIcons = new ArrayList<>();
+
 	public Tab(Workspace workspace) {
 		iconList = new ArrayList<Icons>();
 		connectionList = new ArrayList<Connections>();
 		this.workspace = workspace;
 		icons = new ArrayList<Icons>();
-		for (int i=0;i<3;i++) {
+		for (int i = 0; i < 3; i++) {
 			icons.add(null);
 		}
+
 	}
 
 	public String getSelectedOption() {
@@ -54,6 +63,15 @@ public class Tab extends Observable implements Serializable {
 		return iconList;
 	}
 
+	public void addFixedIcon(Icons icon) {
+		fixedIcons.add(icon);
+		// iconList.add(new OpenBracket(icon.getLocation()));
+	}
+
+	public List<Icons> getFixedIconList() {
+		return fixedIcons;
+	}
+
 	public void setIconList(ArrayList<Icons> iconList) {
 		this.iconList = iconList;
 	}
@@ -64,6 +82,10 @@ public class Tab extends Observable implements Serializable {
 
 	public void setPoint(Point point, String operation) {
 		this.point = point;
+		this.notifyMethod(operation);
+	}
+
+	public void notifyFixedIcons(String operation) {
 		this.notifyMethod(operation);
 	}
 
@@ -155,7 +177,6 @@ public class Tab extends Observable implements Serializable {
 	public void setMoving(boolean isMoving) {
 		this.isMoving = isMoving;
 	}
-
 
 	public boolean isDestInput() {
 		return isDestInput;
