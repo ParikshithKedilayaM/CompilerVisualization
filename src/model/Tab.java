@@ -11,6 +11,7 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import controller.WorkspaceController;
 import view.Icons;
 import view.OpenBracket;
 import view.Workspace;
@@ -29,10 +30,12 @@ public class Tab extends Observable implements Serializable {
 	private Point point, originPoint, destPoint;
 	private List<Icons> icons;
 	private Workspace workspace;
+	private WorkspaceController workspaceController;
 	private boolean isFirstDotClicked = false, isMoving = false;
 	private JButton originDot, destDot;
 	private boolean isOriginInput, isDestInput;
 	private List<Connections> connectionList;
+	private boolean openBracketAdded = false, closeBracketAdded = false;
 
 	private List<Icons> fixedIcons = new ArrayList<>();
 
@@ -192,6 +195,30 @@ public class Tab extends Observable implements Serializable {
 
 	public void setOriginInput(boolean isOriginInput) {
 		this.isOriginInput = isOriginInput;
+	}
+	
+	public boolean isOpenBracketAdded() {
+		return openBracketAdded;
+	}
+
+	public void setOpenBracketAdded(boolean openBracketAdded) {
+		this.openBracketAdded = openBracketAdded;
+	}
+
+	public boolean isCloseBracketAdded() {
+		return closeBracketAdded;
+	}
+
+	public void setCloseBracketAdded(boolean closeBracketAdded) {
+		this.closeBracketAdded = closeBracketAdded;
+	}
+	
+	public WorkspaceController getWorkspaceController() {
+		return workspaceController;
+	}
+
+	public void setWorkspaceController(WorkspaceController workspaceController) {
+		this.workspaceController = workspaceController;
 	}
 
 	public void notifyMethod(String operation) {

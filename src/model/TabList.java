@@ -77,6 +77,8 @@ public class TabList implements Serializable {
 	private final String ATTHERATE = "AT_THE_RATE";
 	private final String HYPHEN = "HYPHEN";
 	private final String BARS = "BARS";
+	
+	private final String POUND= "POUND";
 
 	private final String OPENBRACKET_CLASSNAME = "OpenBracket";
 	private final String CLOSEBRACKET_CLASSNAME = "CloseBracket";
@@ -140,5 +142,8 @@ public class TabList implements Serializable {
 
 	public String getBarsClassName() {
 		return BARS_CLASSNAME;
+
+	public String getPound() {
+		return POUND;
 	}
 }

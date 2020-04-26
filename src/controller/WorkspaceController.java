@@ -7,14 +7,15 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.swing.Icon;
+import javax.swing.JTabbedPane;
 
 import model.Connections;
 import model.Tab;
 import model.TabList;
 import view.DoubleBar;
 import view.Icons;
+import view.Workspace;
 
 /**
  * This is the Controller class for workspace. This class observes changes in
@@ -27,6 +28,7 @@ import view.Icons;
 public class WorkspaceController implements Observer {
 
 	private IconFactory iconFactory;
+
 	private final String OPENBRACKET = "OPEN_BRACKET";
 	private final String CLOSEBRACKET = "CLOSE_BRACKET";
 	private final String LESSTHAN = "LESS_THAN";
@@ -39,14 +41,37 @@ public class WorkspaceController implements Observer {
 	private final int fixedFinaldiffY = 70;
 	private Dimension screenSize;
 
+	private JTabbedPane tabbedPane;
+
+	public void setTabbedPane(JTabbedPane tabbedPane) {
+		this.tabbedPane = tabbedPane;
+	}
+
 	public WorkspaceController() {
 		iconFactory = new IconFactory();
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	}
 
+	private void createWorkspace() {
+		TabList tabList = TabList.getInstance();
+		Workspace workspace = new Workspace();
+		tabList.addTab(workspace);
+		WorkspaceController workspaceController = new WorkspaceController();
+		workspaceController.setTabbedPane(tabbedPane);
+		tabList.getRecentTab().setWorkspaceController(workspaceController);
+		tabList.getRecentTab().addObserver(workspaceController);
+		tabbedPane.add("Tab " + tabList.getSize(), workspace);
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
-		if (arg == "Clicked") {
+		//System.out.println(o.getClass().getName());
+		if(o.getClass().getName().equals("view.Pound")) {
+			String[] args = (String[]) arg;
+			tabbedPane.setTitleAt(Integer.parseInt(args[0]), args[1]);
+		}
+		else {
+			if (arg == "Clicked") {
 			newShape();
 		} else if (arg == "Pressed") {
 			setSelectedIcon();
@@ -62,6 +87,7 @@ public class WorkspaceController implements Observer {
 			createFixedIcons();
 		} else if (arg == "Released") {
 			mouseReleased();
+    }
 		}
 
 		repaint();
@@ -171,6 +197,10 @@ public class WorkspaceController implements Observer {
 			if (drawnIcon != null) {
 				drawnIcon.drawShape(tab.getWorkspace().getGraphics());
 				tab.addIcon(drawnIcon);
+				if(drawnIcon.getClass().getName().equals("view.Pound")) {
+					createWorkspace();
+					drawnIcon.addObserver(TabList.getInstance().getRecentTab().getWorkspaceController());
+				}
 			}
 		} else {
 			tab.setFirstDotClicked(false);

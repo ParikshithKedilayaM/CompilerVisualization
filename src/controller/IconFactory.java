@@ -11,6 +11,7 @@ import view.Hyphen;
 import view.Icons;
 import view.LessThan;
 import view.OpenBracket;
+import view.Pound;
 
 /**
  * This is the factory class used to create and draw different icons on runtime.
@@ -36,9 +37,9 @@ public class IconFactory {
 	 * @return
 	 */
 	public Icons getIconObject(Point point, String icon) {
-		if (tabList.getOpenBracket().equals(icon) || tabList.getOpenBracketClassName().equals(icon)) {
+		if ((tabList.getOpenBracket().equals(icon) || tabList.getOpenBracketClassName().equals(icon)) && !tabList.getTab().isOpenBracketAdded()) {
 			return new OpenBracket(point);
-		} else if (tabList.getCloseBracket().equals(icon) || tabList.getCloseBracketClassName().equals(icon)) {
+		} else if ((tabList.getCloseBracket().equals(icon) || tabList.getCloseBracketClassName().equals(icon)) && !tabList.getTab().isCloseBracketAdded()) {
 			return new CloseBracket(point);
 		} else if (tabList.getLessThan().equals(icon)|| tabList.getLessThanClassName().equals(icon)) {
 			return new LessThan(point);
@@ -50,7 +51,12 @@ public class IconFactory {
 			return new Hyphen(point);
 		} else if (tabList.getBars().equals(icon) || tabList.getBarsClassName().equals(icon)) {
 			return new DoubleBar(point);
+		} else if (tabList.getPound().equals(icon)) {
+			Icons pound = (Pound) new Pound(point);
+			((Pound) pound).setTabIndex(tabList.getSize());
+			return pound;
 		}
+		
 		return null;
 	}
 }
