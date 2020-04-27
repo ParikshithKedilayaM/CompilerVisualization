@@ -47,7 +47,6 @@ public class WorkspaceController implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println(o.getClass().getName());
 		if(o.getClass().getName().equals("view.Pound")) {
 			String[] args = (String[]) arg;
 			tabbedPane.setTitleAt(Integer.parseInt(args[0]), args[1]);

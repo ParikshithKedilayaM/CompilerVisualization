@@ -58,7 +58,7 @@ public class Main extends JFrame {
 				super.componentResized(e);
 				scrollPane.setBounds(0, 0, e.getComponent().getWidth() / 4, 9*e.getComponent().getHeight()/10);
 				scrollPane2.setBounds(e.getComponent().getWidth() / 4, 0, 3 * e.getComponent().getWidth() / 4, 2*screenSize.height/19);
-				tabbedPane.setBounds(10 +e.getComponent().getWidth() / 4, screenSize.height/10 , 11 * e.getComponent().getWidth() / 15, 4*e.getComponent().getHeight()/5);
+				tabbedPane.setBounds(e.getComponent().getWidth() / 4, screenSize.height/10 , 11 * e.getComponent().getWidth() / 15, 4*e.getComponent().getHeight()/5);
 			}
 		});
 	}
@@ -84,7 +84,7 @@ public class Main extends JFrame {
 		tabbedPane = new JTabbedPane();
 		createWorkspace();
 		tabbedPane.setVisible(true);
-		tabbedPane.setBounds(10 +screenSize.width / 4, screenSize.height/10 , 11 * screenSize.width / 15 +10, 4*screenSize.height/5);
+		tabbedPane.setBounds(screenSize.width / 4, screenSize.height/10 , 11 * screenSize.width / 15 +10, 4*screenSize.height/5);
 		this.add(tabbedPane);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			@Override

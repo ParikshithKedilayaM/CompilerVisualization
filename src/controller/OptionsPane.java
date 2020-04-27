@@ -1,7 +1,10 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -10,6 +13,7 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import model.TabList;
 
@@ -23,6 +27,7 @@ import model.TabList;
 public class OptionsPane extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private boolean isMoving = false;
 
 	private List<JButton> shapes = new ArrayList<>();
 
@@ -59,7 +64,7 @@ public class OptionsPane extends JPanel {
 		JButton bars = new JButton(new ImageIcon("Resources//bars.png"));
 		bars.setName(TabList.getInstance().getBars());
 		shapes.add(bars);
-		
+
 		JButton pound = new JButton(new ImageIcon("Resources//pound.png"));
 		pound.setName(TabList.getInstance().getPound());
 		shapes.add(pound);
@@ -71,14 +76,34 @@ public class OptionsPane extends JPanel {
 		while (listIterator.hasNext()) {
 			JButton button = listIterator.next();
 			box.add(Box.createVerticalStrut(10));
-			
-			box.add(button);
-			button.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					TabList.getInstance().getTab().setSelectedOption(button.getName());
+			button.addMouseMotionListener(new MouseMotionAdapter() {
+				public void mouseDragged(MouseEvent e) {
+					if (!isMoving) {
+						TabList.getInstance().getTab().setSelectedOption(button.getName());
+						TabList.getInstance().getTab().getWorkspace().setMovingCursor();
+						Cursor cursor = new Cursor(Cursor.MOVE_CURSOR);
+						setCursor(cursor);
+					}
+					isMoving = true;
 				}
 			});
+			button.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					if (e.getLocationOnScreen().getX() > TabList.getInstance().getTab().getWorkspace().getParent()
+							.getLocationOnScreen().getX()) {
+						Point convertPoint = SwingUtilities.convertPoint(button, e.getPoint(),
+								TabList.getInstance().getTab().getWorkspace());
+						TabList.getInstance().getTab().setPoint(convertPoint, "Clicked");
+					}
+					TabList.getInstance().getTab().setSelectedOption(null);
+					isMoving = false;
+					TabList.getInstance().getTab().getWorkspace().setDefaultCursor();
+					Cursor cursor = new Cursor(Cursor.DEFAULT_CURSOR);
+					setCursor(cursor);
+				}
+			});
+			box.add(button);
 		}
 		this.add(box);
 	}

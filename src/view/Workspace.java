@@ -147,6 +147,10 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 	public void setDefaultCursor() {
 		setCursorMethod(Cursor.DEFAULT_CURSOR);
 	}
+	
+	public void setMovingCursor() {
+		setCursorMethod(Cursor.MOVE_CURSOR);
+	}
 
 	private void setCursorMethod(int cursorType) {
 		Cursor cursor = new Cursor(cursorType);
