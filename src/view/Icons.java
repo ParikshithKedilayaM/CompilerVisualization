@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Observable;
 
+import model.TabList;
+
 /**
  * This is an abstract class where icons, dots and bars are declared.
  *@author Rishika Bera
@@ -61,5 +63,11 @@ public abstract class Icons extends Observable implements Serializable {
 	public void setBars(List<VerticalBar> bars) {
 		this.bars = bars;
 	}
-
+	
+	public void removeDots() {
+		for (Dot dot : dots) {
+			TabList.getInstance().getTab().getWorkspace().remove(dot);
+		}
+	}
+	
 }

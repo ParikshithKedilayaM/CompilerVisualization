@@ -13,6 +13,7 @@ import java.util.ListIterator;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import model.Connections;
 import model.Tab;
@@ -56,7 +57,11 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 		Tab tab = TabList.getInstance().getTab();
 		if (e.getClickCount() == 2) {
 			tab.setPoint(point, "DoubleClicked");
-		} else {
+		} 
+		else if  (SwingUtilities.isRightMouseButton(e)) {
+			tab.setPoint(point, "RightClick");
+		}
+		else {
 			tab.setPoint(point, "Clicked");
 		}
 	}
@@ -135,9 +140,10 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 
 		int[] xpoints = { x2, (int) xm, (int) xn };
 		int[] ypoints = { y2, (int) ym, (int) yn };
-
+		
 		g.drawLine(x1, y1, x2, y2);
 		g.fillPolygon(xpoints, ypoints, 3);
+
 	}
 
 	public void setCrossHairCursor() {
@@ -163,5 +169,13 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 
 	public void displayMessage(String message) {
 		JOptionPane.showMessageDialog(this, message);
+	}
+	
+	public boolean prompt(String message) {
+		int showConfirmDialog = JOptionPane.showConfirmDialog(this, message);
+		if (showConfirmDialog == 0) {
+			return true;
+		}
+		return false;
 	}
 }

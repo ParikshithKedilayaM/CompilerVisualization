@@ -1,5 +1,8 @@
 package controller;
 
+import java.awt.Component;
+import java.awt.Point;
+import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Observable;
 import java.util.Observer;
@@ -9,8 +12,10 @@ import javax.swing.JTabbedPane;
 import model.Connections;
 import model.Tab;
 import model.TabList;
+import view.CloseBracket;
 import view.DoubleBar;
 import view.Icons;
+import view.OpenBracket;
 import view.Workspace;
 
 /**
@@ -64,9 +69,57 @@ public class WorkspaceController implements Observer {
 				drawLine(false);
 			} else if (arg == "DoubleClicked") {
 				doubleClick();
+			} else if (arg == "RightClick") {
+				rightClick();
 			}
 		}
 		repaint();
+	}
+
+	private void rightClick() {
+		deleteIcons();
+	}
+	
+	private void deleteIcons() {
+		Tab tab = TabList.getInstance().getTab();
+		Icons icon = searchIcons(tab);
+		if (icon != null && tab.getWorkspace().prompt("Delete?")) {
+			tab.getIconList().remove(icon);
+			icon.removeDots();
+			removeConnections(icon);
+			checkSingleInstanceIcons(tab, icon);
+		}
+	}
+
+	private void checkSingleInstanceIcons(Tab tab, Icons icon) {
+		if (icon instanceof OpenBracket) {
+			tab.setOpenBracketAdded(false);
+		} else if (icon instanceof CloseBracket) {
+			tab.setCloseBracketAdded(false);
+		}
+	}
+
+	private void removeConnections(Icons removedIcon) {
+		Iterator<Connections> connectionList = TabList.getInstance().getTab().getConnectionList().iterator();
+		while (connectionList.hasNext()) {
+			Connections connection = connectionList.next();
+			if (connection.getOriginIcon() == removedIcon) {
+				enableButtons(connection.getDestPoint());
+				connectionList.remove();
+			} else if (connection.getDestIcon() == removedIcon) {
+				enableButtons(connection.getOriginPoint());
+				connectionList.remove();
+			}
+		}
+	}
+	
+	private void enableButtons(Point connection) {
+		Component[] componentAt = TabList.getInstance().getTab().getWorkspace().getComponents();
+		for (Component c : componentAt) {
+			if (c.getX() == connection.getX() && c.getY() == connection.getY()) {
+				c.setEnabled(true);
+			}
+		}
 	}
 
 	/**
