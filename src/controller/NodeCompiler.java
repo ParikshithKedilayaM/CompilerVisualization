@@ -296,15 +296,12 @@ public class NodeCompiler {
 
 		for (Icons icon : allNodes) {
 			if (!presentInAdj.contains(icon)) {
-				graphNodeConnections
-						.add(icon.toString().substring(icon.toString().indexOf('.') + 1, icon.toString().indexOf('@'))
-								+ ";");
+				graphNodeConnections.add(map.get(icon));
 			}
 		}
 		String translatedText = "";
-		
+
 		for (String s : graphNodeConnections) {
-			System.out.println(s);
 			translatedText += s + '\n';
 		}
 
@@ -314,17 +311,17 @@ public class NodeCompiler {
 			String append = "}";
 			translatedText = prepend + translatedText + append;
 			file.createNewFile();
-			FileWriter writer = new FileWriter(file); 
-			 writer.write(translatedText); 
-			 writer.flush();
-			 writer.close();
-			 tab.getWorkspace().displayMessage("Translated Successfully. Saved in file Translate.txt");
-			
+			FileWriter writer = new FileWriter(file);
+			writer.write(translatedText);
+			writer.flush();
+			writer.close();
+			tab.getWorkspace().displayMessage("Translated Successfully. Saved in file Translate.txt");
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			 tab.getWorkspace().displayMessage("Could not translate the graph");
+			tab.getWorkspace().displayMessage("Could not translate the graph");
 			e.printStackTrace();
 		}
-		
+
 	}
 }
