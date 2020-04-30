@@ -20,16 +20,14 @@ import model.TabList;
 public class Dot extends JButton implements Serializable {
 
 	private Point point;
-	private JButton dot;
 	private boolean isInput;
 
 	public Dot(Point point, boolean isInput, Icons icon) {
 		this.point = point;
 		this.isInput = isInput;
-		dot = this;
 		drawShape();
 		setContentAreaFilled(false);
-		TabList.getInstance().getTab().getWorkspace().add(dot);
+		TabList.getInstance().getTab().getWorkspace().add(this);
 		addActionListener(icon);
 	}
 
@@ -42,7 +40,7 @@ public class Dot extends JButton implements Serializable {
 	}
 
 	public void drawShape() {
-		dot.setBounds((int) point.getX(), (int) point.getY(), 10, 10);
+		this.setBounds((int) point.getX(), (int) point.getY(), 10, 10);
 	}
 
 	public Point getLocation() {
@@ -54,7 +52,7 @@ public class Dot extends JButton implements Serializable {
 	}
 
 	public void addActionListener(Icons icon) {
-		dot.addActionListener(new DotBarActionListener(icon, point, isInput));
+		this.addActionListener(new DotBarActionListener(icon, point, isInput));
 	}
 	
 	private static final long serialVersionUID = 1L;

@@ -65,8 +65,15 @@ public abstract class Icons extends Observable implements Serializable {
 	}
 	
 	public void removeDots() {
-		for (Dot dot : dots) {
-			TabList.getInstance().getTab().getWorkspace().remove(dot);
+		if (dots != null) {
+			for (Dot dot : dots) {
+				TabList.getInstance().getTab().getWorkspace().remove(dot);
+			}
+		}
+		if (bars != null) {
+			for (VerticalBar bar : bars) {
+				TabList.getInstance().getTab().getWorkspace().remove(bar);
+			}
 		}
 	}
 	

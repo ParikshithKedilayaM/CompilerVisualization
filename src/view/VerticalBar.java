@@ -16,20 +16,18 @@ import model.TabList;
  * @version 1.0
  */
 
-public class VerticalBar implements Serializable {
+public class VerticalBar extends JButton implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Point point;
-	private JButton bar;
 	private boolean isInput;
 
 	public VerticalBar(Point point, boolean isInput, Icons icon) {
 		this.point = point;
 		this.isInput = isInput;
-		bar = new JButton();
-		bar.setBorderPainted(false);
-		bar.setOpaque(true);
-		bar.setBackground(Color.BLACK);
-		TabList.getInstance().getTab().getWorkspace().add(bar);
+		this.setBorderPainted(false);
+		this.setOpaque(true);
+		this.setBackground(Color.BLACK);
+		TabList.getInstance().getTab().getWorkspace().add(this);
 		addActionListener(icon);
 	}
 
@@ -42,11 +40,11 @@ public class VerticalBar implements Serializable {
 	}
 
 	public void drawShape() {
-		bar.setBounds((int) point.getX(), (int) point.getY(), 10, 28);
+		this.setBounds((int) point.getX(), (int) point.getY(), 10, 28);
 	}
 
 	public boolean containsPoint(Point point) {
-		return bar.contains(point);
+		return this.contains(point);
 	}
 
 	public Point getLocation() {
@@ -58,7 +56,7 @@ public class VerticalBar implements Serializable {
 	}
 
 	public void addActionListener(Icons icon) {
-		bar.addActionListener(new DotBarActionListener(icon, point, isInput));
+		this.addActionListener(new DotBarActionListener(icon, point, isInput));
 	}
 
 }
