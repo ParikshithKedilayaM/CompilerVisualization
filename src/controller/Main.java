@@ -159,7 +159,9 @@ public class Main extends JFrame {
 		translateButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nodeCompiler.translate();
+//				nodeCompiler.translate(0);
+				
+				nodeCompiler.fileSaveTranslate(nodeCompiler.translate(0));
 			}
 		});
 		projectMenu.add(compileButton);
