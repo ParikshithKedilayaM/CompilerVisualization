@@ -6,10 +6,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.swing.JTabbedPane;
+
 import java.util.Set;
 import java.util.Stack;
 
@@ -24,6 +28,7 @@ import view.Hyphen;
 import view.Icons;
 import view.LessThan;
 import view.OpenBracket;
+import view.Pound;
 
 /**
  * This class does the compilation of the visual diagram, here DFS traversal is
@@ -39,6 +44,10 @@ import view.OpenBracket;
 public class NodeCompiler {
 
 	private String errorMessage = "";
+
+	private HashMap<Icons, String> map = new HashMap<>();
+
+	private String translatedText = "";
 
 	/**
 	 * This method creates an adjacency list of all the nodes present in the graph.
@@ -211,12 +220,10 @@ public class NodeCompiler {
 		return true;
 	}
 
-	public void translate() {
-		Tab tab = TabList.getInstance().getTab();
+	public String translate(int index) {
+		Tab tab = TabList.getInstance().getTabAt(index);
 		List<Icons> allNodes = tab.getIconList();
 		Set<Icons> presentInAdj = new HashSet<Icons>();
-		HashMap<Icons, String> map = new HashMap<Icons, String>();
-		Set<String> graphNodeConnections = new HashSet<String>();
 		LinkedHashMap<Icons, LinkedList<Icons>> adjList = new LinkedHashMap<Icons, LinkedList<Icons>>();
 		List<Connections> connectionList = tab.getConnectionList();
 		HashMap<Icons, Double> atTheRateLoc = new HashMap<Icons, Double>();
@@ -245,83 +252,116 @@ public class NodeCompiler {
 		}
 
 		int openBracketCount = 1, atTheRateCount = 1, closeBracketCount = 1, doubleBarCount = 1, greaterThanCount = 1,
-				hyphenCount = 1, lessThanCount = 1;
+				hyphenCount = 1, lessThanCount = 1, poundCount = 1;
 
 		for (Icons icons : allNodes) {
+			int indexOfTab = 0;
+			JTabbedPane panes = (JTabbedPane) tab.getWorkspace().getParent();
+
+			String tabName = panes.getTitleAt(index).substring(4);
+
 			if (map.containsKey(icons)) {
 				continue;
 			} else {
 				if (icons instanceof LessThan) {
-					map.put(icons,
-							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
-									+ lessThanCount++);
+					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
+							icons.toString().indexOf('@')) + lessThanCount++ + "_tab" +tabName);
 				} else if (icons instanceof GreaterThan) {
-					map.put(icons,
-							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
-									+ greaterThanCount++);
+					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
+							icons.toString().indexOf('@')) + greaterThanCount++ + "_tab" +tabName);
 				} else if (icons instanceof CloseBracket) {
-					map.put(icons,
-							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
-									+ closeBracketCount++);
+					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
+							icons.toString().indexOf('@')) + closeBracketCount+++ "_tab" +tabName);
 				} else if (icons instanceof OpenBracket) {
-					map.put(icons,
-							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
-									+ openBracketCount++);
+					map.put(icons, icons.toString().substring(icons.toString().indexOf('.') + 1,
+							icons.toString().indexOf('@')) + openBracketCount+++ "_tab" +tabName);
 				} else if (icons instanceof AtTheRate) {
-					map.put(icons,
-							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
-									+ atTheRateCount++);
+					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
+							icons.toString().indexOf('@')) + atTheRateCount+++ "_tab" +tabName);
 				} else if (icons instanceof Hyphen) {
-					map.put(icons,
-							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
-									+ hyphenCount++);
+					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
+							icons.toString().indexOf('@')) + hyphenCount+++ "_tab" +tabName);
 				} else if (icons instanceof DoubleBar) {
-					map.put(icons,
-							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
-									+ doubleBarCount++);
+					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
+							icons.toString().indexOf('@')) + doubleBarCount+++ "_tab" +tabName);
+				}
+
+				else if (icons instanceof Pound) {
+					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
+							icons.toString().indexOf('@')) + poundCount+++ "_tab" +tabName);
 				}
 
 			}
 
 		}
-
+		System.out.println(map);
+		Set<String> graphNodeConnections = new LinkedHashSet<>();
+		String locallyTranslated = "";
 		for (Icons icon : adjList.keySet()) {
 			presentInAdj.add(icon);
-			for (Icons icons : adjList.get(icon)) {
-				graphNodeConnections.add(map.get(icon) + "->" + map.get(icons) + ";");
-				presentInAdj.add(icons);
-			}
+			for (Icons iconInAdjList : adjList.get(icon)) {
+				if (iconInAdjList instanceof Pound) {
+					int indexOfNextTab = ((Pound) iconInAdjList).getTabIndex();
+					System.out.println("Adj to pound" +adjList.get(iconInAdjList));
+					
+					graphNodeConnections.add(map.get(icon)+ "->" + this.translate(indexOfNextTab) + "->" + map.get(adjList.get(iconInAdjList).get(0)));
+				}
 
+				else {
+					if (!(icon instanceof Pound))
+					graphNodeConnections.add(map.get(icon) + "->" + map.get(iconInAdjList) );
+					
+
+				}
+				presentInAdj.add(iconInAdjList);
+
+			}
 		}
 
 		for (Icons icon : allNodes) {
 			if (!presentInAdj.contains(icon)) {
-				graphNodeConnections.add(map.get(icon));
+				if (icon instanceof Pound) {
+//					int indexOfNextTab = ((Pound) icon).getTabIndex();
+//					System.out.println(indexOfNextTab);
+//					this.translate(indexOfNextTab);
+//					tab = TabList.getInstance().getTabAt(indexOfNextTab);
+				}
+
+				else {
+
+					graphNodeConnections.add(map.get(icon));
+					if (!translatedText.contains(map.get(icon)))
+						translatedText += map.get(icon);
+				}
 			}
 		}
-		String translatedText = "";
 
 		for (String s : graphNodeConnections) {
-			translatedText += s + '\n';
+			locallyTranslated += s + '\n';
 		}
 
+		return locallyTranslated;
+
+	}
+
+	public void fileSaveTranslate(String text) {
 		File file = new File("Translate.txt");
 		try {
 			String prepend = "digraph nodes{\n";
 			String append = "}";
-			translatedText = prepend + translatedText + append;
+			text = prepend + text + append;
 			file.createNewFile();
 			FileWriter writer = new FileWriter(file);
-			writer.write(translatedText);
+			writer.write(text);
 			writer.flush();
 			writer.close();
-			tab.getWorkspace().displayMessage("Translated Successfully. Saved in file Translate.txt");
+//			tab.getWorkspace().displayMessage("Translated Successfully. Saved in file Translate.txt");
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			tab.getWorkspace().displayMessage("Could not translate the graph");
+//			tab.getWorkspace().displayMessage("Could not translate the graph");
 			e.printStackTrace();
 		}
-
 	}
+
 }
