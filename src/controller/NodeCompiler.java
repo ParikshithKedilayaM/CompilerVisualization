@@ -264,31 +264,39 @@ public class NodeCompiler {
 				continue;
 			} else {
 				if (icons instanceof LessThan) {
-					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
-							icons.toString().indexOf('@')) + lessThanCount++ + "_tab" +tabName);
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ lessThanCount++ + "_tab" + tabName);
 				} else if (icons instanceof GreaterThan) {
-					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
-							icons.toString().indexOf('@')) + greaterThanCount++ + "_tab" +tabName);
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ greaterThanCount++ + "_tab" + tabName);
 				} else if (icons instanceof CloseBracket) {
-					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
-							icons.toString().indexOf('@')) + closeBracketCount+++ "_tab" +tabName);
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ closeBracketCount++ + "_tab" + tabName);
 				} else if (icons instanceof OpenBracket) {
-					map.put(icons, icons.toString().substring(icons.toString().indexOf('.') + 1,
-							icons.toString().indexOf('@')) + openBracketCount+++ "_tab" +tabName);
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ openBracketCount++ + "_tab" + tabName);
 				} else if (icons instanceof AtTheRate) {
-					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
-							icons.toString().indexOf('@')) + atTheRateCount+++ "_tab" +tabName);
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ atTheRateCount++ + "_tab" + tabName);
 				} else if (icons instanceof Hyphen) {
-					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
-							icons.toString().indexOf('@')) + hyphenCount+++ "_tab" +tabName);
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ hyphenCount++ + "_tab" + tabName);
 				} else if (icons instanceof DoubleBar) {
-					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
-							icons.toString().indexOf('@')) + doubleBarCount+++ "_tab" +tabName);
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ doubleBarCount++ + "_tab" + tabName);
 				}
 
 				else if (icons instanceof Pound) {
-					map.put(icons,  icons.toString().substring(icons.toString().indexOf('.') + 1,
-							icons.toString().indexOf('@')) + poundCount+++ "_tab" +tabName);
+					map.put(icons,
+							icons.toString().substring(icons.toString().indexOf('.') + 1, icons.toString().indexOf('@'))
+									+ poundCount++ + "_tab" + tabName);
 				}
 
 			}
@@ -302,15 +310,18 @@ public class NodeCompiler {
 			for (Icons iconInAdjList : adjList.get(icon)) {
 				if (iconInAdjList instanceof Pound) {
 					int indexOfNextTab = ((Pound) iconInAdjList).getTabIndex();
-					System.out.println("Adj to pound" +adjList.get(iconInAdjList));
-					
-					graphNodeConnections.add(map.get(icon)+ "->" + this.translate(indexOfNextTab) + "->" + map.get(adjList.get(iconInAdjList).get(0)));
+					System.out.println("Adj to pound" + adjList.get(iconInAdjList));
+					if (adjList.get(iconInAdjList).get(0) != null) {
+						graphNodeConnections.add(map.get(icon) + "->" + this.translate(indexOfNextTab) + "->"
+								+ map.get(adjList.get(iconInAdjList).get(0)));
+					} else {
+						graphNodeConnections.add(map.get(icon) + "->" + this.translate(indexOfNextTab));
+					}
 				}
 
 				else {
 					if (!(icon instanceof Pound))
-					graphNodeConnections.add(map.get(icon) + "->" + map.get(iconInAdjList) );
-					
+						graphNodeConnections.add(map.get(icon) + "->" + map.get(iconInAdjList));
 
 				}
 				presentInAdj.add(iconInAdjList);
