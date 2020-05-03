@@ -210,7 +210,7 @@ public class NodeCompiler {
 			LinkedHashMap<Icons, LinkedList<Icons>> adjListNext = createAdjacencyList(tab);
 			Icons startNext = getStartIcon(adjListNext);
 			if (startNext == null) {
-				errorMessage = "No Connection present on tab " + tabIndex + 1;
+				errorMessage = "No Connection present on tab " + (tabIndex + 1);
 				return;
 			}
 			traverse(adjListNext, startNext, stack, previous, tabIndex);
