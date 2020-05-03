@@ -37,6 +37,11 @@ public class TabList implements Serializable {
 	public Tab getTab() {
 		return tabList.get(currentTabIndex);
 	}
+	
+	public Tab getTabAt(int index) {
+		return tabList.get(index);
+	}
+	
 
 	public Tab getTab(int i) {
 		return tabList.get(i);
