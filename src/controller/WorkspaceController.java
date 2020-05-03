@@ -74,6 +74,8 @@ public class WorkspaceController implements Observer {
 				rightClick();
 			} else if (arg == "DotClicked") {
 				deleteConnection();
+			} else if (arg == "BarClicked") {
+				deleteAllConnections();
 			}
 		}
 		repaint();
@@ -104,6 +106,21 @@ public class WorkspaceController implements Observer {
 				enableButtons(conn.getDestPoint());
 				enableButtons(conn.getOriginPoint());
 				iterator.remove();
+			}
+		}
+	}
+	
+	private void deleteAllConnections() {
+		Tab tab = TabList.getInstance().getTab();
+		ListIterator<Connections> iterator = tab.getConnectionList().listIterator();
+		if(tab.getWorkspace().prompt("Delete All Connections?")) {
+			while(iterator.hasNext()) {
+				Connections conn = iterator.next();
+				if((conn.getDestPoint().distance(tab.getPoint()) <= 30 || conn.getOriginPoint().distance(tab.getPoint()) <= 30)) {
+					enableButtons(conn.getDestPoint());
+					enableButtons(conn.getOriginPoint());
+					iterator.remove();
+				}
 			}
 		}
 	}
