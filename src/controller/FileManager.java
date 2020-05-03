@@ -19,6 +19,7 @@ import model.Tab;
 import model.TabList;
 import view.Dot;
 import view.Icons;
+import view.Pound;
 import view.VerticalBar;
 import view.Workspace;
 
@@ -106,10 +107,12 @@ public class FileManager {
 					tabList.setCurrentTabIndex(tabList.getSize());
 					tabList.addTab(workspace);
 					tabList.getTab().setWorkspace(workspace);
-					tabList.getTab().addObserver(new WorkspaceController());
+					WorkspaceController workspaceController = new WorkspaceController();
+					workspaceController.setTabbedPane(jTabbedPane);
+					tabList.getTab().addObserver(workspaceController);
 					tabList.getTab().setIconList((ArrayList<Icons>) in.readObject());
 					tabList.getTab().setConnectionList((List<Connections>) in.readObject());
-					addActionListeners(tabList);
+					addActionListeners(tabList, workspaceController);
 				}
 				tabList.setCurrentTabIndex(currentTabIndex);
 			}
@@ -140,8 +143,12 @@ public class FileManager {
 	 * 
 	 * @param tabList
 	 */
-	private void addActionListeners(TabList tabList) {
+	private void addActionListeners(TabList tabList, WorkspaceController workspaceController) {
 		for (Icons icon : tabList.getTab().getIconList()) {
+			if(icon instanceof Pound) {
+				((Pound) icon).setTabIndex(TabList.getInstance().getSize());
+				icon.addObserver(workspaceController);
+			}
 			if (icon.getDots() != null) {
 				for (Dot dot : icon.getDots()) {
 					dot.addActionListener(icon);
