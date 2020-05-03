@@ -58,7 +58,7 @@ public class Workspace extends JPanel implements MouseListener, MouseMotionListe
 		if (e.getClickCount() == 2) {
 			tab.setPoint(point, "DoubleClicked");
 		} 
-		else if  (SwingUtilities.isRightMouseButton(e)) {
+		else if (SwingUtilities.isRightMouseButton(e)) {
 			tab.setPoint(point, "RightClick");
 		}
 		else {

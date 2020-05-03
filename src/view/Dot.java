@@ -4,10 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Shape;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
 import java.io.Serializable;
 
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import model.TabList;
 
@@ -17,7 +20,7 @@ import model.TabList;
  * @author Chandan
  * @version 4.0
  */
-public class Dot extends JButton implements Serializable {
+public class Dot extends JButton implements Serializable, MouseListener {
 
 	private Point point;
 	private boolean isInput;
@@ -52,9 +55,11 @@ public class Dot extends JButton implements Serializable {
 	}
 
 	public void addActionListener(Icons icon) {
-		this.addActionListener(new DotBarActionListener(icon, point, isInput));
+		DotBarActionListener dotBarActionListener = new DotBarActionListener(icon, point, isInput);
+		this.addActionListener(dotBarActionListener);
+		this.addMouseListener(this);
 	}
-	
+
 	private static final long serialVersionUID = 1L;
 	Shape shape;
 
@@ -89,5 +94,38 @@ public class Dot extends JButton implements Serializable {
 		}
 
 		return shape.contains(x, y);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (SwingUtilities.isRightMouseButton(e)) {
+			TabList.getInstance().getTab().setPoint(
+					SwingUtilities.convertPoint(this, e.getPoint(), TabList.getInstance().getTab().getWorkspace()),
+					"DotClicked");
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 }

@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
 
 import model.Connections;
 import model.Tab;
@@ -71,6 +72,8 @@ public class WorkspaceController implements Observer {
 				doubleClick();
 			} else if (arg == "RightClick") {
 				rightClick();
+			} else if (arg == "DotClicked") {
+				deleteConnection();
 			}
 		}
 		repaint();
@@ -83,11 +86,25 @@ public class WorkspaceController implements Observer {
 	private void deleteIcons() {
 		Tab tab = TabList.getInstance().getTab();
 		Icons icon = searchIcons(tab);
-		if (icon != null && tab.getWorkspace().prompt("Delete?")) {
+		if (icon != null && tab.getWorkspace().prompt("Delete Node?")) {
 			tab.getIconList().remove(icon);
 			icon.removeDots();
 			removeConnections(icon);
 			checkSingleInstanceIcons(tab, icon);
+		}
+	}
+	
+	private void deleteConnection() {
+		Tab tab = TabList.getInstance().getTab();
+		ListIterator<Connections> iterator = tab.getConnectionList().listIterator();
+		while(iterator.hasNext()) {
+			Connections conn = iterator.next();
+			if((conn.getDestPoint().distance(tab.getPoint()) <= 10 || conn.getOriginPoint().distance(tab.getPoint()) <= 10)
+					&& tab.getWorkspace().prompt("Delete Connection?")) {
+				enableButtons(conn.getDestPoint());
+				enableButtons(conn.getOriginPoint());
+				iterator.remove();
+			}
 		}
 	}
 
