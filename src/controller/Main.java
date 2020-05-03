@@ -155,14 +155,15 @@ public class Main extends JFrame {
 		compileButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nodeCompiler.createAdjacencyList();
+				// nodeCompiler.createAdjacencyList();
+				nodeCompiler.doCompile();
 			}
 		});
 		JMenuItem translateButton = new JMenuItem("Translate");
 		translateButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nodeCompiler.translate();
+				nodeCompiler.doTranslate();
 			}
 		});
 		projectMenu.add(compileButton);
