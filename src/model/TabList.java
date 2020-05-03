@@ -38,6 +38,10 @@ public class TabList implements Serializable {
 		return tabList.get(currentTabIndex);
 	}
 
+	public Tab getTab(int i) {
+		return tabList.get(i);
+	}
+
 	public Tab getRecentTab() {
 		return tabList.get(getSize() - 1);
 	}
@@ -69,18 +73,18 @@ public class TabList implements Serializable {
 	private final String OPENBRACKET = "OPEN_BRACKET";
 
 	private final String CLOSEBRACKET = "CLOSE_BRACKET";
-	
+
 	private final String LESSTHAN = "LESS_THAN";
-	
+
 	private final String GREATERTHAN = "GREATER_THAN";
 
 	private final String ATTHERATE = "AT_THE_RATE";
-	
+
 	private final String HYPHEN = "HYPHEN";
-	
+
 	private final String BARS = "BARS";
-	
-	private final String POUND= "POUND";
+
+	private final String POUND = "POUND";
 
 	public String getOpenBracket() {
 		return OPENBRACKET;
@@ -109,6 +113,7 @@ public class TabList implements Serializable {
 	public String getBars() {
 		return BARS;
 	}
+
 	public String getPound() {
 		return POUND;
 	}

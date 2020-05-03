@@ -56,9 +56,11 @@ public class Main extends JFrame {
 			public void componentResized(ComponentEvent e) {
 
 				super.componentResized(e);
-				scrollPane.setBounds(0, 0, e.getComponent().getWidth() / 4, 9*e.getComponent().getHeight()/10);
-				scrollPane2.setBounds(e.getComponent().getWidth() / 4, 0, 3 * e.getComponent().getWidth() / 4, 2*screenSize.height/19);
-				tabbedPane.setBounds(e.getComponent().getWidth() / 4, screenSize.height/10 , 11 * e.getComponent().getWidth() / 15, 4*e.getComponent().getHeight()/5);
+				scrollPane.setBounds(0, 0, e.getComponent().getWidth() / 4, 9 * e.getComponent().getHeight() / 10);
+				scrollPane2.setBounds(e.getComponent().getWidth() / 4, 0, 3 * e.getComponent().getWidth() / 4,
+						2 * screenSize.height / 19);
+				tabbedPane.setBounds(e.getComponent().getWidth() / 4, screenSize.height / 10,
+						11 * e.getComponent().getWidth() / 15, 4 * e.getComponent().getHeight() / 5);
 			}
 		});
 	}
@@ -67,9 +69,9 @@ public class Main extends JFrame {
 
 		optionsPanel = new OptionsPane();
 		scrollPane = new JScrollPane(optionsPanel);
-		optionsPanel.setBounds(0, 0, screenSize.width / 4, 9*screenSize.height/10);
+		optionsPanel.setBounds(0, 0, screenSize.width / 4, 9 * screenSize.height / 10);
 		optionsPanel.setVisible(true);
-		scrollPane.setBounds(0, 0, screenSize.width / 4, 9*screenSize.height/10);
+		scrollPane.setBounds(0, 0, screenSize.width / 4, 9 * screenSize.height / 10);
 		scrollPane.setVisible(true);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -84,7 +86,8 @@ public class Main extends JFrame {
 		tabbedPane = new JTabbedPane();
 		createWorkspace();
 		tabbedPane.setVisible(true);
-		tabbedPane.setBounds(screenSize.width / 4, screenSize.height/10 , 11 * screenSize.width / 15 +10, 4*screenSize.height/5);
+		tabbedPane.setBounds(screenSize.width / 4, screenSize.height / 10, 11 * screenSize.width / 15 + 10,
+				4 * screenSize.height / 5);
 		this.add(tabbedPane);
 		tabbedPane.addChangeListener(new ChangeListener() {
 			@Override
@@ -109,21 +112,19 @@ public class Main extends JFrame {
 		tabbedPane.add("Tab 1", workspace);
 	}
 
-	/** create toolbar with icons**/
-	private void createToolBar()
-	{
-  		ToolBar toolBarPanel = new ToolBar();
-    	scrollPane2 = new JScrollPane(toolBarPanel);
-    	toolBarPanel.setVisible(true);
-		scrollPane2.setBounds(screenSize.width / 4, 0, 3 * screenSize.width / 4, 2*screenSize.height/19);
-		toolBarPanel.setBounds(screenSize.width / 4, 0, 3 * screenSize.width / 4, 2*screenSize.height/19);
+	/** create toolbar with icons **/
+	private void createToolBar() {
+		ToolBar toolBarPanel = new ToolBar();
+		scrollPane2 = new JScrollPane(toolBarPanel);
+		toolBarPanel.setVisible(true);
+		scrollPane2.setBounds(screenSize.width / 4, 0, 3 * screenSize.width / 4, 2 * screenSize.height / 19);
+		toolBarPanel.setBounds(screenSize.width / 4, 0, 3 * screenSize.width / 4, 2 * screenSize.height / 19);
 		scrollPane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane2.setViewportView(toolBarPanel);
 		this.getContentPane().add(scrollPane2);
 	}
-	
-	
+
 	/**
 	 * Function to create menu bar with load,save, add workspace and compile
 	 * buttons.
@@ -152,14 +153,15 @@ public class Main extends JFrame {
 		compileButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nodeCompiler.createAdjacencyList();
+				// nodeCompiler.createAdjacencyList();
+				nodeCompiler.doCompile();
 			}
 		});
 		JMenuItem translateButton = new JMenuItem("Translate");
 		translateButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nodeCompiler.translate();
+				nodeCompiler.doTranslate();
 			}
 		});
 		projectMenu.add(compileButton);
@@ -177,8 +179,8 @@ public class Main extends JFrame {
 		frame.createMenu();
 		frame.createOptionsPanel();
 		frame.createTabs();
-	    frame.createToolBar();
-        frame.setVisible(true);
+		frame.createToolBar();
+		frame.setVisible(true);
 	}
 
 }
