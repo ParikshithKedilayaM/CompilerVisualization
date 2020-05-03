@@ -55,8 +55,7 @@ public class Dot extends JButton implements Serializable, MouseListener {
 	}
 
 	public void addActionListener(Icons icon) {
-		DotBarActionListener dotBarActionListener = new DotBarActionListener(icon, point, isInput);
-		this.addActionListener(dotBarActionListener);
+		this.addActionListener(new DotBarActionListener(icon, point, isInput));
 		this.addMouseListener(this);
 	}
 

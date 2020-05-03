@@ -2,9 +2,12 @@ package view;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.Serializable;
 
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import model.TabList;
 
@@ -16,7 +19,7 @@ import model.TabList;
  * @version 1.0
  */
 
-public class VerticalBar extends JButton implements Serializable {
+public class VerticalBar extends JButton implements Serializable, MouseListener {
 	private static final long serialVersionUID = 1L;
 	private Point point;
 	private boolean isInput;
@@ -57,6 +60,40 @@ public class VerticalBar extends JButton implements Serializable {
 
 	public void addActionListener(Icons icon) {
 		this.addActionListener(new DotBarActionListener(icon, point, isInput));
+		this.addMouseListener(this);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (SwingUtilities.isRightMouseButton(e)) {
+			TabList.getInstance().getTab().setPoint(
+					SwingUtilities.convertPoint(this, e.getPoint(), TabList.getInstance().getTab().getWorkspace()),
+					"BarClicked");
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
